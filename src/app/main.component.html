@@ -1,0 +1,23 @@
+<div class="Top">
+  <table style="width:100%; margin-right:20px; border-width: 0">
+    <tr>
+      <td style="background-color: #403E48; width:150px; min-width: 150px; text-align: center">
+        <img src="../assets/logomittel.png" style="height:60px;">
+      </td>
+      <td style="padding-left: 20px; color: #BE392B">{{headline}}</td>
+      <td style="text-align: end;"><img src="../assets/schriftzug.png" style="height:70px"></td>
+    </tr>
+  </table>
+</div>
+<div class="Container">
+  <div class="Left" style="padding-top: 30px">
+    <ul class="nav-menu">
+      <li *ngFor="let navitem of navitems" class="nav-menuitem" routerLinkActive="nav-active">
+        <a routerLink="{{navitem.routerlink}}"><img src="/assets/icons_white/60px/large/{{navitem.imagefilename}}" style="height:35px;"><br/>{{navitem.caption}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="Middle"><router-outlet></router-outlet></div>
+</div>
+
+BE392B

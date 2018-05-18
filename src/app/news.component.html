@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col col-md-9">
+    <div *ngFor="let blogPost of blogPosts" style="margin-top: 15px;">
+      <table>
+        <tr>
+          <td style="vertical-align: top;">
+            <div
+              style="display: inline-block; width: 80px; text-align: center; border: solid 1px black; background-color: #F6C7A5; border-radius: 5px;">
+              <span style="font-size: xx-large; font-weight: bold; padding-top: 0px; margin-top: 0px">{{blogPost.Created | date:'dd'}}</span><br/>
+              <span>{{blogPost.Created | date:'MMM'}}</span>
+            </div>
+          </td>
+          <td style="vertical-align: top;">
+            <div style="padding-left:10px;">
+              <!--span style="font-size: xx-large">{{blogPost.Subject}}</span><br/-->
+              <div markdown [data]="blogPost.Preview"></div>
+              <a href="#">weiterlesen...</a><br/>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <hr>
+    </div>
+    <br/>
+    <nav aria-label="...">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">zurück</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active">
+          <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">weiter</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="col col-md-3">
+    <h4>Neuheiten</h4>
+    <div *ngFor="let artikel of neuheiten">
+      <img src="../assets/products/{{artikel.EdvNr}}.jpg" style="width: 100%"/>
+    </div>
+  </div>
+</div>
+<!--table style="height: 100%; width: 100%">
+  <tbody>
+  <tr>
+    <td style="width:30%">
+      <dx-list
+              height="100%"
+              [dataSource]="blogPosts"
+              [grouped]="true"
+              [collapsibleGroups]="false"
+              groupTemplate="group"
+              itemTemplate="item">
+        <div *dxTemplate="let item of 'group'">
+          <div>{{item.key}}</div>
+        </div>
+        <div *dxTemplate="let data of 'item'">
+          <div><b>{{data.Subject}}</b></div>
+          <div>{{data.Created  | date:'dd.MM.yy HH:mm'}}</div>
+          <div>{{data.Body}}</div>
+        </div>
+      </dx-list>
+    </td>
+    <td style="vertical-align: top; padding-left: 20px"><app-blog-post></app-blog-post></td>
+  </tr>
+  </tbody>
+</table-->
