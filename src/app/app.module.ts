@@ -39,17 +39,17 @@ locale(navigator.language);
 
 const APP_ROUTES: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
-  {path: 'news', component: NewsComponent},
-  {path: 'orders', component: OrdersComponent},
-  {path: 'statistik', component: StatistikComponent},
-  {path: 'gallery', component: GalleryComponent},
-  {path: 'forms', component: FormsComponent},
-  {path: 'fachberaterliste', component: FachberaterlisteComponent},
-  {path: 'artikelliste', component: ArtikellisteComponent},
-  {path: 'userdata', component: UserDataComponent},
+  {path: 'home', component: HomeComponent, canActivate: [ProtectedGuard]},
+  {path: 'news', component: NewsComponent, canActivate: [ProtectedGuard]},
+  {path: 'orders', component: OrdersComponent, canActivate: [ProtectedGuard]},
+  {path: 'statistik', component: StatistikComponent, canActivate: [ProtectedGuard]},
+  {path: 'gallery', component: GalleryComponent, canActivate: [ProtectedGuard]},
+  {path: 'forms', component: FormsComponent, canActivate: [ProtectedGuard]},
+  {path: 'fachberaterliste', component: FachberaterlisteComponent, canActivate: [ProtectedGuard]},
+  {path: 'artikelliste', component: ArtikellisteComponent, canActivate: [ProtectedGuard]},
+  {path: 'userdata', component: UserDataComponent, canActivate: [ProtectedGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'calendar', component: CalendarComponent}
+  {path: 'calendar', component: CalendarComponent, canActivate: [ProtectedGuard]}
 ];
 
 

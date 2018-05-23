@@ -1,5 +1,6 @@
 export interface UserAccessRights {
-  UserID: boolean;
+  UserID: number;
+  UserName: string;
   IsLumaraAdmin: boolean;
   AllowBuchhaltungModuleRead: boolean;
   AllowBuchhaltungModuleWrite: boolean;

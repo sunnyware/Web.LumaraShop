@@ -3,43 +3,43 @@ export class TestData {
     [
       {
         ID: 1,
-        Subject: 'Mohnfüllung nicht lieferbar',
         Preview: '# Mohnfüllung nicht lieferbar \r\n * Leider ist die \r\n * Mohnfüllung momentan nicht lieferbar. Bitte haben Sie etwas Geduld. Wir denken aber, daß wir bis KW28 wieder liefern können.',
         Created: new Date(),
         Username: 'Stephan Blaurock',
         HighPriority: true,
         HasAttachments: false,
-        Seen: false
+        Seen: false,
+        IsComplete: true
       },
       {
         ID: 1,
-        Subject: 'Mohnfüllung nicht lieferbar',
         Preview: 'Leider ist die Mohnfüllung momentan nicht lieferbar. Bitte haben Sie etwas Geduld. Wir denken aber, daß wir bis KW28 wieder liefern können.',
         Created: new Date(),
         Username: 'Stephan Blaurock',
         HighPriority: true,
         HasAttachments: false,
-        Seen: false
+        Seen: false,
+        IsComplete: false
       },
       {
         ID: 1,
-        Subject: 'Mohnfüllung nicht lieferbar',
         Preview: 'Leider ist die Mohnfüllung momentan nicht lieferbar. Bitte haben Sie etwas Geduld. Wir denken aber, daß wir bis KW28 wieder liefern können.',
         Created: new Date(),
         Username: 'Stephan Blaurock',
         HighPriority: true,
         HasAttachments: false,
-        Seen: false
+        Seen: false,
+        IsComplete: false
       },
       {
         ID: 1,
-        Subject: 'Mohnfüllung nicht lieferbar',
         Preview: 'Leider ist die Mohnfüllung momentan nicht lieferbar. Bitte haben Sie etwas Geduld. Wir denken aber, daß wir bis KW28 wieder liefern können.',
         Created: new Date(),
         Username: 'Stephan Blaurock',
         HighPriority: true,
         HasAttachments: false,
-        Seen: false
+        Seen: false,
+        IsComplete: false
       }
     ];
 

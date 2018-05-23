@@ -23,4 +23,8 @@ export class UserDataComponent implements OnInit {
   onFormSubmit($event) {
 
   }
+
+  logout() {
+    this.lumaraService.logout();
+  }
 }

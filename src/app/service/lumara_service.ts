@@ -12,22 +12,32 @@ import {tap} from 'rxjs/internal/operators';
 
 @Injectable()
 export class LumaraService {
-  public url_zentrale = 'http://service.lumara.de/cmd?jsoncommand';
-  'http://lumara.dyndns.org:1088/cmd?jsoncommand';
-  // public url_zentrale = "http://localhost:8990/cmd?jsoncommand";
+  // public url_zentrale = 'https://service.lumara.de:453/cmd?jsoncommand';
+  public url_zentrale = 'http://localhost:8990/cmd?jsoncommand';
+  public url_zentrale_min = 'http://localhost:8990';
   public current_user_name = '';
   public current_token = '';
-  public current_user_access_rights: UserAccessRights;
+  public current_user_access_rights: UserAccessRights = undefined;
   public isAuthenticated = false;
   private authState = new Subject<boolean>();
   private current_headline = '';
   private current_headline_state = new Subject<string>();
 
   constructor(private http: HttpClient, private router: Router) {
+    // console.log('currentToken:' + this.current_token);
     this.current_token = localStorage.getItem('lum_user_token');
-    this.isAuthenticated = this.current_token != null && this.current_token !== '';
+    // console.log('currentToken:' + this.current_token);
+    if (this.current_user_access_rights) {
+      this.isAuthenticated = true;
+    }
+
     this.current_user_name = localStorage.getItem('lum_user_name');
     this.authState.next(this.isAuthenticated);
+
+    if (this.isAuthenticated) {
+      console.log('isAuthenticated:' + this.isAuthenticated);
+      this.loadUserAccessRights();
+    }
   }
 
   doRequestGet(url: string): Observable<string> {
@@ -40,12 +50,6 @@ export class LumaraService {
     const body = JSON.stringify(data);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post<string>(url, body, {headers: headers});
-    // .subscribe(data => {
-    //  return data;
-    // });
-    // .map((response: Response) => {
-    //  return response.json();
-    // });
   }
 
   doCommand(cmd: JsonCommand): Observable<any> {
@@ -63,9 +67,15 @@ export class LumaraService {
     });*/
   }
 
+  getUserImageUrl(userid: number) {
+    const retval = this.url_zentrale + '&user=' + this.current_user_name + '&token=' + this.current_token +
+      '&modulename=Modules.Users.Service.UserService&commandname=GetUserImage&user_id=' + userid + '&UserImageSize=2';
+    return retval;
+  }
+
   tryAutoLogin() {
     const password = localStorage.getItem('nl_password');
-    if (password && !this.isAuthenticated) {
+    if (this.current_user_name && password && !this.isAuthenticated) {
       this.signinUser(this.current_user_name, password, false);
     }
   }
@@ -108,20 +118,20 @@ export class LumaraService {
   }
 
   loadUserAccessRights() {
-    /*
     this.doCommand(LumaraServiceCommands.GetUserAccessRights()).subscribe(
       data => {
         if (data.ReturnCode === 200) {
           // console.log('Ich bekam vom Server folgende Daten: ' + data.ReturnValue);
           // this.mytile.instance.beginUpdate();
           this.current_user_access_rights = JSON.parse(data.ReturnValue);
+          this.authState.next(true);
           // this.mytile.instance.endUpdate();
         } else if (data.ReturnCode === 401) {
           this.current_user_access_rights = undefined;
           this.router.navigate(['/login']);
         }
       }
-    );*/
+    );
   }
 
   logout() {
@@ -154,6 +164,7 @@ export class LumaraService {
   getCurrentHeadlineObservable() {
     return this.current_headline_state.asObservable();
   }
+
 
   /*
   // Gibt die Benutzerdaten zum Bearbeiten zurück. Aber natürlich nur, wenn der Benutzer eingeloggt ist.

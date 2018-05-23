@@ -1,16 +1,23 @@
 <div class="Top">
   <table style="width:100%; margin-right:20px; border-width: 0">
     <tr>
-      <td style="background-color: #403E48; width:150px; min-width: 150px; text-align: center">
-        <img src="../assets/logomittel.png" style="height:60px;">
+      <td *ngIf="isAuthenticated" style="background-color: #403E48; width:150px; min-width: 150px; text-align: center;font-size:1rem; ">
+        <div style="text-align: center; padding-top:7px;">
+          <img [src]="userImageUrl" style="height:60px; border-radius: 50%"><br/>
+          <span style="color:white; margin-top:0px; padding-top:0px;">{{userName}}</span>
+        </div>
+
       </td>
+
       <td style="padding-left: 20px; color: #BE392B">{{headline}}</td>
+
       <td style="text-align: end;"><img src="../assets/schriftzug.png" style="height:70px"></td>
+
     </tr>
   </table>
 </div>
 <div class="Container">
-  <div class="Left" style="padding-top: 30px">
+  <div *ngIf="isAuthenticated" class="Left" style="padding-top: 30px">
     <ul class="nav-menu">
       <li *ngFor="let navitem of navitems" class="nav-menuitem" routerLinkActive="nav-active">
         <a routerLink="{{navitem.routerlink}}"><img src="/assets/icons_white/60px/large/{{navitem.imagefilename}}" style="height:35px;"><br/>{{navitem.caption}}</a>
@@ -19,5 +26,3 @@
   </div>
   <div class="Middle"><router-outlet></router-outlet></div>
 </div>
-
-BE392B
