@@ -44,10 +44,11 @@ export class UserdataAllgemeinComponent implements OnInit {
       data => {
         if (data.ReturnCode === 200) {
           notify('Ihre Daten wurden erfolgreich gespeichert.');
-
         } else if (data.ReturnCode >= 400) {
           console.log(data.ReturnMessage);
           this.router.navigate(['/login']);
+        } else {
+          notify(data.ReturnMessage);
         }
       }
     );
