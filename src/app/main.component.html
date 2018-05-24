@@ -22,6 +22,8 @@
       <li *ngFor="let navitem of navitems" class="nav-menuitem" routerLinkActive="nav-active">
         <a routerLink="{{navitem.routerlink}}"><img src="/assets/icons_white/60px/large/{{navitem.imagefilename}}" style="height:35px;"><br/>{{navitem.caption}}</a>
       </li>
+      <br/>
+      <a [routerLink]="" (click)="logout()" style="color:white;">abmelden</a>
     </ul>
   </div>
   <div class="Middle"><router-outlet></router-outlet></div>

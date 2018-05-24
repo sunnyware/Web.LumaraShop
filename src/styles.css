@@ -98,3 +98,8 @@ WebKit inertia scrolling is being added here for any present/future devices that
     color: white;
 }
 /* ************************/
+
+
+.table td, .table th {
+  padding: .3rem;
+}

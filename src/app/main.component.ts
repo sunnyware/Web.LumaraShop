@@ -11,17 +11,17 @@ import {LumaraService} from './service/lumara_service';
 export class MainComponent implements OnInit {
   navitems: NavItem[] = [
     {caption: 'NEWS', imagefilename: 'news.png', routerlink: 'news'},
-    {caption: 'AUFTRÄGE', imagefilename: 'order.png', routerlink: 'orders'},
+    // {caption: 'AUFTRÄGE', imagefilename: 'order.png', routerlink: 'orders'},
     // {caption: 'CHEF-STATISTIK', imagefilename: 'chart-column-2d-stacked-vendor.png', routerlink: 'statistik'},
-    {caption: 'STATISTIK', imagefilename: 'chart-column-2d-stacked.png', routerlink: 'statistik'},
-    {caption: 'FORMULARE', imagefilename: 'document-acrobat.png', routerlink: 'forms'},
-    {caption: 'GALERIE', imagefilename: 'pictures.png', routerlink: 'gallery'},
+    // {caption: 'STATISTIK', imagefilename: 'chart-column-2d-stacked.png', routerlink: 'statistik'},
+    // {caption: 'FORMULARE', imagefilename: 'document-acrobat.png', routerlink: 'forms'},
+    // {caption: 'GALERIE', imagefilename: 'pictures.png', routerlink: 'gallery'},
     // {caption: 'VERSAND', imagefilename: 'shipment.png', routerlink: 'gallery'},
     // {caption: 'BUCHHALTUNG', imagefilename: 'bank-money-coins.png', routerlink: 'gallery'},
-    {caption: 'ARTIKEL', imagefilename: 'registry-editor.png', routerlink: 'artikelliste'},
-    {caption: 'STAMMDATEN', imagefilename: 'user-woman-info.png', routerlink: 'userdata'},
-    {caption: 'KONTAKTE', imagefilename: 'list-user-group.png', routerlink: 'fachberaterliste'},
-    {caption: 'BACKTERMINE', imagefilename: 'calendar-selection-day.png', routerlink: 'calendar'}
+    // {caption: 'ARTIKEL', imagefilename: 'registry-editor.png', routerlink: 'artikelliste'},
+    {caption: 'BENUTZER', imagefilename: 'user-woman-info.png', routerlink: 'userdata/allgemein'},
+    {caption: 'KONTAKTE', imagefilename: 'list-user-group.png', routerlink: 'kontakte/gastgeber'},
+    // {caption: 'BACKTERMINE', imagefilename: 'calendar-selection-day.png', routerlink: 'calendar'}
   ];
   headline = '';
   isAuthenticated = false;
@@ -58,4 +58,8 @@ export class MainComponent implements OnInit {
     }
   }
 
+  logout() {
+    this.lumaraService.logout();
+    this.router.navigateByUrl('/login');
+  }
 }

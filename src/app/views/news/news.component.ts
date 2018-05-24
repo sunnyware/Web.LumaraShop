@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {LumaraService} from './service/lumara_service';
-import {TestData} from './models/_testdata';
-import {LumaraServiceCommands} from './service/lumara_service_commands';
+import {LumaraService} from '../../service/lumara_service';
+import {TestData} from '../../models/_testdata';
+import {LumaraServiceCommands} from '../../service/lumara_service_commands';
 import {Router} from '@angular/router';
+import {BlogPostListItem} from '../../models/blogpost';
 
 @Component({
   selector: 'app-news',
@@ -11,7 +12,7 @@ import {Router} from '@angular/router';
 })
 
 export class NewsComponent implements OnInit {
-  blogPosts = TestData.blogPosts;
+  blogPosts: BlogPostListItem[] = undefined;
   neuheiten = TestData.neuheiten;
   pageNr = 0;
   itemsPerPage = 10;

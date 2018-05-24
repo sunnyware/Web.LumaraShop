@@ -27,9 +27,9 @@ export class LumaraService {
     // console.log('currentToken:' + this.current_token);
     this.current_token = localStorage.getItem('lum_user_token');
     // console.log('currentToken:' + this.current_token);
-    if (this.current_user_access_rights) {
-      this.isAuthenticated = true;
-    }
+    // if (this.current_user_access_rights) {
+      this.isAuthenticated = this.current_token !== '';
+    // }
 
     this.current_user_name = localStorage.getItem('lum_user_name');
     this.authState.next(this.isAuthenticated);
