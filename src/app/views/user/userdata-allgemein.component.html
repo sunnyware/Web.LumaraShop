@@ -1,0 +1,121 @@
+<div *ngIf="fachberater" class="row">
+  <div class="col-md-6">
+    <div class="form-group row">
+      <label for="_caption1x" class="col-sm-3 col-form-label">Personal-Nr.</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" readonly class="form-control-plaintext" id="_caption1x" aria-describedby="c1x"
+               placeholder="" [(ngModel)]="fachberater.PersonalNr">
+      </div>
+
+      <label for="_caption1" class="col-sm-3 col-form-label">Nachname</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption1" aria-describedby="c1"
+               placeholder="" [(ngModel)]="fachberater.Nachname">
+      </div>
+
+      <label for="_caption2" class="col-sm-3 col-form-label">Vorname</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption2" aria-describedby="c2"
+               placeholder="" [(ngModel)]="fachberater.Vorname">
+      </div>
+
+      <label for="_caption3" class="col-sm-3 col-form-label">Strasse</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption3" aria-describedby="c3"
+               placeholder="" [(ngModel)]="fachberater.Strasse">
+      </div>
+
+      <label for="_caption4a" class="col-sm-3 col-form-label">Land</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption4a" aria-describedby="c4a"
+               placeholder="" [(ngModel)]="fachberater.Land">
+      </div>
+
+      <label for="_caption4" class="col-sm-3 col-form-label">PLZ</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption4" aria-describedby="c4"
+               placeholder="" [(ngModel)]="fachberater.PLZ">
+      </div>
+
+      <label for="_caption5" class="col-sm-3 col-form-label">Ort</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption5" aria-describedby="c5"
+               placeholder="" [(ngModel)]="fachberater.Ort">
+      </div>
+
+      <label for="_caption6" class="col-sm-3 col-form-label">Telefon</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption6" aria-describedby="c6"
+               placeholder="" [(ngModel)]="fachberater.Telefon">
+      </div>
+
+      <label for="_caption6s" class="col-sm-3 col-form-label">Telefax</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption6s" aria-describedby="c6s"
+               placeholder="" [(ngModel)]="fachberater.Telefax">
+      </div>
+
+      <label for="_caption6a" class="col-sm-3 col-form-label">Mobil</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption6a" aria-describedby="c6a"
+               placeholder="" [(ngModel)]="fachberater.Mobil">
+      </div>
+
+      <label for="_caption7" class="col-sm-3 col-form-label">E-Mail</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption7" aria-describedby="c7"
+               placeholder="" [(ngModel)]="fachberater.EMail">
+      </div>
+
+
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group row">
+      <div class="col-sm-11" style="margin-bottom: 5px;">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="fachberater.AllowSaveData"
+                 id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1">
+            ich bin einverstanden, daß LUMARA meine persönlichen Daten für den zweckmäßigen Gebrauch meiner Fachberatertätigkeit verarbeitet.
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-11" style="margin-bottom: 5px;">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="fachberater.AllowNewsletter"
+                 id="defaultCheck2">
+          <label class="form-check-label" for="defaultCheck2">
+            ich willige ein, daß mich LUMARA über meine Kontaktdaten über Neuigkeiten, Sonderangebote, Veranstaltungen etc. informiert.
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-11" style="margin-bottom: 5px;">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="fachberater.AllowPublicImages"
+                 id="defaultCheck3">
+          <label class="form-check-label" for="defaultCheck3">
+            Bilder von meiner Person dürfen im Portal und auf der LUMARA-Homepage veröffentlicht werden.
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-11" style="margin-bottom: 5px;">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="fachberater.AllowPublicOnHomepage"
+                 id="defaultCheck4">
+          <label class="form-check-label" for="defaultCheck4">
+            meine persönlichen Daten (Adresse, Email, Telefon) dürfen auf der LUMARA-Homepage veröffentlicht werden.
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <br/>
+    <p>ich habe die <a href="#">Datenschutzbestimmungen</a> gelesen und bin damit einverstanden.</p>
+    <button type="button" class="btn btn-success" (click)="saveFachberater()">speichern</button>
+  </div>
+</div>
