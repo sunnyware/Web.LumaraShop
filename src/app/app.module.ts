@@ -43,6 +43,7 @@ import { UserdataAllgemeinComponent } from './views/user/userdata-allgemein.comp
 import { UserdataSteuerComponent } from './views/user/userdata-steuer.component';
 import { UserdataProfilComponent } from './views/user/userdata-profil.component';
 import { BacktermineComponent } from './views/termine/backtermine.component';
+import { NewsArtikelComponent } from './views/news/news-artikel.component';
 
 registerLocaleData(localeDe);
 loadMessages(messagesDe);
@@ -51,6 +52,7 @@ locale(navigator.language);
 const APP_ROUTES: Routes = [
   {path: '', redirectTo: 'news', pathMatch: 'full'},
   {path: 'news', component: NewsComponent, canActivate: [ProtectedGuard]},
+  {path: 'news/:id', component: NewsArtikelComponent, canActivate: [ProtectedGuard]},
   {path: 'orders', component: OrdersComponent, canActivate: [ProtectedGuard]},
   {path: 'statistik', component: StatistikComponent, canActivate: [ProtectedGuard]},
   {path: 'gallery', component: GalleryComponent, canActivate: [ProtectedGuard]},
@@ -88,7 +90,8 @@ const APP_ROUTES: Routes = [
     UserdataAllgemeinComponent,
     UserdataSteuerComponent,
     UserdataProfilComponent,
-    BacktermineComponent
+    BacktermineComponent,
+    NewsArtikelComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,

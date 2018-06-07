@@ -17,7 +17,7 @@
               <div style="float:right;max-width:35%">
                 <div *ngFor="let att of blogPost.Attachments"
                      style="background-color:rgb(240,240,240); margin-bottom:2px;">
-                  <a [href]="GetFileStoreFileUrl(att.FileID)">
+                  <a [href]="GetFileStoreFileUrl(att.FileID, att.Filename)">
                     <img [src]="GetIconUrl(att.FileExtension)"
                          style="vertical-align: middle; background-color:transparent;"/><span style="font-size:11pt;">{{att.Filename}}</span>
                   </a>
@@ -25,7 +25,7 @@
               </div>
               <!-- MARKDOWN -->
               <div markdown [data]="blogPost.Preview"></div>
-              <a *ngIf="!blogPost.IsComplete" href="#">weiterlesen...</a><br/>
+              <a *ngIf="!blogPost.IsComplete" [routerLink]="['/news', blogPost.ID]">weiterlesen...</a><br/>
             </div>
           </td>
         </tr>

@@ -1,42 +1,46 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LumaraService} from '../../service/lumara_service';
-import {TestData} from '../../models/_testdata';
 import {LumaraServiceCommands} from '../../service/lumara_service_commands';
-import {Router} from '@angular/router';
-import {BlogPostListItem} from '../../models/blogpost';
+import {BlogPost} from '../../models/blogpost';
+import notify from 'devextreme/ui/notify';
 
 @Component({
-  selector: 'app-news',
-  templateUrl: './news.component.html',
+  selector: 'app-news-artikel',
+  templateUrl: './news-artikel.component.html',
   styles: []
 })
+export class NewsArtikelComponent implements OnInit {
+  private currentRoute: any;
+  private articleID = 0;
+  blogPost: BlogPost = undefined;
 
-export class NewsComponent implements OnInit {
-  blogPosts: BlogPostListItem[] = undefined;
-  neuheiten = TestData.neuheiten;
-  pageNr = 0;
-  itemsPerPage = 10;
-
-  constructor(private lumaraService: LumaraService, private router: Router) {
-    lumaraService.setHeadline('Lumara-News');
+  constructor(private lumaraService: LumaraService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.reloadPosts();
+    this.currentRoute = this.route.params.subscribe(params => {
+      this.articleID = +params['id'];
+      this.reloadPost();
+    });
   }
 
-  reloadPosts() {
-
+  reloadPost() {
+    if (this.articleID === 0) {
+      return;
+    }
     // this.lumaraService.doRequestGet('http://service.lumara.de/tracking.html?pushid=12345&pnr=123455555')
     //  .subscribe(data => this.responsex = data);
-    this.lumaraService.doCommand(LumaraServiceCommands.GetBlogPosts(1, -1, this.pageNr, this.itemsPerPage)).subscribe(
+    this.lumaraService.doCommand(LumaraServiceCommands.GetBlogPost(this.articleID)).subscribe(
       data => {
         if (data.ReturnCode === 200) {
           // console.log('Ich bekam vom Server folgende Daten: ');
           // console.log(data.ReturnValue);
-          this.blogPosts = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
+          this.blogPost = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
         } else if (data.ReturnCode >= 400) {
           this.router.navigate(['/login']);
+        } else {
+          notify(data.ReturnMessage);
         }
       }
     );

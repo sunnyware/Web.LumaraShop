@@ -1,12 +1,23 @@
 <div class="row">
   <div class="col-md-12">
     <br/>
-    <button type="button" class="btn btn-success" (click)="showPopupGastgeber('');">neue Gastgeberadresse</button>
-    <br/>
+    <button type="button" class="btn btn-success" (click)="showPopupGastgeber('');">neue Gastgeberadresse</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-light" (click)="downloadGastgeberFile();">Gastgeberliste herunterladen</button>
+    <br/><br/>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Stichwort" aria-label="Stichwort" aria-describedby="basic-addon2" [(ngModel)]="suchwort">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit" (click)="setSuchwort()">suchen</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="resetSuchwort()">alle</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="reloadAktivGastgeber()">alle Aktiv-GG</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="showHelp()">?</button>
+      </div>
+    </div>
+
 
     <!-- Gastgeber-Tabelle-->
     <br/>
-    <table class="table table-hover">
+    <table class="table table-hover table-scrollable">
       <thead>
       <tr>
         <th scope="col">Nachname</th>
@@ -28,7 +39,7 @@
         <td>{{gg.Ort}}</td>
         <td>{{gg.Telefon}}</td>
         <td>{{gg.EMail}}</td>
-        <td>
+        <td style="text-align: end;">
           <button type="button" class="btn btn-success" (click)="showPopupGastgeber(gg.IDObj);"><img src="/assets/icons_white/32px/large/tool-pencil.png" style="height:20px"></button>&nbsp;
           <button type="button" class="btn btn-danger" (click)="showPopupDeleteGastgeber(gg.IDObj);"><img src="/assets/icons_white/32px/large/button-cancel.png" style="height:20px"></button>
         </td>
@@ -92,6 +103,15 @@
                  placeholder="" [(ngModel)]="currentGastgeber.EMail">
         </div>
 
+        <div class="col-sm-12" style="margin-bottom: 5px;">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="currentGastgeber.IsAktivGastgeber" id="defaultCheck0">
+            <label class="form-check-label" for="defaultCheck0">
+              Diese Gastgeberin ist eine Aktiv-Gastgeberin
+            </label>
+          </div>
+        </div>
+        <br/>
         <div class="col-sm-12" style="margin-bottom: 5px;">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" [(ngModel)]="currentGastgeber.AllowSaveAddress" id="defaultCheck1">

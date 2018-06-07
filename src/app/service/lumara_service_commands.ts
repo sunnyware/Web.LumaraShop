@@ -32,6 +32,13 @@ export class LumaraServiceCommands {
     cmd.addParameter('ItemsPerPage', itemsPerPage);
     return cmd;
   }
+  public static GetBlogPost(blogPostID: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Blogging.Service.BlogService';
+    cmd.CommandName = 'GetBlogPost';
+    cmd.addParameter('BlogPostID', blogPostID);
+    return cmd;
+  }
 
   /***** Fachberater *****/
   public static GetFachberater(): JsonCommand {
@@ -49,14 +56,17 @@ export class LumaraServiceCommands {
   }
 
   /***** Gastgeber *****/
-  public static GetGastgeberlist(pageNr: number, itemsPerPage: number): JsonCommand {
+  public static GetGastgeberlist(filter: string, onlyAktivGastgeber: boolean, pageNr: number, itemsPerPage: number): JsonCommand {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
     cmd.CommandName = 'GetGastgeberlist';
     cmd.addParameter('PageNr', pageNr);
     cmd.addParameter('ItemsPerPage', itemsPerPage);
+    cmd.addParameter('Filter', filter);
+    cmd.addParameter('OnlyAktivGastgeber', onlyAktivGastgeber);
     return cmd;
   }
+
 
   public static UpdateGastgeber(gg: Gastgeber): JsonCommand {
     const cmd = new JsonCommand();

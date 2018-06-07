@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   autologin = false;
 
   constructor(private lumaraService: LumaraService, private router: Router) {
+    lumaraService.setHeadline('');
     this.lumaraService.getIsAuthenticated().subscribe(
       authStatus => {
         if (authStatus) {

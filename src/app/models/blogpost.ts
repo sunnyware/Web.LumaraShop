@@ -6,15 +6,14 @@ export class BlogPostGroup {
 export class BlogPost {
   ID: number;
   Subject: string;
-  Preview: string;
-  Body?: string;
+  Body: string;
   TimeCreated: Date;
-  UserID?: number;
+  TimeChanged: Date;
+  UserID: number;
   Username: string;
-  HighPriority?: boolean;
-  HasAttachments?: boolean;
-  Seen?: boolean;
-  Published?: boolean;
+  HighPriority: boolean;
+  Published: boolean;
+  Attachments?: BlogPostAttachment[];
 }
 
 export class BlogPostListItem {

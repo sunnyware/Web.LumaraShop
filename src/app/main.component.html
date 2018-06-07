@@ -1,7 +1,7 @@
 <div class="Top">
   <table style="width:100%; margin-right:20px; border-width: 0">
     <tr>
-      <td *ngIf="isAuthenticated" style="background-color: #403E48; width:150px; min-width: 150px; text-align: center;font-size:1rem; ">
+      <td *ngIf="showNavBar" style="background-color: #403E48; width:150px; min-width: 150px; text-align: center;font-size:1rem; ">
         <div style="text-align: center; padding-top:7px;">
           <img [src]="userImageUrl" style="height:60px; border-radius: 50%"><br/>
           <span style="color:white; margin-top:0px; padding-top:0px;">{{userName}}</span>
@@ -17,13 +17,17 @@
   </table>
 </div>
 <div class="Container">
-  <div *ngIf="isAuthenticated" class="Left" style="padding-top: 30px">
+  <div *ngIf="showNavBar" class="Left" style="padding-top: 30px">
     <ul class="nav-menu">
       <li *ngFor="let navitem of navitems" class="nav-menuitem" routerLinkActive="nav-active">
         <a routerLink="{{navitem.routerlink}}"><img src="/assets/icons_white/60px/large/{{navitem.imagefilename}}" style="height:35px;"><br/>{{navitem.caption}}</a>
       </li>
       <br/>
       <a [routerLink]="" (click)="logout()" style="color:white;">abmelden</a>
+      <br/>
+      <br/>
+      <a href="http://lumara.eu/impressum.html" target="_blank" style="color:white">Impressum</a><br/>
+      <a href="http://lumara.eu/datenschutz.html" target="_blank" style="color:white">Datenschutz</a>
     </ul>
   </div>
   <div class="Middle"><router-outlet></router-outlet></div>

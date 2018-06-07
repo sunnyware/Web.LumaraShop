@@ -14,28 +14,30 @@ export class MainComponent implements OnInit {
     // {caption: 'AUFTRÄGE', imagefilename: 'order.png', routerlink: 'orders'},
     // {caption: 'CHEF-STATISTIK', imagefilename: 'chart-column-2d-stacked-vendor.png', routerlink: 'statistik'},
     // {caption: 'STATISTIK', imagefilename: 'chart-column-2d-stacked.png', routerlink: 'statistik'},
-    // {caption: 'FORMULARE', imagefilename: 'document-acrobat.png', routerlink: 'forms'},
+    {caption: 'FORMULARE', imagefilename: 'document-acrobat.png', routerlink: 'forms'},
     // {caption: 'GALERIE', imagefilename: 'pictures.png', routerlink: 'gallery'},
     // {caption: 'VERSAND', imagefilename: 'shipment.png', routerlink: 'gallery'},
     // {caption: 'BUCHHALTUNG', imagefilename: 'bank-money-coins.png', routerlink: 'gallery'},
     // {caption: 'ARTIKEL', imagefilename: 'registry-editor.png', routerlink: 'artikelliste'},
-    {caption: 'BENUTZER', imagefilename: 'user-woman-info.png', routerlink: 'userdata/allgemein'},
+    {caption: 'MEINE DATEN', imagefilename: 'user-woman-info.png', routerlink: 'userdata/allgemein'},
     {caption: 'KONTAKTE', imagefilename: 'list-user-group.png', routerlink: 'kontakte/gastgeber'},
     // {caption: 'BACKTERMINE', imagefilename: 'calendar-selection-day.png', routerlink: 'calendar'}
   ];
   headline = '';
-  isAuthenticated = false;
+  showNavBar = false;
   userImageUrl = '';
   userName = '';
 
   constructor(private lumaraService: LumaraService, private router: Router, private route: ActivatedRoute) {
+    this.updateNavBarVisibility();
     this.lumaraService.getIsAuthenticated().subscribe(
       authStatus => {
-        this.isAuthenticated = authStatus;
+        // this.showNavBar = authStatus;
         if (this.lumaraService.current_user_access_rights) {
           this.userImageUrl = this.lumaraService.getUserImageUrl(this.lumaraService.current_user_access_rights.UserID);
           this.userName = this.lumaraService.current_user_access_rights.UserName;
         }
+        this.updateNavBarVisibility();
       }
     );
     this.lumaraService.getCurrentHeadlineObservable().subscribe(
@@ -50,11 +52,19 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isAuthenticated = this.lumaraService.isAuthenticated;
+    this.updateNavBarVisibility();
     console.log(this.lumaraService.current_user_access_rights);
     if (this.lumaraService.current_user_access_rights) {
       this.userImageUrl = this.lumaraService.getUserImageUrl(this.lumaraService.current_user_access_rights.UserID);
       this.userName = this.lumaraService.current_user_access_rights.UserName;
+    }
+  }
+
+  updateNavBarVisibility() {
+    if (this.lumaraService.current_user_access_rights) {
+      this.showNavBar = true;
+    } else {
+      this.showNavBar = false;
     }
   }
 

@@ -1,3 +1,7 @@
-<p>
-  forms works!
-</p>
+<div class="row">
+  <div class="col-md-12" *ngIf="forms">
+    <div *ngFor="let form of forms">
+      {{form.GroupCaption}}
+    </div>
+  </div>
+</div>

@@ -12,10 +12,10 @@ import {tap} from 'rxjs/internal/operators';
 
 @Injectable()
 export class LumaraService {
-  public url_zentrale = 'https://service.lumara.de/cmd?jsoncommand';
-  public url_zentrale_min = 'https://service.lumara.de';
-  // public url_zentrale = 'http://localhost:8990/cmd?jsoncommand';
-  // public url_zentrale_min = 'http://localhost:8990';
+  // public url_zentrale = 'https://service.lumara.de/cmd?jsoncommand';
+  // public url_zentrale_min = 'https://service.lumara.de';
+  public url_zentrale = 'http://localhost:8990/cmd?jsoncommand';
+  public url_zentrale_min = 'http://localhost:8990';
   public current_user_name = '';
   public current_token = '';
   public current_user_access_rights: UserAccessRights = undefined;
@@ -73,6 +73,11 @@ export class LumaraService {
       '&modulename=Modules.Users.Service.UserService&commandname=GetUserImage&user_id=' + userid + '&UserImageSize=2';
     return retval;
   }
+  getGastgeberlistAsCSVUrl() {
+    const retval = this.url_zentrale + '&user=' + this.current_user_name + '&token=' + this.current_token +
+      '&modulename=Modules.Lumara.Base.Service.BaseService&commandname=DownloadGastgeber';
+    return retval;
+  }
 
   tryAutoLogin() {
     const password = localStorage.getItem('nl_password');
@@ -90,12 +95,12 @@ export class LumaraService {
     cmd.addParameter('user', username);
     cmd.addParameter('password', password);
     const body = cmd.toJson();
-    console.log('Ich versuch mich jetzt mit folgendem Befehl einzuloggen: ' + body);
+    console.log('Ich versuch mich jetzt einzuloggen');
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     this.http.post<any>(this.url_zentrale, body, {headers: headers})
       .subscribe(
         data => {
-          console.log(data);
+          // console.log(data);
           if (data.ReturnCode === 1) {
             this.current_token = data.ReturnValue;
             this.current_user_name = username;

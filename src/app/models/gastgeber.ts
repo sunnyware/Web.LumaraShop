@@ -13,4 +13,5 @@ export class Gastgeber {
   AllowTransferToLFB: boolean;
   AllowNewsletter: boolean;
   FlagDeleted?: boolean;
+  IsAktivGastgeber: boolean;
 }
