@@ -1,7 +1,18 @@
 <div class="row">
   <div class="col-md-12" *ngIf="forms">
-    <div *ngFor="let form of forms">
-      {{form.GroupCaption}}
+    <div *ngFor="let formgroup of forms" style="margin-bottom: 10px;">
+      <h2>{{formgroup.GroupCaption}}</h2>
+      <div *ngFor="let form of formgroup.Forms"
+           style="display: inline-block;  border: 1px solid silver;
+           box-sizing: border-box; margin: 10px; padding: 0px 5px 0px 5px; text-align: center">
+        <a href="https://portal.lumara.de/forms/{{form.Filename}}" target="_blank">
+          <div style="text-align: center;">
+            <a href="https://portal.lumara.de/forms/{{form.Filename}}" target="_blank">{{form.Caption}}</a>
+            <div><img src="https://portal.lumara.de/forms/{{form.Filename}}.jpg" style="height:180px"/></div>
+
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </div>

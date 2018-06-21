@@ -20,9 +20,9 @@ export class FormsComponent implements OnInit {
   }
 
   reloadForms() {
-    this.http.get(this.lumaraService.url_zentrale_min + '/forms/forms.json').subscribe(data => {
-      console.log(data);
-      // this.forms = data;
+    this.http.get<LumaraFormGroup[]>('https://portal.lumara.de/forms/forms.json').subscribe(data => {
+      // console.log(data);
+      this.forms = data;
     });
   }
 }

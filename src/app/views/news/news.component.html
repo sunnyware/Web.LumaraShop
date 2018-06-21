@@ -1,5 +1,17 @@
-<div *ngIf="blogPosts" class="row">
+<div class="row" *ngIf="artikelNichtLieferbarArray">
   <div class="col col-md-12">
+    <p style="color:#BE392B"><b>Nicht lieferbare Artikel:</b></p>
+    <!--span style="color: white; font-weight: bold; background: #BE392B; border-radius: 4px; padding: 3px 8px 3px 8px">!!! momentan nicht lieferbare Artikel: Tülle C01, Knusperbiene 1138</span-->
+    <div *ngFor="let art of artikelNichtLieferbarArray" style="height: 42px; display: inline-block; color: white; font-weight: bold; background: #BE392B; border-radius: 4px;padding:3px 8px 3px 8px; margin-right: 5px;">
+      <img src="https://portal.lumara.de/images/artikel/thumbs80/{{art.EdvNr}}.jpg" style="height:35px; border-radius: 4px;"/>
+      {{art.EdvNr}} {{art.Bezeich}}
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="blogPosts" class="row">
+  <div class="col col-md-9">
     <div *ngFor="let blogPost of blogPosts" style="margin-top: 15px;">
       <table>
         <tr>
@@ -50,11 +62,15 @@
     </nav-->
   </div>
 
-  <!--div class="col col-md-3">
-    <h4>Neuheiten</h4>
-    <div *ngFor="let artikel of neuheiten">
+  <div class="col col-md-3" style="background: darkgray; border-radius: 6px;">
+    <h4>Sonderangebote</h4>
+    <a href="https://portal.lumara.de/flyer/FlyerKW27.pdf">
+    <img src="https://portal.lumara.de/flyer/FlyerKW27_01.jpg" style="width: 97%; "/><br/>
+    <img src="https://portal.lumara.de/flyer/FlyerKW27_02.jpg" style="width: 97%; "/>
+    </a>
+    <!--div *ngFor="let artikel of neuheiten">
       <img src="../assets/products/{{artikel.EdvNr}}.jpg" style="width: 100%"/>
-    </div>
-  </div-->
+    </div-->
+  </div>
 </div>
 

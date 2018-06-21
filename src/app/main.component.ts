@@ -11,7 +11,7 @@ import {LumaraService} from './service/lumara_service';
 export class MainComponent implements OnInit {
   navitems: NavItem[] = [
     {caption: 'NEWS', imagefilename: 'news.png', routerlink: 'news'},
-    // {caption: 'AUFTRÄGE', imagefilename: 'order.png', routerlink: 'orders'},
+    {caption: 'AUFTRÄGE', imagefilename: 'order.png', routerlink: 'orders'},
     // {caption: 'CHEF-STATISTIK', imagefilename: 'chart-column-2d-stacked-vendor.png', routerlink: 'statistik'},
     // {caption: 'STATISTIK', imagefilename: 'chart-column-2d-stacked.png', routerlink: 'statistik'},
     {caption: 'FORMULARE', imagefilename: 'document-acrobat.png', routerlink: 'forms'},

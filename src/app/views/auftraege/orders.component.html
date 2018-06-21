@@ -1,59 +1,50 @@
-<div class="row">
+<div *ngIf="false" class="row">
   <div class="col col-md-12">
     <button class="btn btn-primary">aktuellen Auftrag bearbeiten</button>
   </div>
 </div>
 <br/>
+
 <div class="row">
   <div class="col col-md-12">
-    <h4>Auftragshistorie</h4>
-    <table class="table table-hover">
+
+    <table *ngIf="auftraege" class="table table-hover table-scrollable">
       <thead>
       <tr>
         <th scope="col"></th>
         <th scope="col">Datum</th>
         <th scope="col">KW</th>
         <th scope="col">BstNr</th>
-        <th scope="col">Umsatz</th>
-        <th scope="col">Vorschau</th>
+        <th scope="col" class="text-md-right">Umsatz</th>
+        <!--th scope="col">Vorschau</th-->
         <th scope="col">Pakete</th>
-        <th scope="col">Status</th>
+
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>LU</td>
-        <td>17.05.2018</td>
-        <td>17</td>
-        <td>2018005100</td>
-        <td>300,95€</td>
-        <td>Acrobat</td>
-        <td>P1 P2 P3</td>
-        <td>in der Versandabteilung</td>
+      <tr *ngFor="let auftrag of auftraege">
+        <td><img [src]="getAuftragImageSource(auftrag)" style="height:35px;"/> </td>
+        <td>{{auftrag.BstDatum | date:'dd.MM.yyyy'}}</td>
+        <td>{{auftrag.KW}}</td>
+        <td>{{auftrag.BstNr}}</td>
+        <td><p class="text-md-right">{{auftrag.Umsatz | number:'1.2'}}€</p></td>
+        <!--td>
+          <a [href]="getAuftragFileUrl(auftrag)">
+          <img src="/assets/icons/document-acrobat.png" style="height:35px;"/>
+          </a>
+        </td-->
+        <td>
+          <div *ngFor="let paket of auftrag.Pakete" style="display: inline-block;">
+            <a href="https://tracking.dpd.de/status/de_DE/parcel/{{paket.PaketNr}}" >
+            <img src="/assets/icons/product_48.png" style="height:35px;"/>
+            </a>
+          </div>
+        </td>
       </tr>
-      <tr>
-        <td>LU</td>
-        <td>17.05.2018</td>
-        <td>17</td>
-        <td>2018005100</td>
-        <td>300,95€</td>
-        <td>Acrobat</td>
-        <td>P1 P2 P3</td>
-        <td>in der Versandabteilung</td>
-      </tr>
-      <tr>
-        <td>LU</td>
-        <td>17.05.2018</td>
-        <td>17</td>
-        <td>2018005100</td>
-        <td>300,95€</td>
-        <td>Acrobat</td>
-        <td>P1 P2 P3</td>
-        <td>in der Versandabteilung</td>
-      </tr>
+
       </tbody>
     </table>
-    <nav aria-label="...">
+    <!--nav aria-label="...">
       <ul class="pagination">
         <li class="page-item disabled">
           <a class="page-link" href="#" tabindex="-1">zurück</a>
@@ -67,7 +58,7 @@
           <a class="page-link" href="#">weiter</a>
         </li>
       </ul>
-    </nav>
+    </nav-->
   </div>
 </div>
 

@@ -47,6 +47,7 @@ export class UserdataAllgemeinComponent implements OnInit {
         } else if (data.ReturnCode >= 400) {
           console.log(data.ReturnMessage);
           this.router.navigate(['/login']);
+          notify(data.ReturnMessage);
         } else {
           notify(data.ReturnMessage);
         }

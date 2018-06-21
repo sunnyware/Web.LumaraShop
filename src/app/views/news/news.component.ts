@@ -4,6 +4,7 @@ import {TestData} from '../../models/_testdata';
 import {LumaraServiceCommands} from '../../service/lumara_service_commands';
 import {Router} from '@angular/router';
 import {BlogPostListItem} from '../../models/blogpost';
+import {ArtikelNichtLieferbarItem} from '../../models/artikel';
 
 @Component({
   selector: 'app-news',
@@ -13,6 +14,7 @@ import {BlogPostListItem} from '../../models/blogpost';
 
 export class NewsComponent implements OnInit {
   blogPosts: BlogPostListItem[] = undefined;
+  artikelNichtLieferbarArray: ArtikelNichtLieferbarItem[] = undefined;
   neuheiten = TestData.neuheiten;
   pageNr = 0;
   itemsPerPage = 10;
@@ -23,13 +25,24 @@ export class NewsComponent implements OnInit {
 
   ngOnInit() {
     this.reloadPosts();
+    this.reloadArtikelNichtLieferbar();
+  }
+
+  reloadArtikelNichtLieferbar() {
+    this.lumaraService.doCommand(LumaraServiceCommands.GetArtikelNichtLieferbar()).subscribe(
+      data => {
+        if (data.ReturnCode === 200) {
+          this.artikelNichtLieferbarArray = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
+        }
+      }
+    );
   }
 
   reloadPosts() {
 
     // this.lumaraService.doRequestGet('http://service.lumara.de/tracking.html?pushid=12345&pnr=123455555')
     //  .subscribe(data => this.responsex = data);
-    this.lumaraService.doCommand(LumaraServiceCommands.GetBlogPosts(1, -1, this.pageNr, this.itemsPerPage)).subscribe(
+    this.lumaraService.doCommand(LumaraServiceCommands.GetBlogPosts(1, 1, this.pageNr, this.itemsPerPage)).subscribe(
       data => {
         if (data.ReturnCode === 200) {
           // console.log('Ich bekam vom Server folgende Daten: ');

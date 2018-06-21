@@ -32,6 +32,7 @@ export class LumaraServiceCommands {
     cmd.addParameter('ItemsPerPage', itemsPerPage);
     return cmd;
   }
+
   public static GetBlogPost(blogPostID: number): JsonCommand {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Blogging.Service.BlogService';
@@ -47,6 +48,7 @@ export class LumaraServiceCommands {
     cmd.CommandName = 'GetFachberater';
     return cmd;
   }
+
   public static UpdateFachberater(fb: Fachberater): JsonCommand {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
@@ -73,6 +75,23 @@ export class LumaraServiceCommands {
     cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
     cmd.CommandName = 'UpdateGastgeber';
     cmd.addParameter('Gastgeber', gg);
+    return cmd;
+  }
+
+  /***** Artikel *****/
+  public static GetArtikelNichtLieferbar(): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'GetArtikelNichtLieferbar';
+    return cmd;
+  }
+
+  /***** Aufträge *****/
+  public static GetAuftraege(jahr: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'GetAuftraege';
+    cmd.addParameter('Jahr', jahr);
     return cmd;
   }
 }
