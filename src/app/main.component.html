@@ -1,4 +1,36 @@
-<div class="Top">
+<nav id="menu" class="menu" tabindex="0">
+  <div class="smartphone-menu-trigger"></div>
+  <header class="avatar">
+    <img [src]="userImageUrl"/>
+    <h5>{{userName}}</h5>
+  </header>
+  <ul>
+    <li *ngFor="let navitem of navitems" routerLink="{{navitem.routerlink}}" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/'+navitem.imagefilename+')'}">
+      <span>{{navitem.caption}}</span>
+      <!--a routerLink="{{navitem.routerlink}}">
+
+      </a-->
+    </li>
+  </ul>
+</nav>
+<main>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <!--a href="#menu" class="open-menu">
+            ☰
+          </a>
+          <a href="#" class="close-menu">
+            ☰
+          </a-->
+          <h2 class="smartphone-headline-trigger" style="color: #BE392B" >{{headline}}</h2>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+</main>
+
+<!--div class="Top">
   <table style="width:100%; margin-right:20px; border-width: 0">
     <tr>
       <td *ngIf="showNavBar" style="background-color: #403E48; width:150px; min-width: 150px; text-align: center;font-size:1rem; ">
@@ -31,4 +63,4 @@
     </ul>
   </div>
   <div class="Middle"><router-outlet></router-outlet></div>
-</div>
+</div-->

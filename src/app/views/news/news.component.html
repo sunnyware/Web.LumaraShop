@@ -1,5 +1,5 @@
 <div class="row" *ngIf="artikelNichtLieferbarArray">
-  <div class="col col-md-12">
+  <div class="col col-sm-12">
     <p style="color:#BE392B"><b>Nicht lieferbare Artikel:</b></p>
     <!--span style="color: white; font-weight: bold; background: #BE392B; border-radius: 4px; padding: 3px 8px 3px 8px">!!! momentan nicht lieferbare Artikel: Tülle C01, Knusperbiene 1138</span-->
     <div *ngFor="let art of artikelNichtLieferbarArray" style="height: 42px; display: inline-block; color: white; font-weight: bold; background: #BE392B; border-radius: 4px;padding:3px 8px 3px 8px; margin-right: 5px;">
@@ -11,7 +11,7 @@
 
 
 <div *ngIf="blogPosts" class="row">
-  <div class="col col-md-9">
+  <div class="col col-sm-9">
     <div *ngFor="let blogPost of blogPosts" style="margin-top: 15px;">
       <table>
         <tr>
@@ -62,7 +62,7 @@
     </nav-->
   </div>
 
-  <div class="col col-md-3" style="background: darkgray; border-radius: 6px;">
+  <div class="col col-sm-3" style="background: darkgray; border-radius: 6px;">
     <h4>Sonderangebote</h4>
     <a href="https://portal.lumara.de/flyer/FlyerKW27.pdf">
     <img src="https://portal.lumara.de/flyer/FlyerKW27_01.jpg" style="width: 97%; "/><br/>

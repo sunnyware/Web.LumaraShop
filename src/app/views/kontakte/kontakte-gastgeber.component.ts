@@ -61,6 +61,7 @@ export class KontakteGastgeberComponent implements OnInit {
 
   setSuchwort() {
     this.onlyAktivGastgeber = false;
+    this.pageNr = 1;
     this.reloadGastgeber();
   }
   resetSuchwort() {

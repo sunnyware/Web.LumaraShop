@@ -1,20 +1,20 @@
 /*I love me some border-box*/
-* {
+/** {
     box-sizing: border-box;
-}
+}*/
 /*This just stops me getting horizontal scrolling if anything overflows the width*/
-body {
+/*body {
     overflow-x: hidden;
-}
+}*/
 /*Just removing default browser padding/margin*/
-html,
+/*html,
 body {
     padding: 0;
     margin: 0;
     color: black;
-}
+}*/
 /*Flexbox gives us the flexiness we need. The top just stays put as there is no scrolling on the body due to the page never exceeding viewport height*/
-.Top {
+/*.Top {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -23,9 +23,9 @@ body {
     position: relative;
     z-index: 10;
     height: 80px;
-}
+}*/
 /*This is our main wrapping element, it's made 100vh high to ensure it is always the correct size and then moved into place and padded with negative margin and padding*/
-.Container {
+/*.Container {
     display: flex;
     overflow: hidden;
     height: 100vh;
@@ -35,70 +35,315 @@ body {
     width: 100%;
     backface-visibility: hidden;
     will-change: overflow;
-}
+}*/
 /*All the scrollable sections should overflow and be whatever height they need to be. As they are flex-items (due to being inside a flex container) they could be made to stretch full height at all times if needed.
 WebKit inertia scrolling is being added here for any present/future devices that are able to make use of it.
 */
+
+/*** Fully Responsive CSS3 Menu ***/
+body {
+  padding-left: 240px;
+}
+
+main {
+  position: relative;
+  height: 100vh;
+}
+
+/*
+.close-menu {
+  display: none;
+}
+
+#menu:target {
+  width: 230px;
+}
+
+#menu:target + .page-wrap {
+  width: 80%;
+}
+
+#main-nav:target + .page-wrap .open-menu {
+  display: none;
+}
+
+#main-nav:target + .page-wrap .close-menu {
+  display: block;
+}
+*/
+
+.menu {
+  background: #403E48;
+  color: white;
+  height: 100vh;
+  width: 240px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  outline: none;
+}
+
+.menu .avatar {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.5em 0.5em;
+  text-align: center;
+}
+
+.menu .avatar img {
+  height: 65px;
+  margin-bottom: 5px;
+  border-radius: 50%;
+  overflow: hidden;
+  /*border: 4px solid #ffea92;*/
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+.menu .avatar h5 {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0.5em 0;
+  margin: 0;
+}
+
+.menu ul li {
+  padding: 0.5em 1em 0.5em 3em;
+  font-size: 0.95em;
+  font-weight: regular;
+  background-repeat: no-repeat;
+  background-position: left 15px center;
+  background-size: auto 20px;
+  transition: all 0.15s linear;
+  cursor: pointer;
+}
+
+.menu ul li.icon-dashboard {
+  background-image: url("http://www.entypo.com/images//gauge.svg");
+}
+
+.menu ul li.icon-customers {
+  background-image: url("http://www.entypo.com/images//briefcase.svg");
+}
+
+.menu ul li.icon-users {
+  background-image: url("http://www.entypo.com/images//users.svg");
+}
+
+.menu ul li.icon-settings {
+  background-image: url("http://www.entypo.com/images//tools.svg");
+}
+
+.menu ul li:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.menu ul li:focus {
+  outline: none;
+}
+
+/*** schmale Darstellung ***/
+@media screen and (max-width: 900px) and (min-width: 400px) {
+  body {
+    padding-left: 90px;
+  }
+
+  .menu {
+    width: 90px;
+  }
+
+  .menu .avatar {
+    padding: 0.5em;
+    position: relative;
+  }
+
+  .menu .avatar img {
+    height: 40px;
+  }
+
+  .menu .avatar h2 {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 100px;
+    margin: 0;
+    min-width: 200px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.4);
+    transform: translate3d(-20px, -50%, 0);
+    transition: all 0.15s ease-in-out;
+  }
+
+  .menu .avatar:hover h2 {
+    opacity: 1;
+    transform: translate3d(0px, -50%, 0);
+  }
+
+  .menu ul li {
+    height: 60px;
+    background-position: center center;
+    background-size: 30px auto;
+    position: relative;
+  }
+
+  .menu ul li span {
+    opacity: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+    top: 50%;
+    left: 80px;
+    transform: translate3d(-15px, -50%, 0);
+    transition: all 0.15s ease-in-out;
+  }
+
+  .menu ul li span:before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid rgba(0, 0, 0, 0.5);
+    transform: translateY(-50%);
+  }
+
+  .menu ul li:hover span {
+    opacity: 1;
+    transform: translate3d(0px, -50%, 0);
+  }
+}
+
+/*** breite Darstellung ***/
+@media screen and (max-width: 400px) {
+  body {
+    padding-left: 0;
+  }
+
+  .menu {
+    width: 230px;
+    box-shadow: 0 0 0 100em rgba(0, 0, 0, 0);
+    transform: translate3d(-230px, 0, 0);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .menu .smartphone-menu-trigger {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 100%;
+    background: #403E48;
+  }
+
+  .smartphone-headline-trigger {
+    margin-top:40px;
+  }
+
+  .menu .smartphone-menu-trigger:before,
+  .menu .smartphone-menu-trigger:after {
+    content: '';
+    width: 50%;
+    height: 2px;
+    background: #fff;
+    border-radius: 10px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  .menu .smartphone-menu-trigger:after {
+    top: 55%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  .menu ul li {
+    padding: 1em 1em 1em 3em;
+    font-size: 1.2em;
+  }
+
+  .menu:focus {
+    transform: translate3d(0, 0, 0);
+    box-shadow: 0 0 0 100em rgba(0, 0, 0, 0.6);
+  }
+
+  .menu:focus .smartphone-menu-trigger {
+    pointer-events: none;
+  }
+}
+
+/*** End CSS3 Menu ***/
+
 .Left,
 .Middle,
 .Right {
-    overflow: auto;
-    height: auto;
-    padding: .5rem;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none;
+  overflow: auto;
+  height: auto;
+  padding: .5rem;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
 }
+
 /*Entirely optional – just wanted to remove the scrollbar on WebKit browsers as I find them ugly*/
 .Left::-webkit-scrollbar,
 .Middle::-webkit-scrollbar,
 .Right::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
+
 /*  Left and Right are set sizes while the Middle is set to flex one so it occupies all remaining space. This could be set as a width too if prefereable, perhaps using calc.*/
 .Left {
-    width: 150px;
-    background-color: #403E48;
-    text-align: center;
-    color: white;
+  width: 150px;
+  background-color: #403E48;
+  text-align: center;
+  color: white;
 }
 
 .Middle {
-    flex: 1;
-    padding-left: 20px;
+  flex: 1;
+  padding-left: 20px;
 }
 
 .Right {
-    width: 12.5rem;
-    background-color: violet;
+  width: 12.5rem;
+  background-color: violet;
 }
-
 
 /* Navigationsmenu-Styles */
 .nav-menu {
-    list-style-type: none;
-    margin: 0px;
-    padding: 0px;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
 }
-.nav-menuitem a {
-    display: block;
-    width: 100%;
-    color: white;
-    padding-left: 0px;
-    padding-top: 11px;
-    margin-bottom: 4px;
-    height:80px;
-    text-decoration: none;
-    /*font-size: 1.3em;*/
-}
-.nav-menuitem a:hover {
-    background-color: #BE392B;
-}
-.nav-active a {
-    background-color: #BE392B;
-    color: white;
-}
-/* ************************/
 
+.nav-menuitem a {
+  display: block;
+  width: 100%;
+  color: white;
+  padding-left: 0px;
+  padding-top: 11px;
+  margin-bottom: 4px;
+  height: 80px;
+  text-decoration: none;
+  /*font-size: 1.3em;*/
+}
+
+.nav-menuitem a:hover {
+  background-color: #BE392B;
+}
+
+.nav-active a {
+  background-color: #BE392B;
+  color: white;
+}
+
+/* ************************/
 
 .table td, .table th {
   padding: .3rem;
