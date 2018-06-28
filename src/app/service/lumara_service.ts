@@ -12,10 +12,10 @@ import {tap} from 'rxjs/internal/operators';
 
 @Injectable()
 export class LumaraService {
-  public url_zentrale = 'https://service.lumara.de/cmd?jsoncommand';
-  public url_zentrale_min = 'https://service.lumara.de';
-  // public url_zentrale = 'http://localhost:8990/cmd?jsoncommand';
-  // public url_zentrale_min = 'http://localhost:8990';
+  // public url_zentrale = 'https://service.lumara.de/cmd?jsoncommand';
+  // public url_zentrale_min = 'https://service.lumara.de';
+  public url_zentrale = 'http://localhost:8990/cmd?jsoncommand';
+  public url_zentrale_min = 'http://localhost:8990';
   public current_user_name = '';
   public current_token = '';
   public current_user_access_rights: UserAccessRights = undefined;

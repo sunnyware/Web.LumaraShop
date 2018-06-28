@@ -1,6 +1,25 @@
 <div *ngIf="blogPost" class="row">
   <div class="col-md-12">
-    <table>
+    <div class="postdate" style="position: absolute; width: 80px; text-align: center; border: solid 1px black; background-color: #403E48; color: white; border-radius: 8px;">
+      <span style="font-size: xx-large; font-weight: bold; padding-top: 0px; margin-top: 0px">{{blogPost.TimeCreated | date:'dd'}}</span><br/>
+      <span>{{blogPost.TimeCreated | date:'MMM'}}</span>
+    </div>
+    <div class="postcontent">
+      <!-- ATTACHMENTS -->
+      <div style="float:right;max-width:35%">
+        <div *ngFor="let att of blogPost.Attachments"
+             style="background-color:rgb(240,240,240); margin-bottom:2px;">
+          <a [href]="GetFileStoreFileUrl(att.FileID, att.Filename)">
+            <img [src]="GetIconUrl(att.FileExtension)"
+                 style="vertical-align: middle; background-color:transparent;"/><span style="font-size:11pt;">{{att.Filename}}</span>
+          </a>
+        </div>
+      </div>
+      <!-- MARKDOWN -->
+      <div markdown [data]="blogPost.Body"></div>
+    </div>
+
+    <!--table>
       <tr>
         <td style="vertical-align: top;">
           <div
@@ -11,8 +30,7 @@
         </td>
         <td style="vertical-align: top;">
           <div style="padding-left:10px;">
-            <!--span style="font-size: xx-large">{{blogPost.Subject}}</span><br/-->
-            <!-- ATTACHMENTS -->
+
             <div style="float:right;max-width:35%">
               <div *ngFor="let att of blogPost.Attachments"
                    style="background-color:rgb(240,240,240); margin-bottom:2px;">
@@ -22,11 +40,11 @@
                 </a>
               </div>
             </div>
-            <!-- MARKDOWN -->
+
             <div markdown [data]="blogPost.Body"></div>
           </div>
         </td>
       </tr>
-    </table>
+    </table-->
   </div>
 </div>

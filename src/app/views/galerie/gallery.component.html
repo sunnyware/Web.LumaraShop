@@ -1,5 +1,8 @@
 <div class="row">
-  <div class="col-md-12">
-    coming soon....
+  <div class="col-md-12" *ngIf="galleries">
+    <div *ngFor="let galleryitem of galleries" style="margin-bottom: 10px;">
+      <img src="https://portal.lumara.de/images/gallery/{{galleryitem.GalleryFolder}}/image000.jpg" style="height:200px;"/>
+      <h3 style="position: relative; margin-bottom: 0px; color:white;">{{galleryitem.Caption}}</h3>
+    </div>
   </div>
 </div>

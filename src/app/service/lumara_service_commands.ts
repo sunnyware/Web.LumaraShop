@@ -78,6 +78,19 @@ export class LumaraServiceCommands {
     return cmd;
   }
 
+  public static GetGastgeberStatistik(filterIDPersonalakte: number, datum1: Date, datum2: Date, mindestVortraege: number, mindestUmsatz: number, buildGroupedList, boolean): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'GetGastgeberStatistik';
+    cmd.addParameter('FilterIDPersonalakte', filterIDPersonalakte);
+    cmd.addParameter('Datum1', datum1);
+    cmd.addParameter('Datum2', datum2);
+    cmd.addParameter('MindestVortraege', mindestVortraege);
+    cmd.addParameter('MindestUmsatz', mindestUmsatz);
+    cmd.addParameter('BuildGroupedList', buildGroupedList);
+    return cmd;
+  }
+
   /***** Artikel *****/
   public static GetArtikelNichtLieferbar(): JsonCommand {
     const cmd = new JsonCommand();

@@ -1,15 +1,36 @@
-<nav id="menu" class="menu" tabindex="0">
+<nav *ngIf="showNavBar" id="menu" class="menu" tabindex="0">
   <div class="smartphone-menu-trigger"></div>
   <header class="avatar">
     <img [src]="userImageUrl"/>
     <h5>{{userName}}</h5>
   </header>
   <ul>
-    <li *ngFor="let navitem of navitems" routerLink="{{navitem.routerlink}}" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/'+navitem.imagefilename+')'}">
+    <!--li *ngFor="let navitem of navitems" routerLink="{{navitem.routerlink}}" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/'+navitem.imagefilename+')'}">
       <span>{{navitem.caption}}</span>
-      <!--a routerLink="{{navitem.routerlink}}">
-
-      </a-->
+    </li-->
+    <li routerLink="news" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/news.png)'}">
+      <span>NEWS</span>
+    </li>
+    <li *ngIf="!isAdmin" routerLink="orders" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/order.png)'}">
+      <span>AUFTRÄGE</span>
+    </li>
+    <li *ngIf="isAdmin" routerLink="chefstatistik/menu" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/chart-column-2d-stacked.png)'}">
+      <span>CHEF-STATISTIK</span>
+    </li>
+    <li *ngIf="!isAdmin" routerLink="statistik" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/chart-column-2d-stacked.png)'}">
+      <span>STATISTIK</span>
+    </li>
+    <li routerLink="forms" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/document-acrobat.png)'}">
+      <span>FORMULARE</span>
+    </li>
+    <li routerLink="gallery" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/pictures.png)'}">
+      <span>GALERIE</span>
+    </li>
+    <li *ngIf="!isAdmin" routerLink="userdata/allgemein" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/user-woman-info.png)'}">
+      <span>MEINE DATEN</span>
+    </li>
+    <li *ngIf="!isAdmin" routerLink="kontakte/gastgeber" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/list-user-group.png)'}">
+      <span>KONTAKTE</span>
     </li>
   </ul>
 </nav>

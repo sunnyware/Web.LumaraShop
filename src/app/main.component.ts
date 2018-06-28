@@ -25,6 +25,7 @@ export class MainComponent implements OnInit {
   ];
   headline = '';
   showNavBar = false;
+  isAdmin = false;
   userImageUrl = '';
   userName = '';
 
@@ -63,6 +64,10 @@ export class MainComponent implements OnInit {
   updateNavBarVisibility() {
     if (this.lumaraService.current_user_access_rights) {
       this.showNavBar = true;
+      if (this.lumaraService.current_user_access_rights.IsLumaraAdmin) {
+        // bei internen und Administratoren, die keine Fachberater sind, müssen verschiedene Menüpunkt ein/bzw. ausgeblendet werden
+        this.isAdmin = true;
+      }
     } else {
       this.showNavBar = false;
     }

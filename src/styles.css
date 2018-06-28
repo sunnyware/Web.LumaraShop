@@ -42,7 +42,7 @@ WebKit inertia scrolling is being added here for any present/future devices that
 
 /*** Fully Responsive CSS3 Menu ***/
 body {
-  padding-left: 240px;
+  padding-left: 200px;
 }
 
 main {
@@ -72,11 +72,16 @@ main {
 }
 */
 
+.postcontent {
+  padding-top: 0px;
+  padding-left: 90px;
+}
+
 .menu {
   background: #403E48;
   color: white;
   height: 100vh;
-  width: 240px;
+  width: 200px;
   position: fixed;
   top: 0;
   left: 0;
@@ -164,20 +169,20 @@ main {
     height: 40px;
   }
 
-  .menu .avatar h2 {
+  .menu .avatar h5 {
     opacity: 0;
     position: absolute;
     top: 50%;
     left: 100px;
     margin: 0;
-    min-width: 200px;
+    min-width: 190px;
     border-radius: 4px;
     background: rgba(0, 0, 0, 0.4);
     transform: translate3d(-20px, -50%, 0);
     transition: all 0.15s ease-in-out;
   }
 
-  .menu .avatar:hover h2 {
+  .menu .avatar:hover h5 {
     opacity: 1;
     transform: translate3d(0px, -50%, 0);
   }
@@ -218,18 +223,23 @@ main {
     opacity: 1;
     transform: translate3d(0px, -50%, 0);
   }
+
+  .postcontent {
+    padding-top: 80px;
+    padding-left: 0px;
+  }
 }
 
-/*** breite Darstellung ***/
+/*** Darstellung Smartphone-Menu ***/
 @media screen and (max-width: 400px) {
   body {
     padding-left: 0;
   }
 
   .menu {
-    width: 230px;
+    width: 220px;
     box-shadow: 0 0 0 100em rgba(0, 0, 0, 0);
-    transform: translate3d(-230px, 0, 0);
+    transform: translate3d(-220px, 0, 0);
     transition: all 0.3s ease-in-out;
   }
 
@@ -265,7 +275,7 @@ main {
 
   .menu ul li {
     padding: 1em 1em 1em 3em;
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
 
   .menu:focus {
@@ -275,6 +285,10 @@ main {
 
   .menu:focus .smartphone-menu-trigger {
     pointer-events: none;
+  }
+  .postcontent {
+    padding-top: 80px;
+    padding-left: 0px;
   }
 }
 
