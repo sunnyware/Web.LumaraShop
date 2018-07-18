@@ -17,8 +17,6 @@ export class FormsComponent implements OnInit {
 
   ngOnInit() {
     this.reloadForms();
-
-    
   }
 
   reloadForms() {
