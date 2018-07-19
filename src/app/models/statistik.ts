@@ -2,17 +2,17 @@ export class StatistikJahresspiegel {
   Caption: string;
   TimeStamp: Date;
   Duration: number;
-  Statistik: ChartItem[];
+  Statistik?: MyChartItem[];
 }
 
 export class StatistikJahresstatistik {
   Caption: string;
   TimeStamp: Date;
   Duration: number;
-  Statistik: ChartItem[];
+  Statistik?: MyChartItem[];
 }
 
-export class ChartItem {
+export class MyChartItem {
   Label: string;
   Value: number;
 }
@@ -22,7 +22,7 @@ export class StatistikRankingList {
   TimeStamp: Date;
   Duration: number;
   MaxUmsatz: number;
-  Statistik: RankingItem[];
+  Statistik?: RankingItem[];
 }
 
 export class RankingItem {

@@ -25,7 +25,7 @@ export class OrdersComponent implements OnInit {
       data => {
         if (data.ReturnCode === 200) {
           this.auftraege = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
-          console.log(this.auftraege);
+          // console.log(this.auftraege);
         } else if (data.ReturnCode >= 400) {
           this.router.navigate(['/login']);
         }

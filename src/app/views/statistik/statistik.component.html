@@ -1,8 +1,20 @@
-<div class="row">
-  <div *ngIf="chartDataJahresspiegel" class="col-4">
-    <dx-chart id="chart" [dataSource]="chartDataJahresspiegel.Statistik">
+<div class="row"  *ngIf="chartDataJahresspiegel">
+  <div class="col">
+      <h2>{{chartDataJahresspiegel.Caption}}</h2>
+  </div>
+
+</div>
+<div class="row" *ngIf="chartDataJahresspiegel">
+  <div  class="col-12">
+    <dx-chart id="chart" [dataSource]="chartDataJahresspiegel.Statistik" resolveLabelOverlapping="hide">
       <dxo-legend [visible]="false"></dxo-legend>
-      <dxi-series argumentField="Label" valueField="Value" type="bar" color="#ffaa66">
+      <dxi-value-axis>
+        <dxo-label [visible]="false"></dxo-label>
+      </dxi-value-axis>
+      <dxi-series argumentField="Label" valueField="Value" type="bar" color="#ffaa66" >
+        <dxo-label [visible]="true" rotationAngle="0" [showForZeroValues]="false" backgroundColor="#BE392B">
+          <dxo-format type="largeNumber" [precision]="1"></dxo-format>
+        </dxo-label>
       </dxi-series>
     </dx-chart>
   </div>
