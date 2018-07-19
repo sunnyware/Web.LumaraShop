@@ -1,3 +1,9 @@
-<p>
-  statistik works!
-</p>
+<div class="row">
+  <div *ngIf="chartDataJahresspiegel" class="col-4">
+    <dx-chart id="chart" [dataSource]="chartDataJahresspiegel.Statistik">
+      <dxo-legend [visible]="false"></dxo-legend>
+      <dxi-series argumentField="Label" valueField="Value" type="bar" color="#ffaa66">
+      </dxi-series>
+    </dx-chart>
+  </div>
+</div>

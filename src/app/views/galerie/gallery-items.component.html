@@ -1,0 +1,17 @@
+<div *ngIf="thumbnails" class="row">
+
+
+  <!--div class="card-deck"-->
+
+  <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-xs-12" *ngFor="let thumbnail of thumbnails">
+  <div class="card mb-4 bg-dark" >
+    <a [routerLink]="['/gallery', galleryID, thumbnail.Filename]">
+      <img class="card-img-top img-fluid" src="http://localhost:8990/images/gallery/{{galleryID}}/thumb150/{{thumbnail.Filename}}"
+        alt="Galerie">
+      <div class="card-block text-center">
+        <h6 class="card-title text-light">{{thumbnail.Caption}}</h6>
+      </div>
+    </a>
+  </div>
+</div>
+</div>

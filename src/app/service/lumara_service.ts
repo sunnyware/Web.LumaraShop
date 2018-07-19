@@ -12,8 +12,8 @@ import {tap} from 'rxjs/internal/operators';
 
 @Injectable()
 export class LumaraService {
-  // public url_zentrale = 'https://service.lumara.de/cmd?jsoncommand';
-  // public url_zentrale_min = 'https://service.lumara.de';
+  //public url_zentrale = 'https://service.lumara.de/cmd?jsoncommand';
+  //public url_zentrale_min = 'https://service.lumara.de';
   public url_zentrale = 'http://localhost:8990/cmd?jsoncommand';
   public url_zentrale_min = 'http://localhost:8990';
   public current_user_name = '';
@@ -171,57 +171,4 @@ export class LumaraService {
     return this.current_headline_state.asObservable();
   }
 
-
-  /*
-  // Gibt die Benutzerdaten zum Bearbeiten zurück. Aber natürlich nur, wenn der Benutzer eingeloggt ist.
-  getUserData() : User {
-      // zum Abrufen der Daten ist ein gültiger lum_user_token notwendig. Dieser ist im LocalStorage gespeichert
-      let mytoken = localStorage.getItem('lum_user_token');
-      let user = {
-          personalnr: '12345',
-          id: 0,
-          vorname: 'Hupferl',
-          nachname: 'Bupferl',
-          strasse: '',
-          land: '',
-          plz: '',
-          ort: '',
-          email: '',
-          telefon: '',
-          telefax: '',
-          mobil: '',
-          steuernummer: '1940349',
-          password: ''
-      }
-      return user;
-  }
-  saveUserData(user: User): boolean {
-      // zum Speichern der Daten ist ein gültiger sessionToken notwendig. Dieser ist im LocalStorage gespeichert
-      let mytoken = localStorage.getItem('lum_user_token');
-      // hier noch den Code einbauen!
-      return true;
-  }
-*/
-  /*
-  // Gibt die Umsatzsteuerdaten zum Bearbeiten zurück.
-  getUstData(jahr: number) : Ust {
-      // zum Abrufen der Daten ist ein gültiger sessionToken notwendig. Dieser ist im LocalStorage gespeichert
-      let mytoken = localStorage.getItem('lum_user_token');
-      let ust = {
-          doid_personalakte: 39403495,
-          steuernummer: "123.456767",
-          jahr: jahr,
-          usteuer_type: "2",
-          changed_timestamp: new Date("2016-01-01")
-      };
-      return ust;
-  }
-  // Speichert die geänderten Umsatzsteuerdaten ab
-  saveUstData(ust: Ust) {
-      // zum Speichern der Daten ist ein gültiger sessionToken notwendig. Dieser ist im LocalStorage gespeichert
-      let mytoken = localStorage.getItem('lum_user_token');
-      // hier noch den Code einbauen!
-      return true;
-  }
-  */
 }

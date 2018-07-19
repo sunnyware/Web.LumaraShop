@@ -1,87 +1,60 @@
-<nav *ngIf="showNavBar" id="menu" class="menu" tabindex="0">
-  <div class="smartphone-menu-trigger"></div>
-  <header class="avatar">
-    <img [src]="userImageUrl"/>
-    <h5>{{userName}}</h5>
-  </header>
-  <ul>
-    <!--li *ngFor="let navitem of navitems" routerLink="{{navitem.routerlink}}" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/'+navitem.imagefilename+')'}">
-      <span>{{navitem.caption}}</span>
-    </li-->
-    <li routerLink="news" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/news.png)'}">
-      <span>NEWS</span>
-    </li>
-    <li *ngIf="!isAdmin" routerLink="orders" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/order.png)'}">
-      <span>AUFTRÄGE</span>
-    </li>
-    <li *ngIf="isAdmin" routerLink="chefstatistik/menu" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/chart-column-2d-stacked.png)'}">
-      <span>CHEF-STATISTIK</span>
-    </li>
-    <li *ngIf="!isAdmin" routerLink="statistik" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/chart-column-2d-stacked.png)'}">
-      <span>STATISTIK</span>
-    </li>
-    <li routerLink="forms" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/document-acrobat.png)'}">
-      <span>FORMULARE</span>
-    </li>
-    <li routerLink="gallery" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/pictures.png)'}">
-      <span>GALERIE</span>
-    </li>
-    <li *ngIf="!isAdmin" routerLink="userdata/allgemein" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/user-woman-info.png)'}">
-      <span>MEINE DATEN</span>
-    </li>
-    <li *ngIf="!isAdmin" routerLink="kontakte/gastgeber" routerLinkActive="nav-active" tabindex="0" [ngStyle]="{'background-image': 'url(/assets/icons_white/60px/large/list-user-group.png)'}">
-      <span>KONTAKTE</span>
-    </li>
-  </ul>
-</nav>
-<main>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12">
-          <!--a href="#menu" class="open-menu">
-            ☰
-          </a>
-          <a href="#" class="close-menu">
-            ☰
-          </a-->
-          <h2 class="smartphone-headline-trigger" style="color: #BE392B" >{{headline}}</h2>
-        </div>
+<header>
+  <!-- Start Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-0">
+    <div class="container">
+      <a class="navbar-brand font-alt" id="home">
+        <img class="mr-2 mb-1 logo" src="assets/img/logo_main.png" alt="Lumara">
+      </a>
+      <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" data-toggle="collapse" data-target="#navbar-toggle" aria-controls="navbar-toggle">
+        <span class="icon-menu"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end text-uppercase " id="navbar-toggle" [ngbCollapse]="isCollapsed">
+        <ul class="navbar-nav" (click)="navLinkClicked()">
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="news">News</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="orders">Aufträge</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="chefstatistik/menu">Chef-Statistik</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="statistik">Statistik</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="forms">Formulare</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="gallery">Galerie</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="kontakte/gastgeber">Kontakte</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link align-middle" routerLink="userdata/allgemein">
+              <div class="avatar rounded-circle" [ngStyle]="{'background-image':'url(' + userImageUrl + ')'}"></div>
+              <span *ngIf="!isCollapsed"> meine Daten</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="" (click)="logout()"><span class="icon-logout"><span *ngIf="!isCollapsed"> Logout</span></span></a>
+          </li>
+
+        </ul>
+        <!-- navbar-nav -->
       </div>
-      <router-outlet></router-outlet>
+      <!-- navbar-collapse -->
     </div>
-</main>
+    <!-- container -->
+  </nav>
+  <!-- nav -->
+  <!-- Ende Navigation -->
+</header>
 
-<!--div class="Top">
-  <table style="width:100%; margin-right:20px; border-width: 0">
-    <tr>
-      <td *ngIf="showNavBar" style="background-color: #403E48; width:150px; min-width: 150px; text-align: center;font-size:1rem; ">
-        <div style="text-align: center; padding-top:7px;">
-          <img [src]="userImageUrl" style="height:60px; border-radius: 50%"><br/>
-          <span style="color:white; margin-top:0px; padding-top:0px;">{{userName}}</span>
-        </div>
-
-      </td>
-
-      <td style="padding-left: 20px; color: #BE392B">{{headline}}</td>
-
-      <td style="text-align: end;"><img src="../assets/schriftzug.png" style="height:70px"></td>
-
-    </tr>
-  </table>
-</div>
-<div class="Container">
-  <div *ngIf="showNavBar" class="Left" style="padding-top: 30px">
-    <ul class="nav-menu">
-      <li *ngFor="let navitem of navitems" class="nav-menuitem" routerLinkActive="nav-active">
-        <a routerLink="{{navitem.routerlink}}"><img src="/assets/icons_white/60px/large/{{navitem.imagefilename}}" style="height:35px;"><br/>{{navitem.caption}}</a>
-      </li>
-      <br/>
-      <a [routerLink]="" (click)="logout()" style="color:white;">abmelden</a>
-      <br/>
-      <br/>
-      <a href="http://lumara.eu/impressum.html" target="_blank" style="color:white">Impressum</a><br/>
-      <a href="http://lumara.eu/datenschutz.html" target="_blank" style="color:white">Datenschutz</a>
-    </ul>
+<main>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
   </div>
-  <div class="Middle"><router-outlet></router-outlet></div>
-</div-->
+</main>

@@ -26,6 +26,7 @@ import {
   DxValidatorModule
 } from 'devextreme-angular';
 import 'devextreme-intl';
+import {NgbModule, NgbCollapseModule, NgbCarousel, NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import {locale, loadMessages} from 'devextreme/localization';
 import * as messagesDe from 'devextreme/localization/messages/de.json';
 import {ArtikellisteComponent} from './views/artikel/artikelliste.component';
@@ -47,6 +48,8 @@ import {NewsArtikelComponent} from './views/news/news-artikel.component';
 import {ChefStatistikComponent} from './views/statistik/chef-statistik.component';
 import {ChefStatistikAktivGGComponent} from './views/statistik/chef-statistik-aktiv-gg.component';
 import {ChefStatistikMenuComponent} from './views/statistik/chef-statistik-menu.component';
+import { GalleryItemsComponent } from './views/galerie/gallery-items.component';
+import { GalleryBigItemComponent } from './views/galerie/gallery-big-item.component';
 
 registerLocaleData(localeDe);
 loadMessages(messagesDe);
@@ -65,6 +68,8 @@ const APP_ROUTES: Routes = [
     ]
   },
   {path: 'gallery', component: GalleryComponent, canActivate: [ProtectedGuard]},
+  {path: 'gallery/:term', component: GalleryItemsComponent, canActivate: [ProtectedGuard]},
+  {path: 'gallery/:term/:term', component: GalleryBigItemComponent, canActivate: [ProtectedGuard]},
   {path: 'forms', component: FormsComponent, canActivate: [ProtectedGuard]},
   {
     path: 'kontakte', component: KontakteComponent, canActivate: [ProtectedGuard], children: [
@@ -107,9 +112,14 @@ const APP_ROUTES: Routes = [
     NewsArtikelComponent,
     ChefStatistikComponent,
     ChefStatistikAktivGGComponent,
-    ChefStatistikMenuComponent
+    ChefStatistikMenuComponent,
+    GalleryItemsComponent,
+    GalleryBigItemComponent
   ],
   imports: [
+    NgbModule.forRoot(),
+    NgbCollapseModule,
+    NgbCarouselModule,
     BrowserModule, FormsModule, HttpClientModule,
     RouterModule.forRoot(APP_ROUTES),
     MarkdownModule.forRoot(),

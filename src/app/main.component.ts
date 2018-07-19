@@ -23,6 +23,7 @@ export class MainComponent implements OnInit {
     {caption: 'KONTAKTE', imagefilename: 'list-user-group.png', routerlink: 'kontakte/gastgeber'},
     // {caption: 'BACKTERMINE', imagefilename: 'calendar-selection-day.png', routerlink: 'calendar'}
   ];
+  isCollapsed = true;
   headline = '';
   showNavBar = false;
   isAdmin = false;
@@ -58,6 +59,12 @@ export class MainComponent implements OnInit {
     if (this.lumaraService.current_user_access_rights) {
       this.userImageUrl = this.lumaraService.getUserImageUrl(this.lumaraService.current_user_access_rights.UserID);
       this.userName = this.lumaraService.current_user_access_rights.UserName;
+    }
+  }
+
+  navLinkClicked() {
+    if  (!this.isCollapsed) {
+      this.isCollapsed = true;
     }
   }
 

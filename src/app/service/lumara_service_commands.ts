@@ -78,7 +78,8 @@ export class LumaraServiceCommands {
     return cmd;
   }
 
-  public static GetGastgeberStatistik(filterIDPersonalakte: number, datum1: Date, datum2: Date, mindestVortraege: number, mindestUmsatz: number, buildGroupedList, boolean): JsonCommand {
+  public static GetGastgeberStatistik(filterIDPersonalakte: number, datum1: Date, datum2: Date, mindestVortraege: number,
+    mindestUmsatz: number, buildGroupedList, boolean): JsonCommand {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
     cmd.CommandName = 'GetGastgeberStatistik';
@@ -104,6 +105,34 @@ export class LumaraServiceCommands {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
     cmd.CommandName = 'GetAuftraege';
+    cmd.addParameter('Jahr', jahr);
+    return cmd;
+  }
+
+   /***** Statistik *****/
+  public static GetJahresspiegel(idPersonalakte: number, returnChefstatistik: boolean): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.StatistikService';
+    cmd.CommandName = 'GetJahresspiegel';
+    cmd.addParameter('IDPersonalakte', idPersonalakte);
+    cmd.addParameter('ReturnChefstatistik', returnChefstatistik);
+    return cmd;
+  }
+
+  public static GetJahresstatistik(idPersonalakte: number, jahr: number, returnChefstatistik: boolean): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.StatistikService';
+    cmd.CommandName = 'GetJahresstatistik';
+    cmd.addParameter('IDPersonalakte', idPersonalakte);
+    cmd.addParameter('Jahr', jahr);
+    cmd.addParameter('ReturnChefstatistik', returnChefstatistik);
+    return cmd;
+  }
+
+   public static GetRankingList(jahr: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.StatistikService';
+    cmd.CommandName = 'GetRankingList';
     cmd.addParameter('Jahr', jahr);
     return cmd;
   }
