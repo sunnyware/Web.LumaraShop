@@ -27,6 +27,7 @@ export class MainComponent implements OnInit {
   headline = '';
   showNavBar = false;
   isAdmin = false;
+  allowChefstatistik = false;
   userImageUrl = '';
   userName = '';
 
@@ -75,6 +76,9 @@ export class MainComponent implements OnInit {
         // bei internen und Administratoren, die keine Fachberater sind, müssen verschiedene Menüpunkt ein/bzw. ausgeblendet werden
         this.isAdmin = true;
       }
+      if (this.lumaraService.current_user_access_rights.AllowChefstatistik) {
+        this.allowChefstatistik = true;
+      }
     } else {
       this.showNavBar = false;
     }
@@ -82,6 +86,7 @@ export class MainComponent implements OnInit {
 
   logout() {
     this.lumaraService.logout();
+    this.showNavBar = false;
     this.router.navigateByUrl('/login');
   }
 }

@@ -30,7 +30,7 @@ export class GalleryItemsComponent implements OnInit {
       return;
     }
       // const url = 'https://portal.lumara.de/forms/forms.json';
-      const url = 'http://localhost:8990/images/gallery/' + this.galleryID + '/gallery.json';
+      const url = 'https://portal.lumara.de/images/gallery/' + this.galleryID + '/gallery.json';
       this.http.get<LumaraGalleryItem[]>(url).subscribe(data => {
         // console.log(data);
         this.thumbnails = data;

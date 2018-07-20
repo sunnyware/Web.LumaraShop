@@ -25,11 +25,14 @@ export class UserdataAllgemeinComponent implements OnInit {
     this.lumaraService.doCommand(LumaraServiceCommands.GetFachberater()).subscribe(
       data => {
         if (data.ReturnCode === 200) {
+          // console.log('vom server fachberater:');
+          // console.log(data);
           this.fachberater = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
 
         } else if (data.ReturnCode >= 400) {
           console.log(data.ReturnMessage);
-          this.router.navigate(['/login']);
+          notify(data.ReturnMessage);
+          // this.router.navigate(['/login']);
         }
       }
     );

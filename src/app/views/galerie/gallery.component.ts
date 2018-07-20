@@ -21,7 +21,7 @@ export class GalleryComponent implements OnInit {
 
   reloadGalleries() {
     // const url = 'https://portal.lumara.de/forms/forms.json';
-    const url = 'http://localhost:8990/images/gallery/gallery_list.json';
+    const url = 'https://portal.lumara.de/images/gallery/gallery_list.json';
     this.http.get<LumaraGalleryListItem[]>(url).subscribe(data => {
       // console.log(data);
       this.galleries = data;

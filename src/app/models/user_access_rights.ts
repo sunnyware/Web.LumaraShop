@@ -8,4 +8,5 @@ export interface UserAccessRights {
   AllowVersandModuleWrite: boolean;
   AllowMitarbeiterlistRead: boolean;
   AllowMitarbeiterlistWrite: boolean;
+  AllowChefstatistik: boolean;
 }

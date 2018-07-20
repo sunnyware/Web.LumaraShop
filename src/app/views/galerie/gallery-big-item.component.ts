@@ -26,7 +26,7 @@ export class GalleryBigItemComponent implements OnInit {
     this.currentRoute = this.route.params.subscribe(params => {
       this.filename = params['term'];
       this.reloadThumbnails();
-      this.currentImageUrl = 'http://localhost:8990/images/gallery/' + this.galleryID + '/' + this.filename;
+      this.currentImageUrl = 'https://portal.lumara.de/images/gallery/' + this.galleryID + '/' + this.filename;
     });
   }
 
@@ -35,11 +35,11 @@ export class GalleryBigItemComponent implements OnInit {
       return;
     }
       // const url = 'https://portal.lumara.de/forms/forms.json';
-      const url = 'http://localhost:8990/images/gallery/' + this.galleryID + '/gallery.json';
+      const url = 'https://portal.lumara.de/images/gallery/' + this.galleryID + '/gallery.json';
       this.http.get<LumaraGalleryItem[]>(url).subscribe(data => {
         // console.log(data);
         this.imageInfos = data;
-        this.maxIndex = this.imageInfos.length-1;
+        this.maxIndex = this.imageInfos.length - 1;
         this.setCurrentIndexFromFilename(this.filename);
         console.log(data);
       });
@@ -47,7 +47,7 @@ export class GalleryBigItemComponent implements OnInit {
 
   setCurrentIndexFromFilename(fname) {
     let index = 0;
-    for (let entry of this.imageInfos) {
+    for (const entry of this.imageInfos) {
       if (entry.Filename === this.filename) {
         this.currentIndex = index;
         this.currentCaption = entry.Caption;
@@ -58,15 +58,16 @@ export class GalleryBigItemComponent implements OnInit {
   }
 
   setCurrentImageUrlFromIndex(index) {
-    let gallItem = this.imageInfos[index];
-    this.currentImageUrl = 'http://localhost:8990/images/gallery/' + this.galleryID + '/' + gallItem.Filename;
+    const gallItem = this.imageInfos[index];
+    this.currentImageUrl = 'https://portal.lumara.de/images/gallery/' + this.galleryID + '/' + gallItem.Filename;
     this.currentCaption = gallItem.Caption;
     // console.log("CurrentCaption: "+this.currentCaption);
   }
 
   prevImage() {
-    if (this.imageInfos === undefined)
-      return;
+    if (this.imageInfos === undefined) {
+       return;
+    }
     if (this.currentIndex > 0) {
       this.currentIndex--;
     }
@@ -74,8 +75,10 @@ export class GalleryBigItemComponent implements OnInit {
   }
 
   nextImage() {
-    if (this.imageInfos === undefined)
+    if (this.imageInfos === undefined) {
       return;
+    }
+
     if (this.currentIndex < this.maxIndex) {
       this.currentIndex++;
     }

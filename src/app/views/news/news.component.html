@@ -1,12 +1,11 @@
 <div class="row" *ngIf="artikelNichtLieferbarArray">
   <div class="col col-sm-12">
-    <p style="color:#BE392B"><b>Nicht lieferbare Artikel:</b></p>
+    <p style="color:#BE392B">
+      <b>Nicht lieferbare Artikel:</b>
+    </p>
     <!--span style="color: white; font-weight: bold; background: #BE392B; border-radius: 4px; padding: 3px 8px 3px 8px">!!! momentan nicht lieferbare Artikel: Tülle C01, Knusperbiene 1138</span-->
-    <div *ngFor="let art of artikelNichtLieferbarArray"
-         style="height: 42px; display: inline-block; color: white; font-weight: bold; background: #BE392B; border-radius: 4px;padding:3px 8px 3px 8px; margin-right: 5px; margin-bottom: 5px;">
-      <img src="https://portal.lumara.de/images/artikel/thumbs80/{{art.EdvNr}}.jpg"
-           style="height:35px; border-radius: 4px;"/>
-      {{art.EdvNr}} {{art.Bezeich}}
+    <div *ngFor="let art of artikelNichtLieferbarArray" style="height: 42px; display: inline-block; color: white; font-weight: bold; background: #BE392B; border-radius: 4px;padding:3px 8px 3px 8px; margin-right: 5px; margin-bottom: 5px;">
+      <img src="https://portal.lumara.de/images/artikel/thumbs80/{{art.EdvNr}}.jpg" style="height:35px; border-radius: 4px;" /> {{art.EdvNr}} {{art.Bezeich}}
     </div>
   </div>
 </div>
@@ -15,74 +14,43 @@
 <div *ngIf="blogPosts" class="row">
   <div class="col col-sm-9">
     <div class="post" *ngFor="let blogPost of blogPosts" style="margin-top: 15px;">
-      <div class="postdate"
-           style="position: absolute; width: 80px; text-align: center; border: solid 1px black; background-color: #403E48; color: white; border-radius: 8px;">
-        <span style="font-size: xx-large; font-weight: bold; padding-top: 0px; margin-top: 0px">{{blogPost.TimeCreated | date:'dd'}}</span><br/>
+      <div class="postdate" style="position: absolute; width: 80px; text-align: center; border: solid 1px black; background-color: #403E48; color: white; border-radius: 8px;">
+        <span style="font-size: xx-large; font-weight: bold; padding-top: 0px; margin-top: 0px">{{blogPost.TimeCreated | date:'dd'}}</span>
+        <br/>
         <span>{{blogPost.TimeCreated | date:'MMM'}}</span>
       </div>
       <div class="postcontent">
         <!-- ATTACHMENTS -->
         <div style="float:right;max-width:35%">
-          <div *ngFor="let att of blogPost.Attachments"
-               style="background-color:rgb(240,240,240); margin-bottom:2px;">
+          <div *ngFor="let att of blogPost.Attachments" style="background-color:rgb(240,240,240); margin-bottom:2px;">
             <a [href]="GetFileStoreFileUrl(att.FileID, att.Filename)">
-              <img [src]="GetIconUrl(att.FileExtension)"
-                   style="vertical-align: middle; background-color:transparent;"/><span style="font-size:11pt;">{{att.Filename}}</span>
+              <img [src]="GetIconUrl(att.FileExtension)" style="vertical-align: middle; background-color:transparent;" />
+              <span style="font-size:11pt;">{{att.Filename}}</span>
             </a>
           </div>
         </div>
         <!-- MARKDOWN -->
-        <div markdown [data]="blogPost.Preview"></div>
-        <a *ngIf="!blogPost.IsComplete" [routerLink]="['/news', blogPost.ID]">weiterlesen...</a><br/>
+        <section class="markdown">
+          <div markdown [data]="blogPost.Preview"></div>
+          <a *ngIf="!blogPost.IsComplete" [routerLink]="['/news', blogPost.ID]">weiterlesen...</a>
+          <br/>
+        </section>
       </div>
-      <!--table>
-        <tr>
-          <td style="vertical-align: top;">
-            <div
-              style="display: inline-block; width: 80px; text-align: center; border: solid 1px black; background-color: #403E48; color: white; border-radius: 8px;">
-              <span style="font-size: xx-large; font-weight: bold; padding-top: 0px; margin-top: 0px">{{blogPost.TimeCreated | date:'dd'}}</span><br/>
-              <span>{{blogPost.TimeCreated | date:'MMM'}}</span>
-            </div>
-          </td>
-          <td style="vertical-align: top;">
-            <div style="padding-left:10px;">
 
-
-            </div>
-          </td>
-        </tr>
-      </table-->
       <hr>
     </div>
     <br/>
-    <!--nav aria-label="...">
-      <ul class="pagination">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1">zurück</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item active">
-          <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">weiter</a>
-        </li>
-      </ul>
-    </nav-->
+
   </div>
 
   <div class="col col-sm-3">
     <div style="background: #BE392B; color: white; border-radius: 6px; margin-top: 10px; padding-left:10px;padding-right:10px;padding-bottom:10px;">
       <h4 class="text-white">Sonderangebote</h4>
       <a href="https://portal.lumara.de/flyer/FlyerKW27.pdf">
-        <img src="https://portal.lumara.de/flyer/FlyerKW27_01.jpg" style="width: 100%; "/><br/>
-        <img src="https://portal.lumara.de/flyer/FlyerKW27_02.jpg" style="width: 100%; "/>
+        <img src="https://portal.lumara.de/flyer/FlyerKW27_01.jpg" style="width: 100%; " />
+        <br/>
+        <img src="https://portal.lumara.de/flyer/FlyerKW27_02.jpg" style="width: 100%; " />
       </a>
     </div>
-    <!--div *ngFor="let artikel of neuheiten">
-      <img src="../assets/products/{{artikel.EdvNr}}.jpg" style="width: 100%"/>
-    </div-->
   </div>
 </div>
-
