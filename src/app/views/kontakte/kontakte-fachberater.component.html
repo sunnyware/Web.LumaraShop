@@ -1,5 +1,38 @@
 <div class="row">
   <div class="col-md-12">
-    <p>coming soon...</p>
+    <div class="input-group mb-3 mt-3 border-danger">
+      <input type="text" class="form-control" placeholder="Stichwort" aria-label="Stichwort" aria-describedby="basic-addon2" [(ngModel)]="suchwort">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit" (click)="setSuchwort()">suchen</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="getBZLList()">BZL</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="getGPLList()">GPL</button>
+        <!--button class="btn btn-outline-secondary" type="button" (click)="showHelp()">?</button-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover table-scrollable">
+      <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">PersonalNr</th>
+        <th scope="col">E-Mail</th>
+        <th scope="col">BZL</th>
+        <th scope="col">GPL</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let lfb of fachberaterList">
+        <td>{{lfb.Name}}</td>
+        <td>{{lfb.PersonalNr}}</td>
+        <td>{{lfb.EMail}}</td>
+        <td>{{lfb.BZLName}}</td>
+        <td>{{lfb.GPLName}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>

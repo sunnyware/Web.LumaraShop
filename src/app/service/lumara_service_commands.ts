@@ -49,6 +49,16 @@ export class LumaraServiceCommands {
     return cmd;
   }
 
+  public static GetFachberaterList(stichwort: string, getBZLList: boolean, getGPLList: boolean): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'GetFachberaterList';
+    cmd.addParameter('Stichwort', stichwort);
+    cmd.addParameter('GetBZLList', getBZLList);
+    cmd.addParameter('GetGPLList', getGPLList);
+    return cmd;
+  }
+
   public static UpdateFachberater(fb: Fachberater): JsonCommand {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
@@ -78,17 +88,27 @@ export class LumaraServiceCommands {
     return cmd;
   }
 
-  public static GetGastgeberStatistik(filterIDPersonalakte: number, datum1: Date, datum2: Date, mindestVortraege: number,
-    mindestUmsatz: number, buildGroupedList, boolean): JsonCommand {
+  public static GetGastgeberStatistik(filterLFBDOID: number, filterGPLDOID: number, filterBZLDOID: number, datum1: Date,
+    datum2: Date, mindestVortraege: number,
+    mindestUmsatz: number): JsonCommand {
     const cmd = new JsonCommand();
-    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.StatistikService';
     cmd.CommandName = 'GetGastgeberStatistik';
-    cmd.addParameter('FilterIDPersonalakte', filterIDPersonalakte);
+    cmd.addParameter('FilterLFBDOID', filterLFBDOID);
+    cmd.addParameter('FilterGPLDOID', filterGPLDOID);
+    cmd.addParameter('FilterBZLDOID', filterBZLDOID);
     cmd.addParameter('Datum1', datum1);
     cmd.addParameter('Datum2', datum2);
     cmd.addParameter('MindestVortraege', mindestVortraege);
     cmd.addParameter('MindestUmsatz', mindestUmsatz);
-    cmd.addParameter('BuildGroupedList', buildGroupedList);
+    return cmd;
+  }
+
+  public static GetGastgeberUmsaetze(idObjGastgeber: string) {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.StatistikService';
+    cmd.CommandName = 'GetGastgeberUmsaetze';
+    cmd.addParameter('IDObjGastgeber', idObjGastgeber);
     return cmd;
   }
 

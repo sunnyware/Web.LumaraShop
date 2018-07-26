@@ -31,3 +31,26 @@ export class RankingItem {
     Name: string;
     Umsatz: number;
 }
+
+export class GastgeberStatistikItem {
+  IDObj: string;
+  Vorname: string;
+  Nachname: string;
+  Ort: string;
+  Umsatz: number;
+  UmsatzManual: number;
+  Vortraege: number;
+  LFBDOID: number;
+  LFBName: string;
+  GPLDOID: number;
+  GPLName: string;
+  BZLDOID: number;
+  BZLName: string;
+}
+
+export class GastgeberUmsatzItem {
+  IDObj: string;
+  Datum: Date;
+  Umsatz: number;
+  IDMandant: number;
+}

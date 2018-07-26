@@ -39,7 +39,8 @@ export class KontakteGastgeberComponent implements OnInit {
   }
 
   reloadGastgeber() {
-    this.lumaraService.doCommand(LumaraServiceCommands.GetGastgeberlist(this.suchwort, this.onlyAktivGastgeber, this.pageNr, this.itemsPerPage)).subscribe(
+    this.lumaraService.doCommand(LumaraServiceCommands.GetGastgeberlist(this.suchwort,
+      this.onlyAktivGastgeber, this.pageNr, this.itemsPerPage)).subscribe(
       data => {
         if (data.ReturnCode === 200) {
           // console.log('Ich bekam vom Server folgende Daten: ');
