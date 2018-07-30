@@ -3,7 +3,8 @@
     <br/>
     <button type="button" class="btn btn-success" (click)="showPopupGastgeber('');">neue Gastgeberadresse</button>&nbsp;&nbsp;
     <button type="button" class="btn btn-light" (click)="downloadGastgeberFile();">Gastgeberliste herunterladen</button>
-    <br/><br/>
+    <br/>
+    <br/>
     <div class="input-group mb-3">
       <input type="text" class="form-control" placeholder="Stichwort" aria-label="Stichwort" aria-describedby="basic-addon2" [(ngModel)]="suchwort">
       <div class="input-group-append">
@@ -19,137 +20,140 @@
     <br/>
     <table class="table table-hover table-scrollable">
       <thead>
-      <tr>
-        <th scope="col">Nachname</th>
-        <th scope="col">Vorname</th>
-        <th scope="col">Strasse</th>
-        <th scope="col">PLZ</th>
-        <th scope="col">Ort</th>
-        <th scope="col">Telefon</th>
-        <th scope="col">EMail</th>
-        <th scope="col"></th>
-      </tr>
+        <tr>
+          <th scope="col">Nachname</th>
+          <th scope="col">Vorname</th>
+          <th scope="col">Strasse</th>
+          <th scope="col">PLZ</th>
+          <th scope="col">Ort</th>
+          <th scope="col">Telefon</th>
+          <th scope="col">EMail</th>
+          <th scope="col"></th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let gg of gastgeberList">
-        <td>{{gg.Nachname}}</td>
-        <td>{{gg.Vorname}}</td>
-        <td>{{gg.Strasse}}</td>
-        <td>{{gg.PLZ}}</td>
-        <td>{{gg.Ort}}</td>
-        <td>{{gg.Telefon}}</td>
-        <td>{{gg.EMail}}</td>
-        <td style="text-align: end;">
-          <button type="button" class="btn btn-success" (click)="showPopupGastgeber(gg.IDObj);"><img src="/assets/icons_white/32px/large/tool-pencil.png" style="height:20px"></button>&nbsp;
-          <button type="button" class="btn btn-danger" (click)="showPopupDeleteGastgeber(gg.IDObj);"><img src="/assets/icons_white/32px/large/button-cancel.png" style="height:20px"></button>
-        </td>
-      </tr>
+        <tr *ngFor="let gg of gastgeberList">
+          <td>{{gg.Nachname}}</td>
+          <td>{{gg.Vorname}}</td>
+          <td>{{gg.Strasse}}</td>
+          <td>{{gg.PLZ}}</td>
+          <td>{{gg.Ort}}</td>
+          <td>{{gg.Telefon}}</td>
+          <td>{{gg.EMail}}</td>
+          <td style="text-align: end;">
+            <button type="button" class="btn btn-success" (click)="showPopupGastgeber(gg.IDObj);">
+              <img src="/assets/icons_white/32px/large/tool-pencil.png" style="height:20px">
+            </button>&nbsp;
+            <button type="button" class="btn btn-danger" (click)="showPopupDeleteGastgeber(gg.IDObj);">
+              <img src="/assets/icons_white/32px/large/button-cancel.png" style="height:20px">
+            </button>
+          </td>
+        </tr>
       </tbody>
     </table>
     <nav aria-label="...">
       <ul class="pagination">
-        <li *ngFor="let pn of pageNumbers" class="page-item" [ngClass]="getPageNrActiveClassName(pn)"><a class="page-link" [routerLink]="" (click)="gotoPage(pn)">{{pn}}</a></li>
+        <li *ngFor="let pn of pageNumbers" class="page-item" [ngClass]="getPageNrActiveClassName(pn)">
+          <a class="page-link" [routerLink]="" (click)="gotoPage(pn)">{{pn}}</a>
+        </li>
       </ul>
     </nav>
   </div>
 </div>
 
 <!-- Popup Gastgeber bearbeiten -->
-<dx-popup class="popup" [width]="500" [height]="600" [showTitle]="true" title="Gastgeberadresse bearbeiten"
-          [dragEnabled]="false"
-          [closeOnOutsideClick]="false" [(visible)]="popupGastgeberVisible">
+<dx-popup class="popup" [width]="500" [height]="660" [showTitle]="true" title="Gastgeberadresse bearbeiten" [dragEnabled]="false"
+  [closeOnOutsideClick]="false" [(visible)]="popupGastgeberVisible">
   <div *dxTemplate="let data of 'content'">
-    <div>
-      <div class="form-group row">
-        <label for="_caption1" class="col-sm-2 col-form-label">Nachname</label>
-        <div class="col-sm-9" style="margin-bottom: 5px;">
-          <input type="text" class="form-control" id="_caption1" aria-describedby="c1"
-                 placeholder="" [(ngModel)]="currentGastgeber.Nachname">
-        </div>
+    <div class="form-group row">
+      <label for="_caption1" class="col-sm-2 col-form-label">Nachname</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption1" aria-describedby="c1" placeholder="" [(ngModel)]="currentGastgeber.Nachname">
+      </div>
 
-        <label for="_caption2" class="col-sm-2 col-form-label">Vorname</label>
-        <div class="col-sm-9" style="margin-bottom: 5px;">
-          <input type="text" class="form-control" id="_caption2" aria-describedby="c2"
-                 placeholder="" [(ngModel)]="currentGastgeber.Vorname">
-        </div>
+      <label for="_caption2" class="col-sm-2 col-form-label">Vorname</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption2" aria-describedby="c2" placeholder="" [(ngModel)]="currentGastgeber.Vorname">
+      </div>
 
-        <label for="_caption3" class="col-sm-2 col-form-label">Strasse</label>
-        <div class="col-sm-9" style="margin-bottom: 5px;">
-          <input type="text" class="form-control" id="_caption3" aria-describedby="c3"
-                 placeholder="" [(ngModel)]="currentGastgeber.Strasse">
-        </div>
+      <label for="_caption3" class="col-sm-2 col-form-label">Strasse</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption3" aria-describedby="c3" placeholder="" [(ngModel)]="currentGastgeber.Strasse">
+      </div>
 
-        <label for="_caption4" class="col-sm-2 col-form-label">PLZ</label>
-        <div class="col-sm-9" style="margin-bottom: 5px;">
-          <input type="text" class="form-control" id="_caption4" aria-describedby="c4"
-                 placeholder="" [(ngModel)]="currentGastgeber.PLZ">
-        </div>
+      <label for="_caption4" class="col-sm-2 col-form-label">PLZ</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption4" aria-describedby="c4" placeholder="" [(ngModel)]="currentGastgeber.PLZ">
+      </div>
 
-        <label for="_caption5" class="col-sm-2 col-form-label">Ort</label>
-        <div class="col-sm-9" style="margin-bottom: 5px;">
-          <input type="text" class="form-control" id="_caption5" aria-describedby="c5"
-                 placeholder="" [(ngModel)]="currentGastgeber.Ort">
-        </div>
+      <label for="_caption5" class="col-sm-2 col-form-label">Ort</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption5" aria-describedby="c5" placeholder="" [(ngModel)]="currentGastgeber.Ort">
+      </div>
 
-        <label for="_caption6" class="col-sm-2 col-form-label">Telefon</label>
-        <div class="col-sm-9" style="margin-bottom: 5px;">
-          <input type="text" class="form-control" id="_caption6" aria-describedby="c6"
-                 placeholder="" [(ngModel)]="currentGastgeber.Telefon">
-        </div>
+      <label for="_caption6" class="col-sm-2 col-form-label">Telefon</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption6" aria-describedby="c6" placeholder="" [(ngModel)]="currentGastgeber.Telefon">
+      </div>
 
-        <label for="_caption7" class="col-sm-2 col-form-label">E-Mail</label>
-        <div class="col-sm-9" style="margin-bottom: 5px;">
-          <input type="text" class="form-control" id="_caption7" aria-describedby="c7"
-                 placeholder="" [(ngModel)]="currentGastgeber.EMail">
-        </div>
+      <label for="_caption7" class="col-sm-2 col-form-label">E-Mail</label>
+      <div class="col-sm-9" style="margin-bottom: 5px;">
+        <input type="text" class="form-control" id="_caption7" aria-describedby="c7" placeholder="" [(ngModel)]="currentGastgeber.EMail">
+      </div>
 
-        <div class="col-sm-12" style="margin-bottom: 5px;">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="currentGastgeber.IsAktivGastgeber" id="defaultCheck0">
-            <label class="form-check-label" for="defaultCheck0">
-              Diese Gastgeberin ist eine Aktiv-Gastgeberin
-            </label>
-          </div>
-        </div>
-        <br/>
-        <div class="col-sm-12" style="margin-bottom: 5px;">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="currentGastgeber.AllowSaveAddress" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Gastgeberin erlaubt das Speichern ihrer Adresse
-            </label>
-          </div>
-        </div>
-        <div class="col-sm-12" style="margin-bottom: 5px;">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="currentGastgeber.AllowTransferToLFB" id="defaultCheck2">
-            <label class="form-check-label" for="defaultCheck2">
-              Gastgeberin erlaubt weitergeben ihrer Adresse an eine andere Fachberaterin
-            </label>
-          </div>
-        </div>
-        <div class="col-sm-12" style="margin-bottom: 5px;">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="currentGastgeber.AllowNewsletter" id="defaultCheck3">
-            <label class="form-check-label" for="defaultCheck3">
-              Gastgeberin darf über Neuigkeiten und Veranstaltungen informiert werden
-            </label>
-          </div>
+      <div class="col-sm-12" style="margin-bottom: 5px;">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="currentGastgeber.IsAktivGastgeber" id="defaultCheck0">
+          <label class="form-check-label" for="defaultCheck0">
+            Diese Gastgeberin ist eine Aktiv-Gastgeberin
+          </label>
         </div>
       </div>
       <br/>
+      <div class="col-sm-12" style="margin-bottom: 5px;">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="currentGastgeber.AllowSaveAddress" id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1">
+            Gastgeberin erlaubt das Speichern ihrer Adresse
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-12" style="margin-bottom: 5px;">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="currentGastgeber.AllowTransferToLFB" id="defaultCheck2">
+          <label class="form-check-label" for="defaultCheck2">
+            Gastgeberin erlaubt weitergeben ihrer Adresse an eine andere Fachberaterin
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-12" style="margin-bottom: 5px;">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="currentGastgeber.AllowNewsletter" id="defaultCheck3">
+          <label class="form-check-label" for="defaultCheck3">
+            Gastgeberin darf über Neuigkeiten und Veranstaltungen informiert werden
+          </label>
+        </div>
+      </div>
+
     </div>
+
     <br/>
+    <div class="form-group">
+      <label for="_captionGG">Gesamtumsatz Aktiv-Gastgeberwettbewerb 2017/2018</label>
+        <input type="number" class="form-control" id="_captionGG" aria-describedby="c7" placeholder="" [(ngModel)]="currentGastgeber.UmsatzAktivWettbewerb">
+      <br/>
+    </div>
     <button type="button" class="btn btn-success" (click)="saveGastgeber()">speichern</button>
   </div>
 </dx-popup>
 
-<dx-popup class="popup" [width]="400" [height]="300" [showTitle]="true" title="Gastgeberadresse löschen"
-          [dragEnabled]="false"
-          [closeOnOutsideClick]="false" [(visible)]="popupDeleteGastgeberVisible">
+<dx-popup class="popup" [width]="400" [height]="300" [showTitle]="true" title="Gastgeberadresse löschen" [dragEnabled]="false"
+  [closeOnOutsideClick]="false" [(visible)]="popupDeleteGastgeberVisible">
   <div *dxTemplate="let data of 'content'">
     <p>Möchen Sie wirklich die Gastgeberadresse {{currentGastgeber.Nachname}} {{currentGastgeber.Vorname}} löschen?</p>
-    <p><b>Achtung! Löschen Sie keine Aktiv-Gastgeberin, da sonst ihr Umsatz nicht mehr berechnet werden kann!!</b></p>
+    <p>
+      <b>Achtung! Löschen Sie keine Aktiv-Gastgeberin, da sonst ihr Umsatz nicht mehr berechnet werden kann!!</b>
+    </p>
     <button type="button" class="btn btn-danger" (click)="deleteGastgeber()">ja, ich möchte löschen!</button>
   </div>
 </dx-popup>

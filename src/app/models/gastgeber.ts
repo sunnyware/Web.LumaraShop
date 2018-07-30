@@ -14,4 +14,5 @@ export class Gastgeber {
   AllowNewsletter: boolean;
   FlagDeleted?: boolean;
   IsAktivGastgeber: boolean;
+  UmsatzAktivWettbewerb?: number;
 }

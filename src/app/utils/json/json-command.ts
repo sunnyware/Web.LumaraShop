@@ -5,7 +5,7 @@ export class JsonCommand {
     ParameterArray = new Array<JsonParameter>();
 
     public addParameter(name: string, value: any) {
-        for (let item of this.ParameterArray) {
+        for (const item of this.ParameterArray) {
             if (item.name === name) {
                 item.value = value;
                 return;
@@ -15,8 +15,8 @@ export class JsonCommand {
     }
 
     public toJson() {
-        let parObj: any = {};
-        for (let item of this.ParameterArray) {
+        const parObj: any = {};
+        for (const item of this.ParameterArray) {
             parObj[item.name] = item.value;
         }
         return JSON.stringify(

@@ -24,10 +24,10 @@ export class ChefStatistikAktivGGComponent implements OnInit {
     new Date('2018-05-31'), 3, 1200)).subscribe(
       data => {
         if (data.ReturnCode === 200) {
-           console.log('Ich bekam vom Server folgende Daten: ');
+           // console.log('Ich bekam vom Server folgende Daten: ');
            // console.log(data.ReturnMessage + '\r\n' + data.ReturnValue);
             console.log(data.ReturnValue);
-           // this.gastgeberStatistikItems = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
+           this.gastgeberStatistikItems = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
           // this.gastgeberStatistik.GastgeberList = JSON.parse(this.gastgeberStatistik.GastgeberList.toString());
           // console.log(this.gastgeberStatistik);
         } else {

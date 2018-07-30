@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
+    // console.log(form.value);
     this.lumaraService.signinUser(form.value.username, form.value.password, form.value.autologin);
   }
 
