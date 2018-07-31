@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12">
     <br/>
-    <button type="button" class="btn btn-success" (click)="showPopupGastgeber('');">neue Gastgeberadresse</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-success" (click)="showPopupGastgeber('', content);">neue Gastgeberadresse</button>&nbsp;&nbsp;
     <button type="button" class="btn btn-light" (click)="downloadGastgeberFile();">Gastgeberliste herunterladen</button>
     <br/>
     <br/>
@@ -41,7 +41,7 @@
           <td>{{gg.Telefon}}</td>
           <td>{{gg.EMail}}</td>
           <td style="text-align: end;">
-            <button type="button" class="btn btn-success" (click)="showPopupGastgeber(gg.IDObj);">
+            <button type="button" class="btn btn-success" (click)="showPopupGastgeber(gg.IDObj, content);">
               <img src="/assets/icons_white/32px/large/tool-pencil.png" style="height:20px">
             </button>&nbsp;
             <button type="button" class="btn btn-danger" (click)="showPopupDeleteGastgeber(gg.IDObj);">
@@ -65,6 +65,36 @@
 <dx-popup class="popup" [width]="500" [height]="660" [showTitle]="true" title="Gastgeberadresse bearbeiten" [dragEnabled]="false"
   [closeOnOutsideClick]="false" [(visible)]="popupGastgeberVisible">
   <div *dxTemplate="let data of 'content'">
+
+    <br/>
+    <div class="form-group">
+      <label for="_captionGG">Gesamtumsatz Aktiv-Gastgeberwettbewerb 2017/2018</label>
+      <input type="number" class="form-control" id="_captionGG" aria-describedby="c7" placeholder="" [(ngModel)]="currentGastgeber.UmsatzAktivWettbewerb">
+      <br/>
+    </div>
+    <button type="button" class="btn btn-success" (click)="saveGastgeber()">speichern</button>
+  </div>
+</dx-popup>
+
+<dx-popup class="popup" [width]="400" [height]="300" [showTitle]="true" title="Gastgeberadresse löschen" [dragEnabled]="false"
+  [closeOnOutsideClick]="false" [(visible)]="popupDeleteGastgeberVisible">
+  <div *dxTemplate="let data of 'content'">
+    <p>Möchen Sie wirklich die Gastgeberadresse {{currentGastgeber.Nachname}} {{currentGastgeber.Vorname}} löschen?</p>
+    <p>
+      <b>Achtung! Löschen Sie keine Aktiv-Gastgeberin, da sonst ihr Umsatz nicht mehr berechnet werden kann!!</b>
+    </p>
+    <button type="button" class="btn btn-danger" (click)="deleteGastgeber()">ja, ich möchte löschen!</button>
+  </div>
+</dx-popup>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Gastgeber-Formular</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
     <div class="form-group row">
       <label for="_caption1" class="col-sm-2 col-form-label">Nachname</label>
       <div class="col-sm-9" style="margin-bottom: 5px;">
@@ -136,24 +166,15 @@
       </div>
 
     </div>
-
     <br/>
     <div class="form-group">
       <label for="_captionGG">Gesamtumsatz Aktiv-Gastgeberwettbewerb 2017/2018</label>
-        <input type="number" class="form-control" id="_captionGG" aria-describedby="c7" placeholder="" [(ngModel)]="currentGastgeber.UmsatzAktivWettbewerb">
+      <input type="number" class="form-control" id="_captionGG" aria-describedby="c7" placeholder="" [(ngModel)]="currentGastgeber.UmsatzAktivWettbewerb">
       <br/>
     </div>
+  </div>
+  <div class="modal-footer">
     <button type="button" class="btn btn-success" (click)="saveGastgeber()">speichern</button>
   </div>
-</dx-popup>
-
-<dx-popup class="popup" [width]="400" [height]="300" [showTitle]="true" title="Gastgeberadresse löschen" [dragEnabled]="false"
-  [closeOnOutsideClick]="false" [(visible)]="popupDeleteGastgeberVisible">
-  <div *dxTemplate="let data of 'content'">
-    <p>Möchen Sie wirklich die Gastgeberadresse {{currentGastgeber.Nachname}} {{currentGastgeber.Vorname}} löschen?</p>
-    <p>
-      <b>Achtung! Löschen Sie keine Aktiv-Gastgeberin, da sonst ihr Umsatz nicht mehr berechnet werden kann!!</b>
-    </p>
-    <button type="button" class="btn btn-danger" (click)="deleteGastgeber()">ja, ich möchte löschen!</button>
-  </div>
-</dx-popup>
+</ng-template>
+<!--button class="btn btn-outline-primary mb-2 mr-2" (click)="openLg(content)">Large modal</button-->

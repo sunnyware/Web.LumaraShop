@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {forEach} from '@angular/router/src/utils/collection';
 import notify from 'devextreme/ui/notify';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-kontakte-gastgeber',
@@ -23,8 +24,9 @@ export class KontakteGastgeberComponent implements OnInit {
   currentGastgeber: Gastgeber = undefined;
   suchwort = '';
   onlyAktivGastgeber = false;
+  ggModalDialog: any;
 
-  constructor(private lumaraService: LumaraService, private router: Router, private http: HttpClient) {
+  constructor(private lumaraService: LumaraService, private router: Router, private http: HttpClient, private modalService: NgbModal) {
 
   }
 
@@ -83,7 +85,7 @@ export class KontakteGastgeberComponent implements OnInit {
     return '';
   }
 
-  showPopupGastgeber(idObjGastgeber: string) {
+  showPopupGastgeber(idObjGastgeber: string, content) {
     console.log('idObjGastgeber: ' + idObjGastgeber);
     if (idObjGastgeber === '') {
       // es soll eine neue Gastgeberin angelegt werden
@@ -100,11 +102,13 @@ export class KontakteGastgeberComponent implements OnInit {
       alert('Bitte wählen Sie einen gültigen Gastgeber aus');
       return;
     }
-    this.popupGastgeberVisible = true;
+    this.ggModalDialog = this.modalService.open(content, { size: 'lg' });
+    // this.popupGastgeberVisible = true;
   }
 
   saveGastgeber() {
-    this.popupGastgeberVisible = false;
+    // this.popupGastgeberVisible = false;
+    this.ggModalDialog.close();
     // Gastgeber speichern
     this.lumaraService.doCommand(LumaraServiceCommands.UpdateGastgeber(this.currentGastgeber)).subscribe(
       data => {
@@ -181,5 +185,9 @@ export class KontakteGastgeberComponent implements OnInit {
     alert('Geben Sie hier ein Suchwort ein. Es wird immer nach dem Namensanfang gesucht (in Nachname, Vorname, Strasse und Ort).\r\n' +
       'Wenn Sie nur einen einzigen Buchstaben angeben, wird nur im Nachnamen gesucht.\r\n' +
       'Sie können z.B. mit der Eingabe von b alle Nachnamen finden, die mit B anfangen.');
+  }
+
+  openLg(content) {
+    this.modalService.open(content, { size: 'lg' });
   }
 }
