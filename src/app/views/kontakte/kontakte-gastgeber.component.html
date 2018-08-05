@@ -131,6 +131,11 @@
         <input type="text" class="form-control" id="_caption7" aria-describedby="c7" placeholder="" [(ngModel)]="currentGastgeber.EMail">
       </div>
 
+      <div class="form-group">
+        <label for="_captionGG" class="col-12 row-form-label text-info">Gesamtumsatz Aktiv-Gastgeberwettbewerb 2017/2018</label>
+        <input type="number" class="form-control ml-3 mr-3" id="_captionGG" aria-describedby="c77" placeholder="" [(ngModel)]="currentGastgeber.UmsatzAktivWettbewerb">
+      </div>
+
       <div class="col-sm-12" style="margin-bottom: 5px;">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" [(ngModel)]="currentGastgeber.IsAktivGastgeber" id="defaultCheck0">
@@ -166,12 +171,7 @@
       </div>
 
     </div>
-    <br/>
-    <div class="form-group">
-      <label for="_captionGG">Gesamtumsatz Aktiv-Gastgeberwettbewerb 2017/2018</label>
-      <input type="number" class="form-control" id="_captionGG" aria-describedby="c7" placeholder="" [(ngModel)]="currentGastgeber.UmsatzAktivWettbewerb">
-      <br/>
-    </div>
+
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success" (click)="saveGastgeber()">speichern</button>

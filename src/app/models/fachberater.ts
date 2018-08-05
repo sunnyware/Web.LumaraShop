@@ -24,6 +24,7 @@ export class Fachberater {
 
   ChatToken: string;
   ChatID: number;
+  LoginPassword: string;
 }
 
 export class FachberaterListItem {
