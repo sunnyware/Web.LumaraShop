@@ -1,43 +1,68 @@
-<div class="row">
-  <div class="col-12">
+<div class="fixed-top" style="margin-top: 60px;">
     <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/chefstatistik', 'menu']">Chefstatistik</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Aktiv-GG-Wettbewerb 2017/18</li>
+    </ol>
+  </nav>
+</div>
+
+
+<!-- <div class="row">
+  <div class="col-12">
+    <nav aria-label="breadcrumb" class="sticky-top">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a [routerLink]="['/chefstatistik', 'menu']">Chefstatistik</a>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Auswertung Aktiv-Gastgeber-Wettbewerb</li>
+        <li class="breadcrumb-item active" aria-current="page">Auswertung Aktiv-Gastgeber-Wettbewerb 2017/2018</li>
       </ol>
     </nav>
   </div>
-</div>
-<div class="row" *ngIf="gastgeberStatistikItems">
+</div> -->
+<div class="row" style="margin-top: 120px;" *ngIf="gastgeberStatistikItems">
   <div class="col-12">
     <!--button class="btn mb-4">abrufen</button-->
-    <span>Es wurden {{gastgeberStatistikItems.length}} Aktivgastgeber gefunden</span>
-    <br/>
+    <span class="mr-3">Es wurden {{gastgeberStatistikItems.length}} Aktivgastgeber gefunden</span>
+    <dx-check-box [(ngModel)]="onlyNotUmsatzManualAccepted" text="nur unerledigte anzeigen" (onValueChanged)="reloadGastgeberStatistik()"></dx-check-box>
+    <br/><br/>
     <!-- Fachberater-Gruppenzeile -->
-    <table class="table table-hover table-scrollable">
+    <table class="table table-sm table-hover table-scrollable" style="line-height: 1;">
       <thead>
         <tr>
           <th scope="col">Name</th>
-          <th scope="col">Ort</th>
+          <th scope="col">Vortr.</th>
           <th scope="col">Umsatz</th>
-          <th scope="col">UmsatzManual</th>
+          <th scope="col">Ums. man.</th>
+          <th scope="col">OK</th>
           <th scope="col">Fachberater</th>
-          <th scope="col">Gruppenleiter</th>
-          <th scope="col">Bezirksleiter</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let gg of gastgeberStatistikItems">
-          <td>{{gg.Nachname}} {{gg.Vorname}} </td>
-          <td>{{gg.Ort}}</td>
+          <td>{{gg.Nachname}} {{gg.Vorname}}
+            <br/>
+            <span style="font-size:x-small" class="text-muted">Ort: {{gg.Ort}}</span>
+          </td>
+          <td>{{gg.Vortraege | number:'1.0-0'}}</td>
           <td>{{gg.Umsatz | number:'1.0-0':'de'}} €</td>
           <td>{{gg.UmsatzManual | number:'1.0-0':'de'}} €</td>
-          <td>{{gg.LFBName}}</td>
-          <td>{{gg.GPLName}}</td>
-          <td>{{gg.BZLName}}</td>
+          <td>
+            <span class="icon-check" style="font-size: x-large;" [ngClass]="getClass(gg)"></span>
+          </td>
+          <td>{{gg.LFBName}}
+            <br/>
+            <span style="font-size:x-small;" class="text-muted">GPL: {{gg.GPLName}}
+              <br/>BZL: {{gg.BZLName}}</span>
+          </td>
+          <td>
+            <button class="btn" (click)="showPopupGastgeberUmsaetze(gg, content);">
+              <span class="icon-info" style="font-size: x-large;"></span>
+            </button>
+          </td>
           <!--td style="text-align: end;">
               <button type="button" class="btn btn-success" (click)="showPopupGastgeber(gg.IDObj);">
                 <img src="/assets/icons_white/32px/large/tool-pencil.png" style="height:20px">
@@ -51,3 +76,43 @@
       </tbody>
     </table>
   </div>
+
+  <!-- modales Info-Popup -->
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Gastgeberumsätze aus Sammelbestellungen</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="currentGastgeber && currentFachberater"  class="modal-body">
+      <p>Gastgeber: {{currentGastgeber.Vorname}} {{currentGastgeber.Nachname}}</p>
+      <p>Fachberater: {{currentFachberater.Vorname}}  {{currentFachberater.Nachname}} <br/><span style="font-size: small" class="text-muted">Telefon: <strong>{{currentFachberater.Telefon}}</strong> oder <strong>{{currentFachberater.Mobil}}</strong>
+        E-Mail: <strong>{{currentFachberater.EMail}}</strong>
+      </span></p>
+      <table class="table table-sm">
+        <thead>
+          <th scope="col">Datum</th>
+          <th scope="col" class="text-right">Umsatz</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ggUmsatz of gastgeberUmsatzItems">
+            <td>{{ggUmsatz.Datum | date:'dd.MM.yyyy'}}</td>
+            <td class="text-right">{{ggUmsatz.Umsatz | number:'1.2-2'}}</td>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">Gesamtsumme</td>
+            <td class="text-right font-weight-bold">{{gastgeberUmsaetzeGesamt | number:'1.2-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>interne Notizen</p>
+      <textarea rows="3" class="form-control" style="width: 100%" [(ngModel)]="internalNote"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="acceptGastgeberUmsatzManual(false)">nicht akzeptieren</button>
+      <button type="button" class="btn btn-success" (click)="acceptGastgeberUmsatzManual(true)">akzeptieren</button>
+    </div>
+  </ng-template>
+  <!-- ENDE modales Info-Popup -->
+

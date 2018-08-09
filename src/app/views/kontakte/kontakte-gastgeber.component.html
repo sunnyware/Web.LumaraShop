@@ -2,62 +2,59 @@
   <div class="col-md-12">
     <br/>
     <button type="button" class="btn btn-success" (click)="showPopupGastgeber('', content);">neue Gastgeberadresse</button>&nbsp;&nbsp;
-    <button type="button" class="btn btn-light" (click)="downloadGastgeberFile();">Gastgeberliste herunterladen</button>
+    <button type="button" class="btn btn-light" (click)="downloadGastgeberFile();"><span class="icon-cloud-download"></span></button>
     <br/>
     <br/>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3" style="max-width: 500px;">
       <input type="text" class="form-control" placeholder="Stichwort" aria-label="Stichwort" aria-describedby="basic-addon2" [(ngModel)]="suchwort">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="submit" (click)="setSuchwort()">suchen</button>
+        <button class="btn btn-outline-secondary" type="submit" (click)="setSuchwort()"><span class="icon-magnifier"></span></button>
         <button class="btn btn-outline-secondary" type="button" (click)="resetSuchwort()">alle</button>
         <button class="btn btn-outline-secondary" type="button" (click)="reloadAktivGastgeber()">alle Aktiv-GG</button>
-        <button class="btn btn-outline-secondary" type="button" (click)="showHelp()">?</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="showHelp()"><span class="icon-question"></span></button>
       </div>
     </div>
 
-
-    <!-- Gastgeber-Tabelle-->
-    <br/>
-    <table class="table table-hover table-scrollable">
+    <!-- Pager -->
+    <nav aria-label="...">
+        <ul class="pagination">
+          <li *ngFor="let pn of pageNumbers" class="page-item" [ngClass]="getPageNrActiveClassName(pn)">
+            <a class="page-link" [routerLink]="" (click)="gotoPage(pn)">{{pn}}</a>
+          </li>
+        </ul>
+      </nav>
+       <!-- Gastgeber-Tabelle-->
+    <table class="table table-sm table-hover table-scrollable" style="line-height: 1;">
       <thead>
         <tr>
-          <th scope="col">Nachname</th>
-          <th scope="col">Vorname</th>
-          <th scope="col">Strasse</th>
-          <th scope="col">PLZ</th>
-          <th scope="col">Ort</th>
-          <th scope="col">Telefon</th>
-          <th scope="col">EMail</th>
+          <th scope="col">Name / Adresse</th>
+          <th scope="col">Kommunikation</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let gg of gastgeberList">
-          <td>{{gg.Nachname}}</td>
-          <td>{{gg.Vorname}}</td>
-          <td>{{gg.Strasse}}</td>
-          <td>{{gg.PLZ}}</td>
-          <td>{{gg.Ort}}</td>
-          <td>{{gg.Telefon}}</td>
-          <td>{{gg.EMail}}</td>
+            <td>{{gg.Nachname}} {{gg.Vorname}}
+                <br/>
+                <span style="font-size:x-small" class="text-muted">{{gg.Strasse}}</span><br/>
+                <span style="font-size:x-small" class="text-muted">{{gg.PLZ}} {{gg.Ort}}</span>
+              </td>
+          <td>{{gg.Telefon}}<br/>
+            <span style="font-size:x-small" class="text-muted">{{gg.EMail}}</span><br/>
+          </td>
+
           <td style="text-align: end;">
             <button type="button" class="btn btn-success" (click)="showPopupGastgeber(gg.IDObj, content);">
               <img src="/assets/icons_white/32px/large/tool-pencil.png" style="height:20px">
             </button>&nbsp;
-            <button type="button" class="btn btn-danger" (click)="showPopupDeleteGastgeber(gg.IDObj);">
+            <!-- <button type="button" class="btn btn-danger" (click)="showPopupDeleteGastgeber(gg.IDObj);">
               <img src="/assets/icons_white/32px/large/button-cancel.png" style="height:20px">
-            </button>
+            </button> -->
           </td>
         </tr>
       </tbody>
     </table>
-    <nav aria-label="...">
-      <ul class="pagination">
-        <li *ngFor="let pn of pageNumbers" class="page-item" [ngClass]="getPageNrActiveClassName(pn)">
-          <a class="page-link" [routerLink]="" (click)="gotoPage(pn)">{{pn}}</a>
-        </li>
-      </ul>
-    </nav>
+
   </div>
 </div>
 
@@ -131,10 +128,12 @@
         <input type="text" class="form-control" id="_caption7" aria-describedby="c7" placeholder="" [(ngModel)]="currentGastgeber.EMail">
       </div>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="_captionGG" class="col-12 row-form-label text-info">Gesamtumsatz Aktiv-Gastgeberwettbewerb 2017/2018</label>
-        <input type="number" class="form-control ml-3 mr-3" id="_captionGG" aria-describedby="c77" placeholder="" [(ngModel)]="currentGastgeber.UmsatzAktivWettbewerb">
-      </div>
+        <input type="number" lang="de-DE" class="form-control ml-3 mr-3" id="_captionGG" aria-describedby="c77" placeholder="" [(ngModel)]="currentGastgeber.UmsatzAktivWettbewerb">
+      </div> -->
+      <span class="mx-3">Gesamtumsatz Aktiv-GG-Wettbewerb 2017/18</span>
+      <dx-number-box [(ngModel)] = "currentGastgeber.UmsatzAktivWettbewerb" [showSpinButtons]="false" [showClearButton]="false" style="width:100vw" class="mx-3"></dx-number-box>
 
       <div class="col-sm-12" style="margin-bottom: 5px;">
         <div class="form-check">
@@ -174,6 +173,7 @@
 
   </div>
   <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="deleteGastgeber()">löschen!</button>
     <button type="button" class="btn btn-success" (click)="saveGastgeber()">speichern</button>
   </div>
 </ng-template>

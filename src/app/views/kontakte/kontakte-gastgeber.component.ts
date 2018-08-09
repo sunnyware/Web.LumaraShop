@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {Gastgeber} from '../../models/gastgeber';
-import {LumaraServiceCommands} from '../../service/lumara_service_commands';
-import {LumaraService} from '../../service/lumara_service';
-import {Router} from '@angular/router';
-import {forEach} from '@angular/router/src/utils/collection';
-import notify from 'devextreme/ui/notify';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from "@angular/core";
+import { Gastgeber } from "../../models/gastgeber";
+import { LumaraServiceCommands } from "../../service/lumara_service_commands";
+import { LumaraService } from "../../service/lumara_service";
+import { Router } from "@angular/router";
+import { forEach } from "@angular/router/src/utils/collection";
+import notify from "devextreme/ui/notify";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-kontakte-gastgeber',
-  templateUrl: './kontakte-gastgeber.component.html',
+  selector: "app-kontakte-gastgeber",
+  templateUrl: "./kontakte-gastgeber.component.html",
   styles: []
 })
 export class KontakteGastgeberComponent implements OnInit {
@@ -22,32 +22,42 @@ export class KontakteGastgeberComponent implements OnInit {
   popupGastgeberVisible = false;
   popupDeleteGastgeberVisible = false;
   currentGastgeber: Gastgeber = undefined;
-  suchwort = '';
+  suchwort = "";
   onlyAktivGastgeber = false;
   ggModalDialog: any;
 
-  constructor(private lumaraService: LumaraService, private router: Router, private http: HttpClient, private modalService: NgbModal) {
-
-  }
+  constructor(
+    private lumaraService: LumaraService,
+    private router: Router,
+    private http: HttpClient,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit() {
     this.reloadGastgeber();
   }
 
   reloadAktivGastgeber() {
-    this.suchwort = '';
+    this.suchwort = "";
     this.onlyAktivGastgeber = true;
     this.reloadGastgeber();
   }
 
   reloadGastgeber() {
-    this.lumaraService.doCommand(LumaraServiceCommands.GetGastgeberlist(this.suchwort,
-      this.onlyAktivGastgeber, this.pageNr, this.itemsPerPage)).subscribe(
-      data => {
+    this.lumaraService
+      .doCommand(
+        LumaraServiceCommands.GetGastgeberlist(
+          this.suchwort,
+          this.onlyAktivGastgeber,
+          this.pageNr,
+          this.itemsPerPage
+        )
+      )
+      .subscribe(data => {
         if (data.ReturnCode === 200) {
           // console.log('Ich bekam vom Server folgende Daten: ');
           // console.log(data.ReturnValue);
-          this.gastgeberList = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
+          this.gastgeberList = JSON.parse(data.ReturnValue); // JSON.parse(data.ReturnValue);
           this.gastgeberListMeta = JSON.parse(data.ReturnMessage);
           const pc: number = this.gastgeberListMeta.PageCount;
           this.pageNumbers = new Array(pc);
@@ -56,10 +66,9 @@ export class KontakteGastgeberComponent implements OnInit {
           }
           // notify(data.ReturnMessage);
         } else if (data.ReturnCode >= 400) {
-          this.router.navigate(['/login']);
+          this.router.navigate(["/login"]);
         }
-      }
-    );
+      });
   }
 
   setSuchwort() {
@@ -68,7 +77,7 @@ export class KontakteGastgeberComponent implements OnInit {
     this.reloadGastgeber();
   }
   resetSuchwort() {
-    this.suchwort = '';
+    this.suchwort = "";
     this.onlyAktivGastgeber = false;
     this.reloadGastgeber();
   }
@@ -80,14 +89,14 @@ export class KontakteGastgeberComponent implements OnInit {
 
   public getPageNrActiveClassName(pageNumber: number) {
     if (pageNumber === this.pageNr) {
-      return 'active';
+      return "active";
     }
-    return '';
+    return "";
   }
 
   showPopupGastgeber(idObjGastgeber: string, content) {
-    console.log('idObjGastgeber: ' + idObjGastgeber);
-    if (idObjGastgeber === '') {
+    console.log("idObjGastgeber: " + idObjGastgeber);
+    if (idObjGastgeber === "") {
       // es soll eine neue Gastgeberin angelegt werden
       this.currentGastgeber = new Gastgeber();
     } else {
@@ -99,7 +108,7 @@ export class KontakteGastgeberComponent implements OnInit {
       }
     }
     if (!this.currentGastgeber) {
-      alert('Bitte wählen Sie einen gültigen Gastgeber aus');
+      alert("Bitte wählen Sie einen gültigen Gastgeber aus");
       return;
     }
     this.ggModalDialog = this.modalService.open(content, { size: 'lg' });
@@ -110,8 +119,9 @@ export class KontakteGastgeberComponent implements OnInit {
     // this.popupGastgeberVisible = false;
     this.ggModalDialog.close();
     // Gastgeber speichern
-    this.lumaraService.doCommand(LumaraServiceCommands.UpdateGastgeber(this.currentGastgeber)).subscribe(
-      data => {
+    this.lumaraService
+      .doCommand(LumaraServiceCommands.UpdateGastgeber(this.currentGastgeber))
+      .subscribe(data => {
         if (data.ReturnCode === 200) {
           // this.gastgeberList = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
           notify('Gastgeber wurde erfolgreich gespeichert');
@@ -119,8 +129,7 @@ export class KontakteGastgeberComponent implements OnInit {
         } else if (data.ReturnCode >= 400) {
           notify(data.ReturnMessage);
         }
-      }
-    );
+      });
   }
 
   showPopupDeleteGastgeber(idObjGastgeber: string) {
@@ -137,19 +146,26 @@ export class KontakteGastgeberComponent implements OnInit {
   }
 
   deleteGastgeber() {
-    this.popupDeleteGastgeberVisible = false;
-    this.currentGastgeber.FlagDeleted = true;
-    this.lumaraService.doCommand(LumaraServiceCommands.UpdateGastgeber(this.currentGastgeber)).subscribe(
-      data => {
-        if (data.ReturnCode === 200) {
-          // this.gastgeberList = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
-          this.reloadGastgeber();
-          notify('Gastgeber wurde erfolgreich gespeichert');
-        } else if (data.ReturnCode >= 400) {
-          notify(data.ReturnMessage);
-        }
-      }
-    );
+    if (this.currentGastgeber === undefined) {
+      alert('Bitte wählen Sie einen gültigen Gastgeber aus!');
+      return;
+    }
+    if (confirm('Wollen Sie wirklich den Gastgeber löschen?')) {
+      this.ggModalDialog.close();
+      // this.popupDeleteGastgeberVisible = false;
+      this.currentGastgeber.FlagDeleted = true;
+      this.lumaraService
+        .doCommand(LumaraServiceCommands.UpdateGastgeber(this.currentGastgeber))
+        .subscribe(data => {
+          if (data.ReturnCode === 200) {
+            // this.gastgeberList = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
+            this.reloadGastgeber();
+            notify('Gastgeber wurde erfolgreich gelöscht!');
+          } else if (data.ReturnCode >= 400) {
+            notify(data.ReturnMessage);
+          }
+        });
+    }
   }
 
   downloadGastgeberFileInternal() {
@@ -174,17 +190,22 @@ export class KontakteGastgeberComponent implements OnInit {
         a.click();
         window.URL.revokeObjectURL(url);
         a.remove(); // remove the element
-      }, error => {
+      },
+      error => {
         console.log('download error:', JSON.stringify(error));
-      }, () => {
+      },
+      () => {
         console.log('Completed file download.');
-      });
+      }
+    );
   }
 
   showHelp() {
-    alert('Geben Sie hier ein Suchwort ein. Es wird immer nach dem Namensanfang gesucht (in Nachname, Vorname, Strasse und Ort).\r\n' +
-      'Wenn Sie nur einen einzigen Buchstaben angeben, wird nur im Nachnamen gesucht.\r\n' +
-      'Sie können z.B. mit der Eingabe von b alle Nachnamen finden, die mit B anfangen.');
+    alert(
+      'Geben Sie hier ein Suchwort ein. Es wird immer nach dem Namensanfang gesucht (in Nachname, Vorname, Strasse und Ort).\r\n' +
+        'Wenn Sie nur einen einzigen Buchstaben angeben, wird nur im Nachnamen gesucht.\r\n' +
+        'Sie können z.B. mit der Eingabe von b alle Nachnamen finden, die mit B anfangen.'
+    );
   }
 
   openLg(content) {

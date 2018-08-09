@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavItem } from '../../models/navitem';
 
 @Component({
   selector: 'app-chef-statistik-menu',
@@ -6,10 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class ChefStatistikMenuComponent implements OnInit {
+  navItems: NavItem[] = [
+    {
+      caption: 'Aktiv-Gastgeberwettbewerb',
+      imagefilename:
+        '/assets/icons_white/96px/large/chart-column-2d-stacked.png',
+      routerlink: ['/chefstatistik', 'aktivgg']
+    },
+    {
+      caption: 'Jahresspiegel',
+      imagefilename:
+        '/assets/icons_white/96px/large/chart-column-2d-stacked.png',
+      routerlink: ['/chefstatistik', 'aktivgg']
+    },
+    {
+      caption: 'Jahresumsatz',
+      imagefilename:
+        '/assets/icons_white/96px/large/chart-column-2d-stacked.png',
+      routerlink: ['/chefstatistik', 'aktivgg']
+    }
+  ];
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

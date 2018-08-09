@@ -27,6 +27,10 @@ main {
   display: inline-block;
 }
 
+.breadcrumb {
+  border-radius: 0px;
+}
+
 /*** News-Posts ***/
 .postcontent {
   padding-top: 0px;

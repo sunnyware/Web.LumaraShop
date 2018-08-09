@@ -42,10 +42,11 @@ export class LumaraServiceCommands {
   }
 
   /***** Fachberater *****/
-  public static GetFachberater(): JsonCommand {
+  public static GetFachberater(idPersonalakte: number): JsonCommand {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
     cmd.CommandName = 'GetFachberater';
+    cmd.addParameter('IDPersonalakte', idPersonalakte);
     return cmd;
   }
 
@@ -89,8 +90,7 @@ export class LumaraServiceCommands {
   }
 
   public static GetGastgeberStatistik(filterLFBDOID: number, filterGPLDOID: number, filterBZLDOID: number, datum1: Date,
-    datum2: Date, mindestVortraege: number,
-    mindestUmsatz: number): JsonCommand {
+    datum2: Date, mindestVortraege: number, mindestUmsatz: number, onlyNotUmsatzManualAccepted: boolean): JsonCommand {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.StatistikService';
     cmd.CommandName = 'GetGastgeberStatistik';
@@ -101,14 +101,28 @@ export class LumaraServiceCommands {
     cmd.addParameter('Datum2', datum2);
     cmd.addParameter('MindestVortraege', mindestVortraege);
     cmd.addParameter('MindestUmsatz', mindestUmsatz);
+    cmd.addParameter('OnlyNotUmsatzManualAccepted', onlyNotUmsatzManualAccepted);
     return cmd;
   }
 
-  public static GetGastgeberUmsaetze(idObjGastgeber: string) {
+  public static GetGastgeberUmsaetze(idObjGastgeber: string, datum1: Date, datum2: Date) {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.StatistikService';
     cmd.CommandName = 'GetGastgeberUmsaetze';
     cmd.addParameter('IDObjGastgeber', idObjGastgeber);
+    cmd.addParameter('Datum1', datum1);
+    cmd.addParameter('Datum2', datum2);
+    return cmd;
+  }
+
+  public static AcceptGastgeberUmsatzManual(idObjGastgeber: string, umsatzManual: number, accept: boolean, internalNote: string) {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'AcceptGastgeberUmsatzManual';
+    cmd.addParameter('IDObjGastgeber', idObjGastgeber);
+    cmd.addParameter('UmsatzManual', umsatzManual);
+    cmd.addParameter('Accept', accept);
+    cmd.addParameter('InternalNote', internalNote);
     return cmd;
   }
 

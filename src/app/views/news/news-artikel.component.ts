@@ -34,8 +34,8 @@ export class NewsArtikelComponent implements OnInit {
     this.lumaraService.doCommand(LumaraServiceCommands.GetBlogPost(this.articleID)).subscribe(
       data => {
         if (data.ReturnCode === 200) {
-          // console.log('Ich bekam vom Server folgende Daten: ');
-          // console.log(data.ReturnValue);
+           console.log('Ich bekam vom Server folgende Daten: ');
+           console.log(data.ReturnValue);
           this.blogPost = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
         } else if (data.ReturnCode >= 400) {
           this.router.navigate(['/login']);

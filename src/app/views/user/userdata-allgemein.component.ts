@@ -22,7 +22,7 @@ export class UserdataAllgemeinComponent implements OnInit {
   }
 
   reloadFachberater() {
-    this.lumaraService.doCommand(LumaraServiceCommands.GetFachberater()).subscribe(
+    this.lumaraService.doCommand(LumaraServiceCommands.GetFachberater(0)).subscribe(
       data => {
         // console.log('vom server fachberater:');
         // console.log(data);

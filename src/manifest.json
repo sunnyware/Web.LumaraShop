@@ -1,20 +1,27 @@
 {
+  "name": "LUMARA Portal",
+  "short_name": "LUMARA",
+  "start_url": "/index.html",
+  "manifest_version": 2,
   "background_color": "#E7E7E7",
   "description": "LUMARA Online-Portal",
   "display": "fullscreen",
   "icons": [
     {
-      "src": "assets/logomittel.png",
-      "sizes": "193x165",
+      "src": "assets/logos/logo_128.png",
+      "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "assets/logoschriftzug.png",
-      "sizes": "1340x328",
+      "src": "assets/logos/logo_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logos/logo_512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "name": "LUMARA Portal",
-  "short_name": "LUMARA",
-  "start_url": "/index.html"
+  ]
+
 }

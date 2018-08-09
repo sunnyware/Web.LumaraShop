@@ -1,14 +1,14 @@
 <div *ngIf="galleries" class="row">
 
   <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-xs-12" *ngFor="let galleryitem of galleries">
-      <div class="card mb-4 bg-dark" >
-        <a [routerLink]="['/gallery', galleryitem.GalleryFolder]">
-          <img class="card-img-top" src="https://portal.lumara.de/images/gallery/{{galleryitem.GalleryFolder}}/image000.jpg" alt="Galerie">
-          <div class="card-block text-center">
-            <h4 class="card-title text-light">{{galleryitem.Caption}}</h4>
-          </div>
-        </a>
-      </div>
+    <div class="card mb-4 bg-dark">
+      <a [routerLink]="['/gallery', galleryitem.GalleryFolder]">
+        <img class="card-img-top" src="https://portal.lumara.de/images/gallery/{{galleryitem.GalleryFolder}}/image000.jpg" alt="Galerie">
+        <div class="card-block text-center">
+          <h4 class="card-title text-light">{{galleryitem.Caption}}</h4>
+        </div>
+      </a>
     </div>
   </div>
 
+</div>

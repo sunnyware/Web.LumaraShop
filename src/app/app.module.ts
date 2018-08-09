@@ -23,7 +23,8 @@ import {
   DxTextBoxModule,
   DxValidationGroupModule,
   DxValidationSummaryModule,
-  DxValidatorModule
+  DxValidatorModule,
+  DxNumberBoxModule
 } from 'devextreme-angular';
 import 'devextreme-intl';
 import {NgbModule, NgbCollapseModule, NgbCarousel, NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
@@ -50,6 +51,9 @@ import {ChefStatistikAktivGGComponent} from './views/statistik/chef-statistik-ak
 import {ChefStatistikMenuComponent} from './views/statistik/chef-statistik-menu.component';
 import { GalleryItemsComponent } from './views/galerie/gallery-items.component';
 import { GalleryBigItemComponent } from './views/galerie/gallery-big-item.component';
+import { TestComponent } from './views/statistik/test.component';
+import { JahresspiegelComponent } from './views/statistik/jahresspiegel.component';
+import { JahresumsatzComponent } from './views/statistik/jahresumsatz.component';
 
 registerLocaleData(localeDe);
 loadMessages(messagesDe);
@@ -114,7 +118,10 @@ const APP_ROUTES: Routes = [
     ChefStatistikAktivGGComponent,
     ChefStatistikMenuComponent,
     GalleryItemsComponent,
-    GalleryBigItemComponent
+    GalleryBigItemComponent,
+    TestComponent,
+    JahresspiegelComponent,
+    JahresumsatzComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -128,6 +135,7 @@ const APP_ROUTES: Routes = [
     DxCheckBoxModule,
     DxFormModule,
     DxListModule,
+    DxNumberBoxModule,
     DxPopupModule,
     DxTabPanelModule,
     DxTabsModule,
