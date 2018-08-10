@@ -133,7 +133,7 @@
         <input type="number" lang="de-DE" class="form-control ml-3 mr-3" id="_captionGG" aria-describedby="c77" placeholder="" [(ngModel)]="currentGastgeber.UmsatzAktivWettbewerb">
       </div> -->
       <span class="mx-3">Gesamtumsatz Aktiv-GG-Wettbewerb 2017/18</span>
-      <dx-number-box [(ngModel)] = "currentGastgeber.UmsatzAktivWettbewerb" [showSpinButtons]="false" [showClearButton]="false" style="width:100vw" class="mx-3"></dx-number-box>
+      <dx-number-box format="###,###,##0.00" [(ngModel)] = "currentGastgeber.UmsatzAktivWettbewerb" [showSpinButtons]="false" [showClearButton]="false" style="width:100vw" class="mx-3"></dx-number-box>
 
       <div class="col-sm-12" style="margin-bottom: 5px;">
         <div class="form-check">

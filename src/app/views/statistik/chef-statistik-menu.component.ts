@@ -18,13 +18,13 @@ export class ChefStatistikMenuComponent implements OnInit {
       caption: 'Jahresspiegel',
       imagefilename:
         '/assets/icons_white/96px/large/chart-column-2d-stacked.png',
-      routerlink: ['/chefstatistik', 'aktivgg']
+      routerlink: ['/chefstatistik', 'jahresspiegel']
     },
     {
       caption: 'Jahresumsatz',
       imagefilename:
         '/assets/icons_white/96px/large/chart-column-2d-stacked.png',
-      routerlink: ['/chefstatistik', 'aktivgg']
+      routerlink: ['/chefstatistik', 'jahresumsatz']
     }
   ];
   constructor() {}

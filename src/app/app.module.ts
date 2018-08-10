@@ -68,7 +68,9 @@ const APP_ROUTES: Routes = [
   {
     path: 'chefstatistik', component: ChefStatistikComponent, canActivate: [ProtectedGuard], children: [
       {path: 'menu', component: ChefStatistikMenuComponent, canActivate: [ProtectedGuard]},
-      {path: 'aktivgg', component: ChefStatistikAktivGGComponent, canActivate: [ProtectedGuard]}
+      {path: 'aktivgg', component: ChefStatistikAktivGGComponent, canActivate: [ProtectedGuard]},
+      {path: 'jahresspiegel', component: JahresspiegelComponent, canActivate: [ProtectedGuard]},
+      {path: 'jahresumsatz', component: JahresumsatzComponent, canActivate: [ProtectedGuard]}
     ]
   },
   {path: 'gallery', component: GalleryComponent, canActivate: [ProtectedGuard]},

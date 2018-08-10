@@ -1,3 +1,32 @@
-<p>
-  jahresspiegel works!
-</p>
+<div class="fixed-top" style="margin-top: 60px;">
+  <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a [routerLink]="['/chefstatistik', 'menu']">Chefstatistik</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Jahresspiegel</li>
+  </ol>
+</nav>
+</div>
+
+<div class="row" style="margin-top: 120px;"  *ngIf="chartDataJahresspiegel">
+  <div class="col">
+      <h2>{{chartDataJahresspiegel.Caption}}</h2>
+  </div>
+
+</div>
+<div class="row" *ngIf="chartDataJahresspiegel">
+  <div  class="col-12">
+    <dx-chart id="chart" [dataSource]="chartDataJahresspiegel.Statistik" resolveLabelOverlapping="hide">
+      <dxo-legend [visible]="false"></dxo-legend>
+      <dxi-value-axis>
+        <dxo-label [visible]="false"></dxo-label>
+      </dxi-value-axis>
+      <dxi-series argumentField="Label" valueField="Value" type="bar" color="#ffaa66" >
+        <dxo-label [visible]="true" rotationAngle="0" [showForZeroValues]="false" backgroundColor="#BE392B">
+          <dxo-format type="###,###" [precision]="0"></dxo-format>
+        </dxo-label>
+      </dxi-series>
+    </dx-chart>
+  </div>
+</div>
