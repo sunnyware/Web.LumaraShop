@@ -1,5 +1,6 @@
 export class Fachberater {
   ID: number;
+  IsInaktiv: boolean;
   PersonalNr: string;
   Anrede: string;
   Vorname: string;

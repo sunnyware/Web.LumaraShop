@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavItem } from '../../models/navitem';
+import { LumaraService } from '../../service/lumara_service';
+import { Router } from '@angular/router';
+import { LumaraServiceCommands } from '../../service/lumara_service_commands';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-chef-statistik-menu',
@@ -27,7 +31,18 @@ export class ChefStatistikMenuComponent implements OnInit {
       routerlink: ['/chefstatistik', 'jahresumsatz']
     }
   ];
-  constructor() {}
+  constructor(private lumaraService: LumaraService,
+    private router: Router) {}
 
   ngOnInit() {}
+
+  setDebugMode(mode: number) {
+    this.lumaraService
+    .doCommand(
+      LumaraServiceCommands.SetDebugMode(mode)
+    )
+    .subscribe(data => {
+      notify(data.ReturnMessage);
+    });
+  }
 }

@@ -39,7 +39,7 @@ export class GastgeberStatistikItem {
   Ort: string;
   Umsatz: number;
   UmsatzManual: number;
-  UmsatzManualAccepted: boolean;
+  UmsatzManualAccepted: number;
   Vortraege: number;
   LFBDOID: number;
   LFBName: string;

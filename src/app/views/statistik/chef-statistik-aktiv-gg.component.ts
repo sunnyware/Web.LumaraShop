@@ -20,7 +20,8 @@ export class ChefStatistikAktivGGComponent implements OnInit {
   gastgeberUmsaetzeGesamt = 0;
   ggModalDialog: any;
   internalNote = '';
-  onlyNotUmsatzManualAccepted = true;
+  // lastOnlyNotUmsatzManualAccepted = 0;
+  onlyNotUmsatzManualAccepted = 0;
 
   constructor(
     private lumaraService: LumaraService,
@@ -30,6 +31,13 @@ export class ChefStatistikAktivGGComponent implements OnInit {
 
   ngOnInit() {
     this.reloadGastgeberStatistik();
+  }
+
+  setFilter(filter: number) {
+    if (this.onlyNotUmsatzManualAccepted !== filter) {
+      this.onlyNotUmsatzManualAccepted = filter;
+      this.reloadGastgeberStatistik();
+    }
   }
 
   reloadGastgeberStatistik() {
@@ -114,8 +122,12 @@ export class ChefStatistikAktivGGComponent implements OnInit {
   }
 
   getClass(item: GastgeberStatistikItem) {
-    if (item.UmsatzManualAccepted) {
+    if (item.UmsatzManualAccepted === 1) {
       return 'text-success font-weight-bold';
+    } else if (item.UmsatzManualAccepted === 0) {
+      return 'text-light';
+    } else if (item.UmsatzManualAccepted === -1) {
+      return 'text-danger font-weight-bold';
     }
     return 'text-light';
   }
@@ -127,7 +139,7 @@ export class ChefStatistikAktivGGComponent implements OnInit {
     this.ggModalDialog = this.modalService.open(content, { size: 'lg' });
   }
 
-  acceptGastgeberUmsatzManual(accept: boolean) {
+  acceptGastgeberUmsatzManual(accept: number) {
     this.ggModalDialog.close();
     this.lumaraService
       .doCommand(

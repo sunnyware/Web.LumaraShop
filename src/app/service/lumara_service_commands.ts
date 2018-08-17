@@ -20,6 +20,14 @@ export class LumaraServiceCommands {
     return cmd;
   }
 
+  public static SetDebugMode(telegramDebug: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Users.Service.UserService';
+    cmd.CommandName = 'SetDebugMode';
+    cmd.addParameter('TelegramControllerDebugging', telegramDebug);
+    return cmd;
+  }
+
 
   /***** Blogging *****/
   public static GetBlogPosts(archiveID: number, publishedFilter: number, pageNr: number, itemsPerPage: number): JsonCommand {
@@ -90,7 +98,7 @@ export class LumaraServiceCommands {
   }
 
   public static GetGastgeberStatistik(filterLFBDOID: number, filterGPLDOID: number, filterBZLDOID: number, datum1: Date,
-    datum2: Date, mindestVortraege: number, mindestUmsatz: number, onlyNotUmsatzManualAccepted: boolean): JsonCommand {
+    datum2: Date, mindestVortraege: number, mindestUmsatz: number, umsatzManualAcceptStatus: number): JsonCommand {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.StatistikService';
     cmd.CommandName = 'GetGastgeberStatistik';
@@ -101,7 +109,7 @@ export class LumaraServiceCommands {
     cmd.addParameter('Datum2', datum2);
     cmd.addParameter('MindestVortraege', mindestVortraege);
     cmd.addParameter('MindestUmsatz', mindestUmsatz);
-    cmd.addParameter('OnlyNotUmsatzManualAccepted', onlyNotUmsatzManualAccepted);
+    cmd.addParameter('UmsatzManualAcceptStatus', umsatzManualAcceptStatus);
     return cmd;
   }
 
@@ -115,7 +123,7 @@ export class LumaraServiceCommands {
     return cmd;
   }
 
-  public static AcceptGastgeberUmsatzManual(idObjGastgeber: string, umsatzManual: number, accept: boolean, internalNote: string) {
+  public static AcceptGastgeberUmsatzManual(idObjGastgeber: string, umsatzManual: number, accept: number, internalNote: string) {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
     cmd.CommandName = 'AcceptGastgeberUmsatzManual';

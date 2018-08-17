@@ -1,5 +1,5 @@
 <div class="fixed-top" style="margin-top: 60px;">
-    <nav aria-label="breadcrumb">
+  <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
         <a [routerLink]="['/chefstatistik', 'menu']">Chefstatistik</a>
@@ -24,10 +24,17 @@
 </div> -->
 <div class="row" style="margin-top: 120px;" *ngIf="gastgeberStatistikItems">
   <div class="col-12">
+
     <!--button class="btn mb-4">abrufen</button-->
     <span class="mr-3">Es wurden {{gastgeberStatistikItems.length}} Aktivgastgeber gefunden</span>
-    <dx-check-box [(ngModel)]="onlyNotUmsatzManualAccepted" text="nur unerledigte anzeigen" (onValueChanged)="reloadGastgeberStatistik()"></dx-check-box>
-    <br/><br/>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-light" (click)="setFilter(-1)">alle ausgeschlossenen</button>
+      <button type="button" class="btn btn-light" (click)="setFilter(0)">alle offenen</button>
+      <button type="button" class="btn btn-light" (click)="setFilter(1)">alle erreichten</button>
+    </div>
+    <!-- <dx-check-box [(ngModel)]="onlyNotUmsatzManualAccepted" text="nur unerledigte anzeigen" (onValueChanged)="filterChanged()"></dx-check-box> -->
+    <br/>
+    <br/>
     <!-- Fachberater-Gruppenzeile -->
     <table class="table table-sm table-hover table-scrollable" style="line-height: 1;">
       <thead>
@@ -85,11 +92,18 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div *ngIf="currentGastgeber && currentFachberater"  class="modal-body">
+    <div *ngIf="currentGastgeber && currentFachberater" class="modal-body">
       <p>Gastgeber: {{currentGastgeber.Vorname}} {{currentGastgeber.Nachname}}</p>
-      <p>Fachberater: {{currentFachberater.Vorname}}  {{currentFachberater.Nachname}} <br/><span style="font-size: small" class="text-muted">Telefon: <strong>{{currentFachberater.Telefon}}</strong> oder <strong>{{currentFachberater.Mobil}}</strong>
-        E-Mail: <strong>{{currentFachberater.EMail}}</strong>
-      </span></p>
+      <p>Fachberater: {{currentFachberater.Vorname}} {{currentFachberater.Nachname}}
+        <br/>
+        <span style="font-size: small" class="text-muted">Telefon:
+          <strong>{{currentFachberater.Telefon}}</strong> oder
+          <strong>{{currentFachberater.Mobil}}</strong>
+          E-Mail:
+          <strong>{{currentFachberater.EMail}}</strong>
+          <span *ngIf="currentFachberater.IsInaktiv" class="badge-warning"> inaktiv!</span>
+        </span>
+      </p>
       <table class="table table-sm">
         <thead>
           <th scope="col">Datum</th>
@@ -110,9 +124,9 @@
       <textarea rows="3" class="form-control" style="width: 100%" [(ngModel)]="internalNote"></textarea>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="acceptGastgeberUmsatzManual(false)">nicht akzeptieren</button>
-      <button type="button" class="btn btn-success" (click)="acceptGastgeberUmsatzManual(true)">akzeptieren</button>
+      <button type="button" class="btn btn-danger" (click)="acceptGastgeberUmsatzManual(-1)">ausgeschlossen</button>
+      <button type="button" class="btn" (click)="acceptGastgeberUmsatzManual(0)">offen</button>
+      <button type="button" class="btn btn-success" (click)="acceptGastgeberUmsatzManual(1)">erreicht</button>
     </div>
   </ng-template>
   <!-- ENDE modales Info-Popup -->
-
