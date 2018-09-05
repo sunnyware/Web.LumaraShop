@@ -1,16 +1,22 @@
 /*** Allgemein ***/
-body, p, span {
+body, p {
   font-family: 'Roboto';
 }
 
+h1 {
+  color: #BE392B;
+}
 h1, h2, h3, h4, h5, h6, .font-alt {
   font-family: 'Roboto Condensed';
   font-weight:300;
-  color: #BE392B;
 }
 
 main {
   margin-top: 80px;
+}
+
+ul {
+  margin-left: 15px;
 }
 
 /*** Navbar ***/
@@ -38,6 +44,56 @@ main {
 }
 .postcontent ul {
   margin-left: 15px;
+}
+.postcontent h1 {
+  color: brown;
+  line-height: 1em;
+  margin-bottom: 4px;
+}
+.postcontent h2 {
+  border-bottom: 1px solid #b0aeae;
+  text-transform: uppercase;
+}
+
+.postcontent tr {
+  vertical-align: top;
+}
+.postcontent code {
+  color: black;
+  background-color: #eeeeee;
+  border-radius: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-shadow: 0px 0px;
+}
+.postcontent pre {
+  color: black;
+  background-color: #eeeeee;
+  border-radius: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-shadow: 0px 0px;
+}
+  /* ein Stern = fett schreiben */
+ .postcontent em {
+    font-weight: bold;
+    font-style: normal;
+}
+/* zwei Sterne = hervorheben */
+.postcontent strong {
+    color: brown;
+}
+
+.postcontent .postinfo {
+    color: gray;
+    line-height: 1em;
+    font-size:x-small;
+    margin-top: 3px;
+    padding-top: 0px;
+    margin-bottom: 15px;
+}
+.postcontent .postinfo strong {
+  color: gray;
 }
 
 .markdown img {

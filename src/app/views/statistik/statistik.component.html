@@ -1,3 +1,43 @@
+<div class="row">
+  <div class="col">
+    <h2>Aktiv-Gastgeberwettbewerb</h2>
+    <table class="table table-light">
+      <tr>
+        <td>Laufzeit:</td>
+        <td><strong>KW13/2017 bis KW10/2018</strong></td>
+      </tr>
+      <tr>
+        <td>Mindestumsatz:</td>
+        <td><strong>1.200 €</strong></td>
+      </tr>
+      <tr>
+        <td>Anzahl der Vorträge:</td>
+        <td><strong>mind. 3</strong></td>
+      </tr>
+    </table>
+    <br>
+    <p><strong>Ihre Aktivgastgeber, die diesen Wettbewerb erreicht haben:</strong></p>
+    <div *ngIf="gastgeberStatistikItems">
+      <span style="color: brown; font-weight: bold" *ngFor="let gg of gastgeberStatistikItems">
+        {{gg.Nachname}} {{gg.Vorname}},
+        <!-- {{gg.Nachname}} {{gg.Vorname}}, Umsatz = {{gg.UmsatzManual | number:'1.0-0':'de'}}€ -->
+       </span>
+    </div>
+    <div *ngIf="showEmptyGastgeberList"><p style="color: brown; font-weight: bold">keine Ihrer Gastgeber hat den Wettbewerb erreicht :-(</p></div>
+
+    <br>
+    <p><strong>Falls etwas nicht stimmen sollte:</strong></p>
+    <ul>
+      <li>prüfen Sie nach, ob Sie bei Ihren Gastgebern die richtigen Summen eingegeben haben (<strong>Achtung: Bitte Gastgeber NIE doppelt eingeben!</strong>)</li>
+      <li>Wenn diese Summen stimmen, dann schreiben Sie bitte eine Korrektur-E-Mail an <a href="mailto:nannette.blaurock@lumara.de">nannette.blaurock@lumara.de</a>. In dieser Mail
+        sollten die Gastgeber-Namen, der Umsatz und das Vortragsdatum enthalten sein!!
+      </li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
 <div class="row"  *ngIf="chartDataJahresspiegel">
   <div class="col">
       <h2>{{chartDataJahresspiegel.Caption}}</h2>
@@ -19,6 +59,8 @@
     </dx-chart>
   </div>
 </div>
+
+<hr>
 
 <div class="row mt-4"  *ngIf="chartDataJahresstatistik">
   <div class="col">

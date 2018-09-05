@@ -31,7 +31,8 @@
         </div>
         <!-- MARKDOWN -->
         <section class="markdown">
-          <div markdown [data]="blogPost.Preview"></div>
+          <!--div markdown [data]="blogPost.Preview"></div -->
+          <div [innerHTML]="blogPost.Preview"></div>
           <a *ngIf="!blogPost.IsComplete" [routerLink]="['/news', blogPost.ID]">weiterlesen...</a>
           <br/>
         </section>
@@ -52,10 +53,10 @@
         <img src="https://portal.lumara.de/flyer/Flyer_KW36-44_2018_02.jpg" style="width: 100%; " />
       </a>
       <br/>
-      <a href="https://portal.lumara.de/flyer/FlyerKW27.pdf">
-        <img src="https://portal.lumara.de/flyer/FlyerKW27_01.jpg" style="width: 100%; " />
+      <a href="https://portal.lumara.de/flyer/Flyer_KW45-KW1.pdf">
+        <img src="https://portal.lumara.de/flyer/Flyer_KW45-KW1_01.jpg" style="width: 100%; " />
         <br/>
-        <img src="https://portal.lumara.de/flyer/FlyerKW27_02.jpg" style="width: 100%; " />
+        <img src="https://portal.lumara.de/flyer/Flyer_KW45-KW1_02.jpg" style="width: 100%; " />
       </a>
     </div>
   </div>

@@ -17,7 +17,8 @@
       </div>
       <!-- MARKDOWN -->
       <section class="markdown">
-        <div markdown [data]="blogPost.Body"></div>
+        <!-- div markdown [data]="blogPost.Body"></div -->
+        <div [innerHTML]="blogPost.Body"></div>
       </section>
     </div>
 
