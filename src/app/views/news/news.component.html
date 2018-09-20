@@ -1,18 +1,22 @@
-<div class="row" *ngIf="artikelNichtLieferbarArray">
-  <div class="col col-sm-12">
-    <p style="color:#BE392B">
-      <b>Nicht lieferbare Artikel:</b>
-    </p>
-    <!--span style="color: white; font-weight: bold; background: #BE392B; border-radius: 4px; padding: 3px 8px 3px 8px">!!! momentan nicht lieferbare Artikel: Tülle C01, Knusperbiene 1138</span-->
-    <div *ngFor="let art of artikelNichtLieferbarArray" style="height: 42px; display: inline-block; color: white; font-weight: bold; background: #BE392B; border-radius: 4px;padding:3px 8px 3px 8px; margin-right: 5px; margin-bottom: 5px;">
-      <img src="https://portal.lumara.de/images/artikel/thumbs80/{{art.EdvNr}}.jpg" style="height:35px; border-radius: 4px;" /> {{art.EdvNr}} {{art.Bezeich}}
-    </div>
-  </div>
-</div>
-
 
 <div *ngIf="blogPosts" class="row">
   <div class="col col-sm-9">
+    <!-- Anzeige der nicht lieferbaren Artikeln -->
+    <div *ngIf="artikelNichtLieferbarArray">
+
+          <p style="color:#BE392B; line-height: 1em;">
+            <b>Nicht lieferbare Artikel:</b>
+          </p>
+          <!--span style="color: white; font-weight: bold; background: #BE392B; border-radius: 4px; padding: 3px 8px 3px 8px">!!! momentan nicht lieferbare Artikel: Tülle C01, Knusperbiene 1138</span-->
+          <div *ngFor="let art of artikelNichtLieferbarArray"  style="display: inline-block; color: white; font-weight: bold; text-align: center; background: #BE392B; border-radius: 4px;padding:3px 5px 3px 5px; margin-right: 5px; margin-bottom: 5px;"
+            placement="top" ngbTooltip="{{art.Bezeich}}">
+            <img src="https://portal.lumara.de/images/artikel/thumbs80/{{art.EdvNr}}.jpg" style="height:35px; border-radius: 4px;" /> <br/> {{art.EdvNr}}
+          </div>
+
+      </div>
+    <!-- ENDE nicht lieferbare Artikel -->
+
+    <!-- Blog-Posts -->
     <div class="post" *ngFor="let blogPost of blogPosts" style="margin-top: 15px;">
       <div class="postdate" style="position: absolute; width: 80px; text-align: center; border: solid 1px black; background-color: #403E48; color: white; border-radius: 8px;">
         <span style="font-size: xx-large; font-weight: bold; padding-top: 0px; margin-top: 0px">{{blogPost.TimeCreated | date:'dd'}}</span>
@@ -40,6 +44,7 @@
 
       <hr>
     </div>
+    <!-- ENDE Blog-Posts -->
     <br/>
 
   </div>

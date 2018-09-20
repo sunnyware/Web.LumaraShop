@@ -51,7 +51,8 @@ export class ChefStatistikAktivGGComponent implements OnInit {
           new Date('2018-05-31'),
           3,
           1200,
-          this.onlyNotUmsatzManualAccepted
+          this.onlyNotUmsatzManualAccepted,
+          true
         )
       )
       .subscribe(data => {

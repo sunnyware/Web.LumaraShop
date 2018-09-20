@@ -1,3 +1,15 @@
-<p>
-  test works!
-</p>
+<h1>TEST</h1>
+<p>Hier sieht man ein paar tolle Bilder in einer Gallerie-Form</p>
+<div class="row mx-0">
+  <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4 col-6 px-1" *ngFor="let thumbnail of thumbnails">
+    <div class="card mb-2 bg-secondary">
+      <a [routerLink]="['/gallery', '2018-07', thumbnail.Filename]">
+        <img class="card-img-top img-fluid" style="height:100px; object-fit: cover;" src="https://portal.lumara.de/images/gallery/2018-07/thumb150/{{thumbnail.Filename}}"
+          alt="Galerie">
+        <div class="card-block text-center text-white font-weight-light mb-0 pb-0" style="line-height: 1.2;">
+          <p class="mb-0 pb-0">A01<br />{{thumbnail.Caption}}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

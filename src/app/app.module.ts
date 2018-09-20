@@ -27,7 +27,7 @@ import {
   DxNumberBoxModule
 } from 'devextreme-angular';
 import 'devextreme-intl';
-import {NgbModule, NgbCollapseModule, NgbCarousel, NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbCollapseModule, NgbCarousel, NgbCarouselModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import {locale, loadMessages} from 'devextreme/localization';
 import * as messagesDe from 'devextreme/localization/messages/de.json';
 import {ArtikellisteComponent} from './views/artikel/artikelliste.component';
@@ -92,6 +92,7 @@ const APP_ROUTES: Routes = [
     ]
   },
   {path: 'login', component: LoginComponent},
+  {path: 'test', component: TestComponent},
   {path: 'calendar', component: BacktermineComponent, canActivate: [ProtectedGuard]}
 ];
 
@@ -129,6 +130,7 @@ const APP_ROUTES: Routes = [
     NgbModule.forRoot(),
     NgbCollapseModule,
     NgbCarouselModule,
+    NgbTooltipModule,
     BrowserModule, FormsModule, HttpClientModule,
     RouterModule.forRoot(APP_ROUTES),
     MarkdownModule.forRoot(),

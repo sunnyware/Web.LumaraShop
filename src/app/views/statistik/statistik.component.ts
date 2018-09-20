@@ -38,7 +38,8 @@ export class StatistikComponent implements OnInit {
           new Date('2018-05-31'),
           3,
           1200,
-          1
+          1,
+          false
         )
       )
       .subscribe(data => {

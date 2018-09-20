@@ -98,7 +98,7 @@ export class LumaraServiceCommands {
   }
 
   public static GetGastgeberStatistik(filterLFBDOID: number, filterGPLDOID: number, filterBZLDOID: number, datum1: Date,
-    datum2: Date, mindestVortraege: number, mindestUmsatz: number, umsatzManualAcceptStatus: number): JsonCommand {
+    datum2: Date, mindestVortraege: number, mindestUmsatz: number, umsatzManualAcceptStatus: number, returnPDF: boolean): JsonCommand {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.StatistikService';
     cmd.CommandName = 'GetGastgeberStatistik';
@@ -110,6 +110,7 @@ export class LumaraServiceCommands {
     cmd.addParameter('MindestVortraege', mindestVortraege);
     cmd.addParameter('MindestUmsatz', mindestUmsatz);
     cmd.addParameter('UmsatzManualAcceptStatus', umsatzManualAcceptStatus);
+    cmd.addParameter('ReturnPDF', returnPDF);
     return cmd;
   }
 

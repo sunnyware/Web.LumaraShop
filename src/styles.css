@@ -45,6 +45,9 @@ ul {
 .postcontent ul {
   margin-left: 15px;
 }
+.postcontent ol {
+  margin-left: 15px;
+}
 .postcontent h1 {
   color: brown;
   line-height: 1em;
@@ -98,7 +101,11 @@ ul {
 
 .markdown img {
   max-width: 100%;
-  height: auto;
+  /*height: auto;*/
+}
+.markdown .card-img-top {
+  height:100px;
+  object-fit: cover;
 }
 
 /*** Gallerie-Cards ***/
@@ -120,6 +127,9 @@ ul {
     padding-left: 0px;
   }
   .postcontent ul {
+    margin-left: 15px;
+  }
+  .postcontent ol {
     margin-left: 15px;
   }
 }
