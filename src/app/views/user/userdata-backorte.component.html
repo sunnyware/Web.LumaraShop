@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-12">
+        <h1>Back-Veranstaltungsorte</h1>
+    </div>
+    <div class="col-12">
+        <a [routerLink]="['/userdata-backtermine']">zurück zu den Backterminen</a>
+    </div>
+
+
+    <div class="col-12">
+      <!-- Veranstaltungsorte-Tabelle -->
+    <button type="button" class="btn btn-success my-2" (click)="showPopupOrt(0, content);">neuer Veranstaltungsort</button>
+    <table class="table table-sm table-hover table-scrollable" style="line-height: 1;">
+        <thead>
+          <tr>
+            <th scope="col">Ort</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ort of orte">
+              <td>{{ort.Ort}} ({{ort.PLZ}})
+                  <br/>
+                  <span style="font-size:x-small" class="text-muted">{{ort.Strasse}}</span><br/>
+              </td>
+            <td style="text-align: end;">
+              <button type="button" class="btn btn-success" (click)="showPopupOrt(ort.ID, content);">
+                <img src="/assets/icons_white/32px/large/tool-pencil.png" style="height:20px">
+              </button>&nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+  <!-- Popup für die Pflege des Veranstaltungsortes -->
+  <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title">Veranstaltungsort</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <!-- Formular-Felder -->
+          <label for="_caption1" class="col-sm-2 col-form-label">Strasse</label>
+          <div class="col-sm-9" style="margin-bottom: 5px;">
+            <input type="text" class="form-control" id="_caption1" aria-describedby="c1" placeholder="" [(ngModel)]="currentOrt.Strasse">
+          </div>
+
+          <label for="_caption2" class="col-sm-2 col-form-label">PLZ</label>
+          <div class="col-sm-9" style="margin-bottom: 5px;">
+            <input type="text" class="form-control" id="_caption2" aria-describedby="c2" placeholder="" [(ngModel)]="currentOrt.PLZ">
+          </div>
+
+          <label for="_caption3" class="col-sm-2 col-form-label">Ort</label>
+          <div class="col-sm-9" style="margin-bottom: 5px;">
+            <input type="text" class="form-control" id="_caption3" aria-describedby="c3" placeholder="" [(ngModel)]="currentOrt.Ort">
+          </div>
+          <!-- ENDE Formular-Felder -->
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="deleteOrt()">löschen!</button>
+        <button type="button" class="btn btn-success" (click)="saveOrt()">speichern</button>
+      </div>
+    </ng-template>

@@ -1,0 +1,20 @@
+<div *ngIf="fachberater" class="row">
+  <div class="col-md-12">
+    <h4>Telegram-Messenger</h4>
+    <p>Verwenden Sie bitte nachfolgenden Token, um sich über den Telegram-Messenger (gibts für jedes Smartphone + PC) anzumelden.
+      Über diesen Kanal empfangen Sie dann Statusmeldungen über
+    </p>
+    <ul class="ml-3">
+      <li>(nicht) lieferbare oder neue Produkte</li>
+      <li>Infos über Artikel, die aus dem Programm genommen wurden.</li>
+      <li>Rundschreiben und Nachrichten</li>
+      <li>Infos über Ihre Paketlieferungen (Paketverfolgung)</li>
+    </ul>
+    <p>Ihr persönlicher Telegram-Token: <span class="font-weight-bold text-info">{{fachberater.ChatToken}}</span></p>
+  </div>
+</div>
+
+<div>
+  <p>Beachten Sie bitte nachfolgende Anleitung für die Installation des Telegram-Messengers:</p>
+  <app-news-artikel articleID="23"></app-news-artikel>
+</div>

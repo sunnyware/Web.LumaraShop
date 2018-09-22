@@ -31,18 +31,15 @@ export class ChefStatistikMenuComponent implements OnInit {
       routerlink: ['/chefstatistik', 'jahresumsatz']
     }
   ];
-  constructor(private lumaraService: LumaraService,
-    private router: Router) {}
+  constructor(private lumaraService: LumaraService, private router: Router) {}
 
   ngOnInit() {}
 
   setDebugMode(mode: number) {
     this.lumaraService
-    .doCommand(
-      LumaraServiceCommands.SetDebugMode(mode)
-    )
-    .subscribe(data => {
-      notify(data.ReturnMessage);
-    });
+      .doCommand(LumaraServiceCommands.SetDebugMode(mode))
+      .subscribe(data => {
+        notify(data.ReturnMessage);
+      });
   }
 }

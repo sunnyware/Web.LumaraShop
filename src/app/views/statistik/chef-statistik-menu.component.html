@@ -1,26 +1,24 @@
+<div *ngIf="navItems" class="row">
 
-    <div *ngIf="navItems" class="row">
-
-        <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-xs-12" *ngFor="let navItem of navItems">
-          <div class="card mb-4 bg-dark text-center">
-            <a [routerLink]="navItem.routerlink">
-              <img class="card-img-top" [src]="navItem.imagefilename" style="max-width:96px; max-height: 96px;" alt="{{navItem.caption}}">
-              <div class="card-block text-center">
-                <h5 class="card-title text-light">{{navItem.caption}}</h5>
-              </div>
-            </a>
-          </div>
+  <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-xs-12" *ngFor="let navItem of navItems">
+    <div class="card mb-4 bg-dark text-center">
+      <a [routerLink]="navItem.routerlink">
+        <img class="card-img-top" [src]="navItem.imagefilename" style="max-width:96px; max-height: 96px;" alt="{{navItem.caption}}">
+        <div class="card-block text-center">
+          <h5 class="card-title text-light">{{navItem.caption}}</h5>
         </div>
+      </a>
+    </div>
+  </div>
 
-      </div>
+</div>
 
 
-      <button class="btn btn-success" (click)="setDebugMode(1)">DebugMode einschalten</button>
-      <button class="btn btn-success" (click)="setDebugMode(0)">DebugMode ausschalten</button>
-  <!-- <div class="col-sm-3">
+<button class="btn btn-success" (click)="setDebugMode(1)">DebugMode einschalten</button>
+<button class="btn btn-success" (click)="setDebugMode(0)">DebugMode ausschalten</button>
+<!-- <div class="col-sm-3">
     <div style="border: #BBBBBB solid 1px; text-align: center;">
       <img src="/assets/icons_white/60px/large/chart-column-2d-stacked.png" style="height: 50px"><br/>
       <a [routerLink]="['/chefstatistik','aktivgg']" >Aktiv-Gastgeber-Wettbewerb</a>
     </div>
   </div> -->
-

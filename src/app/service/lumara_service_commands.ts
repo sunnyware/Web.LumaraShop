@@ -1,6 +1,8 @@
+import { BackterminOrt } from './../models/backtermine';
 import {JsonCommand} from '../utils/json/json-command';
 import {Gastgeber} from '../models/gastgeber';
 import {Fachberater} from '../models/fachberater';
+import { Backtermin, BackterminAnmeldung } from '../models/backtermine';
 
 export class LumaraServiceCommands {
 
@@ -132,6 +134,95 @@ export class LumaraServiceCommands {
     cmd.addParameter('UmsatzManual', umsatzManual);
     cmd.addParameter('Accept', accept);
     cmd.addParameter('InternalNote', internalNote);
+    return cmd;
+  }
+
+  /*** Backtermine ****/
+  public static GetBacktermine(): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'GetBacktermine';
+    return cmd;
+  }
+  public static CreateBacktermin(): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'CreateBacktermin';
+    return cmd;
+  }
+  public static GetBacktermin(backterminID: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'GetBacktermin';
+    cmd.addParameter('BackterminID', backterminID);
+    return cmd;
+  }
+   public static UpdateBacktermin(backtermin: Backtermin): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'UpdateBacktermin';
+    cmd.addParameter('Backtermin', backtermin);
+    return cmd;
+  }
+  public static DeleteBacktermin(backterminID: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'DeleteBacktermin';
+    cmd.addParameter('BackterminID', backterminID);
+    return cmd;
+  }
+  public static CreateBackterminAnmeldung(backterminID: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'CreateBackterminAnmeldung';
+    cmd.addParameter('BackterminID', backterminID);
+    return cmd;
+  }
+  public static GetBackterminAnmeldung(backterminAnmeldungID: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'GetBackterminAnmeldung';
+    cmd.addParameter('BackterminAnmeldungID', backterminAnmeldungID);
+    return cmd;
+  }
+  public static UpdateBackterminAnmeldung(anmeldung: BackterminAnmeldung): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'UpdateBackterminAnmeldung';
+    cmd.addParameter('BackterminAnmeldung', anmeldung);
+    return cmd;
+  }
+  public static GetBackterminAnmeldungen(backterminID: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'GetBackterminAnmeldungen';
+    cmd.addParameter('BackterminID', backterminID);
+    return cmd;
+  }
+  public static CreateBackterminOrt(): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'CreateBackterminOrt';
+    return cmd;
+  }
+  public static GetBackterminOrt(ortID: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'GetBackterminOrt';
+    cmd.addParameter('BackterminOrtID', ortID);
+    return cmd;
+  }
+  public static UpdateBackterminOrt(ort: BackterminOrt): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'UpdateBackterminOrt';
+    cmd.addParameter('BackterminOrt', ort);
+    return cmd;
+  }
+  public static GetBackterminOrte(): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'GetBackterminOrte';
     return cmd;
   }
 

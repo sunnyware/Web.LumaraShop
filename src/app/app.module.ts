@@ -1,3 +1,4 @@
+import { UserdataBacktermineComponent } from './views/user/userdata-backtermine.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {registerLocaleData} from '@angular/common';
@@ -54,6 +55,9 @@ import { GalleryBigItemComponent } from './views/galerie/gallery-big-item.compon
 import { TestComponent } from './views/statistik/test.component';
 import { JahresspiegelComponent } from './views/statistik/jahresspiegel.component';
 import { JahresumsatzComponent } from './views/statistik/jahresumsatz.component';
+import { NavigationComponent } from './navigation.component';
+import { UserdataMessengerComponent } from './views/user/userdata-messenger.component';
+import { UserdataBackorteComponent } from './views/user/userdata-backorte.component';
 
 registerLocaleData(localeDe);
 loadMessages(messagesDe);
@@ -84,13 +88,19 @@ const APP_ROUTES: Routes = [
     ]
   },
   {path: 'artikelliste', component: ArtikellisteComponent, canActivate: [ProtectedGuard]},
-  {
+  {path: 'userdata', component: NavigationComponent, canActivate: [ProtectedGuard]},
+  {path: 'userdata-allgemein', component: UserdataAllgemeinComponent, canActivate: [ProtectedGuard]},
+  {path: 'userdata-steuer', component: UserdataSteuerComponent, canActivate: [ProtectedGuard]},
+  {path: 'userdata-messenger', component: UserdataMessengerComponent, canActivate: [ProtectedGuard]},
+  {path: 'userdata-backtermine', component: UserdataBacktermineComponent, canActivate: [ProtectedGuard]},
+  {path: 'userdata-backorte', component: UserdataBackorteComponent, canActivate: [ProtectedGuard]},
+  /*{
     path: 'userdata', component: UserdataComponent, canActivate: [ProtectedGuard], children: [
       {path: 'allgemein', component: UserdataAllgemeinComponent, canActivate: [ProtectedGuard]},
       {path: 'steuer', component: UserdataSteuerComponent, canActivate: [ProtectedGuard]},
       {path: 'profil', component: UserdataProfilComponent, canActivate: [ProtectedGuard]}
     ]
-  },
+  },*/
   {path: 'login', component: LoginComponent},
   {path: 'test', component: TestComponent},
   {path: 'calendar', component: BacktermineComponent, canActivate: [ProtectedGuard]}
@@ -115,7 +125,9 @@ const APP_ROUTES: Routes = [
     UserdataAllgemeinComponent,
     UserdataSteuerComponent,
     UserdataProfilComponent,
+    UserdataMessengerComponent,
     BacktermineComponent,
+    UserdataBacktermineComponent,
     NewsArtikelComponent,
     ChefStatistikComponent,
     ChefStatistikAktivGGComponent,
@@ -124,7 +136,9 @@ const APP_ROUTES: Routes = [
     GalleryBigItemComponent,
     TestComponent,
     JahresspiegelComponent,
-    JahresumsatzComponent
+    JahresumsatzComponent,
+    NavigationComponent,
+    UserdataBackorteComponent
   ],
   imports: [
     NgbModule.forRoot(),
