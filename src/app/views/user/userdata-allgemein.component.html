@@ -1,4 +1,10 @@
-<h1>Kontaktdaten</h1>
+<h1><div *ngIf="fachberater" class="avatar rounded-circle" [ngStyle]="{'background-image':'url(' + userImageUrl + ')'}" style="height:50px;width:50px;background-size:cover;display:inline-block;background-position: center;"></div> meine Daten</h1>
+<p class="small">Wenn Sie Ihr Profilbild hochladen möchten, schicken Sie es einfach per Telegram-Messenger mit dem Befehl "/profilbild"</p>
+<!--div *ngIf="fachberater" class="row">
+  <div class="col-12">
+    <div class="avatar rounded-circle" [ngStyle]="{'background-image':'url(' + userImageUrl + ')'}" style="height:50px;width:50px;"></div>
+  </div>
+</div-->
 <div *ngIf="fachberater" class="row">
   <div class="col-md-6">
     <div class="form-group row">

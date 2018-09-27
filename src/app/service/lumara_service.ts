@@ -9,16 +9,18 @@ import {JsonCommand} from '../utils/json/json-command';
 import {UserAccessRights} from '../models/user_access_rights';
 import {LumaraServiceCommands} from './lumara_service_commands';
 import {tap} from 'rxjs/internal/operators';
+import { Fachberater } from '../models/fachberater';
 
 @Injectable()
 export class LumaraService {
-  public url_zentrale = 'https://service.lumara.de/cmd?jsoncommand';
-  public url_zentrale_min = 'https://service.lumara.de';
-  // public url_zentrale = 'http://localhost:8990/cmd?jsoncommand';
-  // public url_zentrale_min = 'http://localhost:8990';
+  // public url_zentrale = 'https://service.lumara.de/cmd?jsoncommand';
+  // public url_zentrale_min = 'https://service.lumara.de';
+  public url_zentrale = 'http://localhost:8990/cmd?jsoncommand';
+  public url_zentrale_min = 'http://localhost:8990';
   public current_user_name = '';
   public current_token = '';
   public current_user_access_rights: UserAccessRights = undefined;
+  public current_fachberater: Fachberater = undefined;
   public isAuthenticated = false;
   private authState = new Subject<boolean>();
   private current_headline = '';
@@ -38,6 +40,7 @@ export class LumaraService {
     if (this.isAuthenticated) {
       console.log('isAuthenticated:' + this.isAuthenticated);
       this.loadUserAccessRights();
+      this.loadFachberater();
     }
   }
 
@@ -112,6 +115,7 @@ export class LumaraService {
             this.isAuthenticated = true;
             this.authState.next(true);
             this.loadUserAccessRights();
+            this.loadFachberater();
             console.log('Benutzer wurde erfolgreich eingeloggt! Token:' + this.current_token);
             // wenn erfolgreich eingeloggt, dann automatisch auf "News" routen
             this.router.navigate(['/news']);
@@ -139,6 +143,20 @@ export class LumaraService {
       }
     );
   }
+  loadFachberater() {
+    this.doCommand(LumaraServiceCommands.GetFachberater(0)).subscribe(
+      data => {
+        // console.log('vom server fachberater:');
+        // console.log(data);
+        if (data.ReturnCode === 200) {
+          this.current_fachberater = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue)
+        } else if (data.ReturnCode >= 400) {
+          this.current_fachberater = undefined;
+        }
+      }
+    );
+  }
+
 
   logout() {
     console.log('Logout wurde ausgeführt!');
@@ -150,6 +168,7 @@ export class LumaraService {
     this.current_user_name = '';
     this.isAuthenticated = false;
     this.current_user_access_rights = undefined;
+    this.current_fachberater = undefined;
     this.authState.next(false);
   }
 

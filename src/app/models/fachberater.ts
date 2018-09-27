@@ -22,6 +22,7 @@ export class Fachberater {
   AllowNewsletter: boolean;
   AllowPublicImages: boolean;
   AllowPublicOnHomepage: boolean;
+  ShowAddressInHomepage: boolean;
 
   ChatToken: string;
   ChatID: number;

@@ -12,6 +12,7 @@ import notify from 'devextreme/ui/notify';
 })
 export class UserdataAllgemeinComponent implements OnInit {
   fachberater: Fachberater = undefined;
+  userImageUrl = '';
 
   constructor(private lumaraService: LumaraService, private router: Router) {
 
@@ -19,6 +20,9 @@ export class UserdataAllgemeinComponent implements OnInit {
 
   ngOnInit() {
     this.reloadFachberater();
+    if (this.lumaraService.current_user_access_rights) {
+      this.userImageUrl = this.lumaraService.getUserImageUrl(this.lumaraService.current_user_access_rights.UserID);
+    }
   }
 
   reloadFachberater() {

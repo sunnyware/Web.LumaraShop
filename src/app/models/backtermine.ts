@@ -26,6 +26,7 @@ export class BackterminAnmeldungItem {
   Kontakt: string;
   PLZ: string;
   AnzahlTeilnehmer: number;
+  IsStorniert: boolean;
 }
 
 export class BackterminAnmeldung {
@@ -44,4 +45,5 @@ export class BackterminOrt {
   Strasse: string;
   PLZ: string;
   Ort: string;
+  Caption: string;
 }

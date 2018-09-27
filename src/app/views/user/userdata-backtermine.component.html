@@ -1,16 +1,16 @@
 <div class="row">
   <div class="col-12">
-      <h1>meine Backtermine</h1>
+    <h1>meine Backkurse</h1>
   </div>
   <div class="col-12">
-      <a [routerLink]="['/userdata-backorte']">Veranstaltungsorte pflegen</a>
+    <a [routerLink]="['/userdata-backorte']">Veranstaltungsorte pflegen</a>
   </div>
 
 
   <div class="col-12">
     <!-- Backtermine-Tabelle -->
-  <button type="button" class="btn btn-success my-2" (click)="createBacktermin();">neuer Backvortrag</button>
-  <table class="table table-sm table-hover table-scrollable" style="line-height: 1;">
+    <button type="button" class="btn btn-success my-2" (click)="createBacktermin();">neuer Backvortrag</button>
+    <table class="table table-sm table-hover table-scrollable" style="line-height: 1;">
       <thead>
         <tr>
           <th scope="col">Datum</th>
@@ -20,12 +20,15 @@
       </thead>
       <tbody>
         <tr *ngFor="let backtermin of backtermine">
-            <td>{{backtermin.DateBegin}}</td>
-            <td>
-                {{backtermin.Caption}}
-                <br/>
-                <span style="font-size:x-small" class="text-muted">{{backtermin.Ort}}</span><br/>
-            </td>
+          <td>{{backtermin.DateBegin | date:'dd.MM.yyyy HH:mm'}}</td>
+          <td>
+            {{backtermin.Caption}}
+            <br />
+            <span style="font-size:x-small" class="text-muted">{{backtermin.Ort}}</span><br />
+            <a [routerLink]="['/userdata-backtermin-anmeldungen']" [queryParams]="{backterminid: backtermin.ID}">
+              <span style="font-size:small" class="text-muted" [ngClass]="getAnzahlTeilnehmerClass(backtermin.AnzahlTeilnehmer)" >{{getAnzahlTeilnehmerText(backtermin.AnzahlTeilnehmer)}}</span>
+            </a>
+          </td>
           <td style="text-align: end;">
             <button type="button" class="btn btn-success" (click)="loadBacktermin(backtermin.ID, true, content);">
               <img src="/assets/icons_white/32px/large/tool-pencil.png" style="height:20px">
@@ -38,47 +41,25 @@
 </div>
 
 
- <!-- Popup für die Pflege des Backtermins -->
- <ng-template #content let-c="close" let-d="dismiss">
-    <div class="modal-header">
-      <h4 class="modal-title">Backvortrag</h4>
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group row">
-        <!-- Formular-Felder -->
-        <label for="_caption1" class="col-sm-2 col-form-label">Inhalt</label>
-        <div class="col-sm-9" style="margin-bottom: 5px;">
-          <input type="text" class="form-control" id="_caption1" aria-describedby="c1" placeholder="" [(ngModel)]="currentBacktermin.Caption">
-        </div>
 
-        <label for="_caption2" class="col-sm-2 col-form-label">Wann?</label>
-        <div class="col-sm-9" style="margin-bottom: 5px;">
-          <input type="text" class="form-control" id="_caption2" aria-describedby="c2" placeholder="" [(ngModel)]="currentBacktermin.DateBegin">
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Backvortrag</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+        <dx-form [colCount]="1" [formData]="currentBacktermin" [labelLocation]="labelLocation">
+          <dxi-item dataField="Caption"><dxo-label text="Bezeichnung"></dxo-label></dxi-item>
+          <dxi-item dataField="DateBegin" editorType="dxDateBox" [editorOptions]="{type: 'datetime', showAnalogClock: false, pickerType: 'rollers'}"><dxo-label text="Wann?"></dxo-label></dxi-item>
+          <dxi-item dataField="Dauer"></dxi-item>
+          <dxi-item dataField="OrtID" editorType="dxSelectBox" [editorOptions]="{items: orte, valueExpr: 'ID', displayExpr: 'Caption'}"><dxo-label text="Wo?"></dxo-label></dxi-item>
+          <dxi-item dataField="MaxTeilnehmer" editorType="dxNumberBox"><dxo-label text="max. Teilnehmer"></dxo-label></dxi-item>
+        </dx-form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="deleteBacktermin()">löschen!</button>
+          <button type="button" class="btn btn-success" (click)="saveBacktermin()">speichern</button>
         </div>
-
-        <label for="_caption3" class="col-sm-2 col-form-label">Wie lange?</label>
-        <div class="col-sm-9" style="margin-bottom: 5px;">
-          <input type="text" class="form-control" id="_caption3" aria-describedby="c3" placeholder="" [(ngModel)]="currentBacktermin.Dauer">
-        </div>
-
-        <label for="_caption4" class="col-sm-2 col-form-label">Wo?</label>
-        <div class="col-sm-9" style="margin-bottom: 5px;">
-          <input type="text" class="form-control" id="_caption4" aria-describedby="c4" placeholder="" [(ngModel)]="currentBacktermin.OrtID">
-        </div>
-
-        <label for="_caption5" class="col-sm-2 col-form-label">maximale Teilnehmeranzahl</label>
-        <div class="col-sm-9" style="margin-bottom: 5px;">
-          <input type="text" class="form-control" id="_caption5" aria-describedby="c5" placeholder="" [(ngModel)]="currentBacktermin.MaxTeilnehmer">
-        </div>
-        <!-- ENDE Formular-Felder -->
       </div>
-
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-danger" (click)="deleteBacktermin()">löschen!</button>
-      <button type="button" class="btn btn-success" (click)="saveBacktermin()">speichern</button>
-    </div>
-  </ng-template>
+</ng-template>

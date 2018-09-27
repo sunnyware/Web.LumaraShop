@@ -1,0 +1,58 @@
+<div *ngIf="this.currentBacktermin" class="row">
+    <div class="col-12">
+      <h1>Anmeldungen für Backkurs '{{this.currentBacktermin.Caption}}'</h1>
+    </div>
+    <div class="col-12">
+      <a [routerLink]="['/userdata-backtermine']">zurück zu den Backterminen</a>
+    </div>
+
+
+    <div class="col-12">
+      <!-- Backtermine-Tabelle -->
+      <button type="button" class="btn btn-success my-2" (click)="createBackterminAnmeldung();">neue Anmeldung</button>
+      <table class="table table-sm table-hover table-scrollable" style="line-height: 1;">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Teilnehmer</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let backterminAnmeldung of backterminAnmeldungen">
+            <td>{{backterminAnmeldung.Name}}<br>{{backterminAnmeldung.Kontakt}} ({{backterminAnmeldung.PLZ}})</td>
+            <td>{{backterminAnmeldung.AnzahlTeilnehmer}}</td>
+            <td style="text-align: end;">
+              <button type="button" class="btn btn-success" (click)="loadBackterminAnmeldung(backterminAnmeldung.ID, true, content);">
+                <img src="/assets/icons_white/32px/large/tool-pencil.png" style="height:20px">
+              </button>&nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Backkurs-Anmeldung</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+          <dx-form [colCount]="1" [formData]="currentBackterminAnmeldung" [labelLocation]="labelLocation">
+            <dxi-item dataField="Name"><dxo-label text="Name"></dxo-label></dxi-item>
+            <dxi-item dataField="Telefon"></dxi-item>
+            <dxi-item dataField="EMail"></dxi-item>
+            <dxi-item dataField="PLZ"></dxi-item>
+            <dxi-item dataField="Teilnehmer" editorType="dxNumberBox"><dxo-label text="Teilnehmer incl. Anmelder"></dxo-label></dxi-item>
+          </dx-form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="deleteBackterminAnmeldung()">stornieren</button>
+            <button type="button" class="btn btn-success" (click)="saveBackterminAnmeldung()">speichern</button>
+          </div>
+        </div>
+  </ng-template>

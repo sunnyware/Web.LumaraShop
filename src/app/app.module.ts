@@ -25,7 +25,9 @@ import {
   DxValidationGroupModule,
   DxValidationSummaryModule,
   DxValidatorModule,
-  DxNumberBoxModule
+  DxNumberBoxModule,
+  DxDateBoxModule,
+  DxSelectBoxModule
 } from 'devextreme-angular';
 import 'devextreme-intl';
 import {NgbModule, NgbCollapseModule, NgbCarousel, NgbCarouselModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
@@ -58,6 +60,7 @@ import { JahresumsatzComponent } from './views/statistik/jahresumsatz.component'
 import { NavigationComponent } from './navigation.component';
 import { UserdataMessengerComponent } from './views/user/userdata-messenger.component';
 import { UserdataBackorteComponent } from './views/user/userdata-backorte.component';
+import { UserdataBackterminAnmeldungComponent } from './views/user/userdata-backtermin-anmeldung.component';
 
 registerLocaleData(localeDe);
 loadMessages(messagesDe);
@@ -94,6 +97,7 @@ const APP_ROUTES: Routes = [
   {path: 'userdata-messenger', component: UserdataMessengerComponent, canActivate: [ProtectedGuard]},
   {path: 'userdata-backtermine', component: UserdataBacktermineComponent, canActivate: [ProtectedGuard]},
   {path: 'userdata-backorte', component: UserdataBackorteComponent, canActivate: [ProtectedGuard]},
+  {path: 'userdata-backtermin-anmeldungen', component: UserdataBackterminAnmeldungComponent, canActivate: [ProtectedGuard]},
   /*{
     path: 'userdata', component: UserdataComponent, canActivate: [ProtectedGuard], children: [
       {path: 'allgemein', component: UserdataAllgemeinComponent, canActivate: [ProtectedGuard]},
@@ -138,7 +142,8 @@ const APP_ROUTES: Routes = [
     JahresspiegelComponent,
     JahresumsatzComponent,
     NavigationComponent,
-    UserdataBackorteComponent
+    UserdataBackorteComponent,
+    UserdataBackterminAnmeldungComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -151,10 +156,12 @@ const APP_ROUTES: Routes = [
     DxButtonModule,
     DxChartModule,
     DxCheckBoxModule,
+    DxDateBoxModule,
     DxFormModule,
     DxListModule,
     DxNumberBoxModule,
     DxPopupModule,
+    DxSelectBoxModule,
     DxTabPanelModule,
     DxTabsModule,
     DxTextBoxModule,
