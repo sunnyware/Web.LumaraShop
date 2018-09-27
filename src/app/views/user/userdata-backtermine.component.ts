@@ -58,13 +58,13 @@ export class UserdataBacktermineComponent implements OnInit {
     if (anzahl === 0) {
       return 'noch keine Anmeldungen';
     }
-    return anzahl + 'Anmeldungen';
+    return anzahl + ' Anmeldungen';
   }
   getAnzahlTeilnehmerClass(anzahl: number) {
     if (anzahl === 0) {
       return 'text-mute';
     }
-    return anzahl + 'text-success';
+    return 'text-success';
   }
 
   loadBacktermin(backterminID: number, showPopup: boolean, content) {

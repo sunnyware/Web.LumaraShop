@@ -26,7 +26,7 @@
             <br />
             <span style="font-size:x-small" class="text-muted">{{backtermin.Ort}}</span><br />
             <a [routerLink]="['/userdata-backtermin-anmeldungen']" [queryParams]="{backterminid: backtermin.ID}">
-              <span style="font-size:small" class="text-muted" [ngClass]="getAnzahlTeilnehmerClass(backtermin.AnzahlTeilnehmer)" >{{getAnzahlTeilnehmerText(backtermin.AnzahlTeilnehmer)}}</span>
+              <span style="font-size:small" [ngClass]="getAnzahlTeilnehmerClass(backtermin.AnzahlTeilnehmer)" >{{getAnzahlTeilnehmerText(backtermin.AnzahlTeilnehmer)}}</span>
             </a>
           </td>
           <td style="text-align: end;">
