@@ -205,6 +205,13 @@ export class LumaraServiceCommands {
     cmd.CommandName = 'CreateBackterminOrt';
     return cmd;
   }
+  public static DeleteBackterminOrt(ortID: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'DeleteBackterminOrt';
+    cmd.addParameter('BackterminOrtID', ortID);
+    return cmd;
+  }
   public static GetBackterminOrt(ortID: number): JsonCommand {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';

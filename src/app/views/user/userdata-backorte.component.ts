@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { BackterminOrt } from '../../models/backtermine';
-import { LumaraService } from '../../service/lumara_service';
-import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LumaraServiceCommands } from '../../service/lumara_service_commands';
-import notify from 'devextreme/ui/notify';
+import { Component, OnInit } from "@angular/core";
+import { BackterminOrt } from "../../models/backtermine";
+import { LumaraService } from "../../service/lumara_service";
+import { Router } from "@angular/router";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { LumaraServiceCommands } from "../../service/lumara_service_commands";
+import notify from "devextreme/ui/notify";
 
 @Component({
-  selector: 'app-userdata-backorte',
-  templateUrl: './userdata-backorte.component.html',
+  selector: "app-userdata-backorte",
+  templateUrl: "./userdata-backorte.component.html",
   styleUrls: []
 })
 export class UserdataBackorteComponent implements OnInit {
@@ -17,7 +17,11 @@ export class UserdataBackorteComponent implements OnInit {
   currentOrt: BackterminOrt = undefined;
   ggModalDialog: any;
 
-  constructor(private lumaraService: LumaraService, private router: Router, private modalService: NgbModal) { }
+  constructor(
+    private lumaraService: LumaraService,
+    private router: Router,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit() {
     this.reloadOrte();
@@ -25,8 +29,7 @@ export class UserdataBackorteComponent implements OnInit {
 
   reloadOrte() {
     this.lumaraService
-      .doCommand(
-        LumaraServiceCommands.GetBackterminOrte())
+      .doCommand(LumaraServiceCommands.GetBackterminOrte())
       .subscribe(data => {
         if (data.ReturnCode === 200) {
           // console.log('Ich bekam vom Server folgende Daten: ');
@@ -34,7 +37,7 @@ export class UserdataBackorteComponent implements OnInit {
           this.orte = JSON.parse(data.ReturnValue); // JSON.parse(data.ReturnValue);
           // notify(data.ReturnMessage);
         } else if (data.ReturnCode >= 400) {
-          this.router.navigate(['/login']);
+          this.router.navigate(["/login"]);
         }
       });
   }
@@ -52,30 +55,43 @@ export class UserdataBackorteComponent implements OnInit {
       }
     }
     if (!this.currentOrt) {
-      alert('Bitte wählen Sie einen gültigen Ort aus');
+      alert("Bitte wählen Sie einen gültigen Ort aus");
       return;
     }
-    this.ggModalDialog = this.modalService.open(content, { size: 'lg' });
+    this.ggModalDialog = this.modalService.open(content, { size: "lg" });
     // this.popupGastgeberVisible = true;
   }
 
   deleteOrt() {
-
+    // this.popupGastgeberVisible = false;
+    this.ggModalDialog.close();
+    // Gastgeber speichern
+    this.lumaraService
+      .doCommand(LumaraServiceCommands.DeleteBackterminOrt(this.currentOrt.ID))
+      .subscribe(data => {
+        if (data.ReturnCode === 200) {
+          // this.gastgeberList = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
+          notify("Veranstaltungsort wurde erfolgreich gelöscht");
+          this.reloadOrte();
+        } else if (data.ReturnCode >= 400) {
+          notify(data.ReturnMessage);
+        }
+      });
   }
   saveOrt() {
-   // this.popupGastgeberVisible = false;
-   this.ggModalDialog.close();
-   // Gastgeber speichern
-   this.lumaraService
-     .doCommand(LumaraServiceCommands.UpdateBackterminOrt(this.currentOrt))
-     .subscribe(data => {
-       if (data.ReturnCode === 200) {
-         // this.gastgeberList = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
-         notify('Veranstaltungsort wurde erfolgreich gespeichert');
-         this.reloadOrte();
-       } else if (data.ReturnCode >= 400) {
-         notify(data.ReturnMessage);
-       }
-     });
+    // this.popupGastgeberVisible = false;
+    this.ggModalDialog.close();
+    // Gastgeber speichern
+    this.lumaraService
+      .doCommand(LumaraServiceCommands.UpdateBackterminOrt(this.currentOrt))
+      .subscribe(data => {
+        if (data.ReturnCode === 200) {
+          // this.gastgeberList = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
+          notify("Veranstaltungsort wurde erfolgreich gespeichert");
+          this.reloadOrte();
+        } else if (data.ReturnCode >= 400) {
+          notify(data.ReturnMessage);
+        }
+      });
   }
 }
