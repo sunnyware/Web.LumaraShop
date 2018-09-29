@@ -89,28 +89,30 @@ export class UserdataBackterminAnmeldungComponent implements OnInit {
       });
   }
   showPopupBackterminAnmeldung(backterminAnmeldungID: number, content) {
+    if (!this.currentBacktermin) {
+      alert('Bitte wählen Sie einen gültigen Backtermin aus');
+      return;
+    }
     if (backterminAnmeldungID === 0) {
       // es soll eine neue Backtermin-Anmeldung angelegt werden
       this.currentBackterminAnmeldung = new BackterminAnmeldung();
+      this.currentBackterminAnmeldung.BackterminID = this.currentBacktermin.ID;
     } else {
-      // es soll eine Gastgeberin bearbeitet werden
       for (const backterminAnmeldung of this.backterminAnmeldungen) {
         if (backterminAnmeldung.ID === backterminAnmeldungID) {
           // this.currentBacktermin = backtermin;
         }
       }
     }
-    if (!this.currentBacktermin) {
-      alert('Bitte wählen Sie einen gültigen Backtermin aus');
-      return;
-    }
+
     this.ggModalDialog = this.modalService.open(content, { size: 'lg' });
     // this.popupGastgeberVisible = true;
   }
 
-  createBackterminAnmeldung() {
-    if (this.currentBackterminID <= 0) {
-      notify('Es ist kein gültiger Backtermin ausgewählt!');
+  /*
+  createBackterminAnmeldung(backterminAnmeldungID: number, content) {
+    if (this.currentBackterminID === 0) {
+      this.currentBackterminAnmeldung
       return;
     }
     this.lumaraService
@@ -123,7 +125,7 @@ export class UserdataBackterminAnmeldungComponent implements OnInit {
         }
       });
   }
-
+*/
   deleteBackterminAnmeldung() {
     this.currentBackterminAnmeldung.IsStorniert = !this.currentBackterminAnmeldung.IsStorniert;
     this.saveBackterminAnmeldung();

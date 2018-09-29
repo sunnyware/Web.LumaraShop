@@ -15,6 +15,7 @@ export class Backtermin {
   DateBegin: Date;
   DateEnd: Date;
   Dauer: string;
+  Kosten: number;
   OrtID: number;
   MaxTeilnehmer: number;
 }
@@ -46,4 +47,6 @@ export class BackterminOrt {
   PLZ: string;
   Ort: string;
   Caption: string;
+  GeoLat: number;
+  GeoLng: number;
 }

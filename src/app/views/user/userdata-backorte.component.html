@@ -19,7 +19,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let ort of orte">
-              <td>{{ort.Ort}} ({{ort.PLZ}})
+              <td>{{ort.Ort}} ({{ort.PLZ}}) <img [src]="getMarkerImage(ort.GeoLng)" style="height:15px;">
                   <br/>
                   <span style="font-size:x-small" class="text-muted">{{ort.Strasse}}</span><br/>
               </td>

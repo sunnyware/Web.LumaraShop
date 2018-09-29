@@ -42,6 +42,13 @@ export class UserdataBackorteComponent implements OnInit {
       });
   }
 
+  getMarkerImage(geolat: number) {
+    if (geolat === 0) {
+      return '/assets/navicons/marker_red_small.png';
+    }
+    return '/assets/navicons/marker_green_small.png';
+  }
+
   showPopupOrt(ortID: number, content) {
     if (ortID === 0) {
       // es soll eine neue Gastgeberin angelegt werden

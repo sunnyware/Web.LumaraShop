@@ -9,7 +9,7 @@
 
     <div class="col-12">
       <!-- Backtermine-Tabelle -->
-      <button type="button" class="btn btn-success my-2" (click)="createBackterminAnmeldung();">neue Anmeldung</button>
+      <button type="button" class="btn btn-success my-2" (click)="showPopupBackterminAnmeldung(0, content);">neue Anmeldung</button>
       <table class="table table-sm table-hover table-scrollable" style="line-height: 1;">
         <thead>
           <tr>
@@ -50,6 +50,8 @@
             <dxi-item dataField="PLZ"></dxi-item>
             <dxi-item dataField="AnzahlTeilnehmer" editorType="dxNumberBox"><dxo-label text="Teilnehmer incl. Anmelder"></dxo-label></dxi-item>
           </dx-form>
+          <div *ngIf="currentBacktermin.Kosten > 0"><p>Bitte beachten Sie, daß für diesen Backkurs ein Kostenbeitrag von {{currentBacktermin.Kosten}}€ erhoben werden.</p></div>
+          <div *ngIf="currentBacktermin.Kosten === 0"><p>Die Teilnahme an diesem Backkurs ist kostenlos.</p></div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" (click)="deleteBackterminAnmeldung()">stornieren</button>
             <button type="button" class="btn btn-success" (click)="saveBackterminAnmeldung()">speichern</button>

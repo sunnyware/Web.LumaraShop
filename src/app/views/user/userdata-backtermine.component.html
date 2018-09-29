@@ -9,7 +9,7 @@
 
   <div class="col-12">
     <!-- Backtermine-Tabelle -->
-    <button type="button" class="btn btn-success my-2" (click)="createBacktermin();">neuer Backvortrag</button>
+    <button type="button" class="btn btn-success my-2" (click)="showPopupBacktermin(0, content);">neuer Backvortrag</button>
     <table class="table table-sm table-hover table-scrollable" style="line-height: 1;">
       <thead>
         <tr>
@@ -52,10 +52,12 @@
   <div class="modal-body">
         <dx-form [colCount]="1" [formData]="currentBacktermin" [labelLocation]="labelLocation">
           <dxi-item dataField="Caption"><dxo-label text="Bezeichnung"></dxo-label></dxi-item>
-          <dxi-item dataField="DateBegin" editorType="dxDateBox" [editorOptions]="{type: 'datetime', showAnalogClock: false, pickerType: 'rollers'}"><dxo-label text="Wann?"></dxo-label></dxi-item>
+          <dxi-item dataField="DateBegin" editorType="dxDateBox" [editorOptions]="{type: 'date', showAnalogClock: false, pickerType: 'rollers'}"><dxo-label text="Wann?"></dxo-label></dxi-item>
+          <dxi-item dataField="DateBegin" editorType="dxDateBox" [editorOptions]="{type: 'time', showAnalogClock: false, pickerType: 'rollers'}"><dxo-label text="Zeitpunkt?"></dxo-label></dxi-item>
           <dxi-item dataField="Dauer"></dxi-item>
           <dxi-item dataField="OrtID" editorType="dxSelectBox" [editorOptions]="{items: orte, valueExpr: 'ID', displayExpr: 'Caption'}"><dxo-label text="Wo?"></dxo-label></dxi-item>
           <dxi-item dataField="MaxTeilnehmer" editorType="dxNumberBox"><dxo-label text="max. Teilnehmer"></dxo-label></dxi-item>
+          <dxi-item dataField="Kosten" editorType="dxNumberBox"><dxo-label text="Kostenbeitrag"></dxo-label></dxi-item>
         </dx-form>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="deleteBacktermin()">löschen!</button>
