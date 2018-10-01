@@ -52,7 +52,7 @@ export class ChefStatistikAktivGGComponent implements OnInit {
           3,
           1200,
           this.onlyNotUmsatzManualAccepted,
-          true
+          false
         )
       )
       .subscribe(data => {
@@ -64,7 +64,9 @@ export class ChefStatistikAktivGGComponent implements OnInit {
           // this.gastgeberStatistik.GastgeberList = JSON.parse(this.gastgeberStatistik.GastgeberList.toString());
           // console.log(this.gastgeberStatistik);
         } else {
-          console.log(data.ReturnMessage + '\r\n' + data.ReturnValue);
+          console.log('Gastgeberumsatz ist fehlgeschlagen!');
+          console.log(data);
+          // console.log(data.ReturnMessage + '\r\n' + data.ReturnValue);
           // this.router.navigate(['/login']);
           notify(data.ReturnMessage);
         }
