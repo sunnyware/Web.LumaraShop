@@ -139,10 +139,10 @@ export class UserdataBackterminAnmeldungComponent implements OnInit {
       .subscribe(data => {
         if (data.ReturnCode === 200) {
           // this.gastgeberList = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
-          notify('Backkurs-Anmeldung wurde erfolgreich gespeichert');
+          notify('Backkurs-Anmeldung wurde erfolgreich gespeichert', 'success');
           this.reloadBackterminAnmeldungen();
         } else if (data.ReturnCode >= 400) {
-          notify(data.ReturnMessage);
+          notify(data.ReturnMessage, 'error', 3000);
         }
       });
   }

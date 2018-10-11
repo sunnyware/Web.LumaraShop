@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LumaraServiceCommands } from '../../service/lumara_service_commands';
 import notify from 'devextreme/ui/notify';
+import moment from 'moment';
 
 @Component({
   selector: 'app-userdata-backtermine',
@@ -26,6 +27,7 @@ export class UserdataBacktermineComponent implements OnInit {
   innerWidth: any;
   labelLocation = 'left';
   orteLoaded = false;
+  isNewBacktermin = false;
 
   constructor(
     private lumaraService: LumaraService,
@@ -74,7 +76,10 @@ export class UserdataBacktermineComponent implements OnInit {
         if (data.ReturnCode === 200) {
           // console.log('Ich bekam vom Server folgende Daten: ');
           // console.log(data.ReturnValue);
+          this.isNewBacktermin = false;
           this.currentBacktermin = JSON.parse(data.ReturnValue); // JSON.parse(data.ReturnValue);
+          console.log('bestehender Backtermin');
+          console.log(this.currentBacktermin);
           // jetzt noch das Popup öffnen
           if (showPopup) {
             this.showPopupBacktermin(backterminID, content);
@@ -115,6 +120,12 @@ export class UserdataBacktermineComponent implements OnInit {
     if (backterminID === 0) {
       // es soll eine neue Gastgeberin angelegt werden
       this.currentBacktermin = new Backtermin();
+      this.currentBacktermin.IsAusstellung = false;
+      this.currentBacktermin.DateBegin = new Date();
+      this.currentBacktermin.DateBegin.setHours(20, 0, 0, 0);
+      this.currentBacktermin.DateEnd = new Date();
+      this.currentBacktermin.DateEnd.setHours(20, 0, 0, 0);
+      this.isNewBacktermin = true;
     } else {
       // es soll eine Gastgeberin bearbeitet werden
       for (const backtermin of this.backtermine) {
@@ -163,7 +174,15 @@ export class UserdataBacktermineComponent implements OnInit {
   saveBacktermin() {
     // this.popupGastgeberVisible = false;
     this.ggModalDialog.close();
-    // Gastgeber speichern
+    // Backtermin speichern. Hier aufpassen und das Datum bei den neuen Backterminen umrechnen
+    // console.log('bisheriger begin-termin:');
+    // console.log(this.currentBacktermin.DateBegin);
+    if (this.isNewBacktermin) {
+      this.currentBacktermin.DateBegin = moment(this.currentBacktermin.DateBegin).utc(true).toDate();
+      this.currentBacktermin.DateEnd = moment(this.currentBacktermin.DateEnd).utc(true).toDate();
+    }
+    // console.log('neuer begin-termin:');
+    // console.log(this.currentBacktermin.DateBegin);
     this.lumaraService
       .doCommand(LumaraServiceCommands.UpdateBacktermin(this.currentBacktermin))
       .subscribe(data => {

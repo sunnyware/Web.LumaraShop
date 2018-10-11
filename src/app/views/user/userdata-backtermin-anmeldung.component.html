@@ -50,7 +50,7 @@
             <dxi-item dataField="PLZ"></dxi-item>
             <dxi-item dataField="AnzahlTeilnehmer" editorType="dxNumberBox"><dxo-label text="Teilnehmer incl. Anmelder"></dxo-label></dxi-item>
           </dx-form>
-          <div *ngIf="currentBacktermin.Kosten > 0"><p>Bitte beachten Sie, daß für diesen Backkurs ein Kostenbeitrag von {{currentBacktermin.Kosten}}€ erhoben werden.</p></div>
+          <div *ngIf="currentBacktermin.Kosten > 0"><p class="text-danger mt=3">Bitte beachten Sie, daß für diesen Backkurs ein Kostenbeitrag von {{currentBacktermin.Kosten}}€ erhoben werden.</p></div>
           <div *ngIf="currentBacktermin.Kosten === 0"><p>Die Teilnahme an diesem Backkurs ist kostenlos.</p></div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" (click)="deleteBackterminAnmeldung()">stornieren</button>

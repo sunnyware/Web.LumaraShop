@@ -5,6 +5,18 @@ export class BackterminItem {
   DateBegin: Date;
   Ort: string;
   AnzahlTeilnehmer: number;
+  IsAusstellung: number;
+}
+
+export class BackterminSearchItem {
+  ID: number;
+  Caption: string;
+  DateBegin: Date;
+  Ort: string;
+  AnzahlFrei: number;
+  LFBName: string;
+  Distance: number;
+  IsAusstellung: boolean;
 }
 
 export class Backtermin {
@@ -18,6 +30,7 @@ export class Backtermin {
   Kosten: number;
   OrtID: number;
   MaxTeilnehmer: number;
+  IsAusstellung: boolean;
 }
 
 export class BackterminAnmeldungItem {

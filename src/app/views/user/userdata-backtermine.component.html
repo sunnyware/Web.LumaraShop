@@ -25,9 +25,10 @@
             {{backtermin.Caption}}
             <br />
             <span style="font-size:x-small" class="text-muted">{{backtermin.Ort}}</span><br />
-            <a [routerLink]="['/userdata-backtermin-anmeldungen']" [queryParams]="{backterminid: backtermin.ID}">
+            <a *ngIf="!backtermin.IsAusstellung" [routerLink]="['/userdata-backtermin-anmeldungen']" [queryParams]="{backterminid: backtermin.ID}">
               <span style="font-size:small" [ngClass]="getAnzahlTeilnehmerClass(backtermin.AnzahlTeilnehmer)" >{{getAnzahlTeilnehmerText(backtermin.AnzahlTeilnehmer)}}</span>
             </a>
+            <span *ngIf="backtermin.IsAusstellung" style="font-size:small">Messe / Ausstellung</span>
           </td>
           <td style="text-align: end;">
             <button type="button" class="btn btn-success" (click)="loadBacktermin(backtermin.ID, true, content);">
@@ -52,12 +53,15 @@
   <div class="modal-body">
         <dx-form [colCount]="1" [formData]="currentBacktermin" [labelLocation]="labelLocation">
           <dxi-item dataField="Caption"><dxo-label text="Bezeichnung"></dxo-label></dxi-item>
-          <dxi-item dataField="DateBegin" editorType="dxDateBox" [editorOptions]="{type: 'date', showAnalogClock: false, pickerType: 'rollers'}"><dxo-label text="Wann?"></dxo-label></dxi-item>
-          <dxi-item dataField="DateBegin" editorType="dxDateBox" [editorOptions]="{type: 'time', showAnalogClock: false, pickerType: 'rollers'}"><dxo-label text="Zeitpunkt?"></dxo-label></dxi-item>
-          <dxi-item dataField="Dauer"></dxi-item>
-          <dxi-item dataField="OrtID" editorType="dxSelectBox" [editorOptions]="{items: orte, valueExpr: 'ID', displayExpr: 'Caption'}"><dxo-label text="Wo?"></dxo-label></dxi-item>
-          <dxi-item dataField="MaxTeilnehmer" editorType="dxNumberBox"><dxo-label text="max. Teilnehmer"></dxo-label></dxi-item>
-          <dxi-item dataField="Kosten" editorType="dxNumberBox"><dxo-label text="Kostenbeitrag"></dxo-label></dxi-item>
+          <dxi-item dataField="IsAusstellung" editorType="dxCheckBox"><dxo-label text="Ausstellung"></dxo-label></dxi-item>
+          <dxi-item dataField="DateBegin" editorType="dxDateBox" [editorOptions]="{type: 'date', showAnalogClock: false, pickerType: 'rollers', dateSerializationFormat: 'yyy-MM-ddTHH:mm:ssx'}"><dxo-label text="Beginn"></dxo-label></dxi-item>
+          <dxi-item dataField="DateBegin" editorType="dxDateBox" [editorOptions]="{type: 'time', showAnalogClock: false, pickerType: 'rollers', dateSerializationFormat: 'yyy-MM-ddTHH:mm:ssx'}"><dxo-label text="Uhrzeit"></dxo-label></dxi-item>
+          <dxi-item *ngIf="!currentBacktermin.IsAusstellung" dataField="Dauer"></dxi-item>
+          <dxi-item *ngIf="currentBacktermin.IsAusstellung" dataField="DateEnd" editorType="dxDateBox" [editorOptions]="{type: 'date', showAnalogClock: false, pickerType: 'rollers'}"><dxo-label text="Ende"></dxo-label></dxi-item>
+          <dxi-item *ngIf="currentBacktermin.IsAusstellung" dataField="DateEnd" editorType="dxDateBox" [editorOptions]="{type: 'time', showAnalogClock: false, pickerType: 'rollers'}"><dxo-label text="Uhrzeit"></dxo-label></dxi-item>
+          <dxi-item dataField="OrtID" editorType="dxSelectBox" [editorOptions]="{items: orte, valueExpr: 'ID', displayExpr: 'Caption'}"><dxo-label text="Wo"></dxo-label></dxi-item>
+          <dxi-item *ngIf="!currentBacktermin.IsAusstellung" dataField="MaxTeilnehmer" editorType="dxNumberBox"><dxo-label text="max. Teilnehmer"></dxo-label></dxi-item>
+          <dxi-item *ngIf="!currentBacktermin.IsAusstellung" dataField="Kosten" editorType="dxNumberBox"><dxo-label text="Kostenbeitrag"></dxo-label></dxi-item>
         </dx-form>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="deleteBacktermin()">löschen!</button>

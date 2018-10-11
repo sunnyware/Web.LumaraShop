@@ -61,6 +61,7 @@ import { NavigationComponent } from './navigation.component';
 import { UserdataMessengerComponent } from './views/user/userdata-messenger.component';
 import { UserdataBackorteComponent } from './views/user/userdata-backorte.component';
 import { UserdataBackterminAnmeldungComponent } from './views/user/userdata-backtermin-anmeldung.component';
+import { MomentModule } from 'ngx-moment';
 
 registerLocaleData(localeDe);
 loadMessages(messagesDe);
@@ -168,7 +169,8 @@ const APP_ROUTES: Routes = [
     DxTemplateModule,
     DxValidatorModule,
     DxValidationGroupModule,
-    DxValidationSummaryModule
+    DxValidationSummaryModule,
+    MomentModule
   ],
   providers: [LumaraService, ProtectedGuard, {
     provide: LOCALE_ID,
