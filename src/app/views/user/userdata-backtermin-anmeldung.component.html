@@ -21,7 +21,7 @@
         <tbody>
           <tr *ngFor="let backterminAnmeldung of backterminAnmeldungen">
             <td>{{backterminAnmeldung.Name}}<br>{{backterminAnmeldung.Kontakt}} ({{backterminAnmeldung.PLZ}})</td>
-            <td>{{backterminAnmeldung.AnzahlTeilnehmer}}</td>
+            <td>{{backterminAnmeldung.AnzahlTeilnehmer}} <span *ngIf="backterminAnmeldung.IsStorniert" class="badge badge-danger">storniert!</span></td>
             <td style="text-align: end;">
               <button type="button" class="btn btn-success" (click)="loadBackterminAnmeldung(backterminAnmeldung.ID, true, content);">
                 <img src="/assets/icons_white/32px/large/tool-pencil.png" style="height:20px">

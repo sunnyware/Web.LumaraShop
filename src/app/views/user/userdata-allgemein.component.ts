@@ -49,7 +49,8 @@ export class UserdataAllgemeinComponent implements OnInit {
     this.lumaraService.doCommand(LumaraServiceCommands.UpdateFachberater(this.fachberater)).subscribe(
       data => {
         if (data.ReturnCode === 200) {
-          notify('Ihre Daten wurden erfolgreich gespeichert.');
+          // notify('Ihre Daten wurden erfolgreich gespeichert.');
+          notify(data.ReturnMessage);
         } else if (data.ReturnCode >= 400) {
           console.log(data.ReturnMessage);
           this.router.navigate(['/login']);

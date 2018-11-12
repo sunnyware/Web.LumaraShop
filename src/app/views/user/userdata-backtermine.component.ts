@@ -46,8 +46,8 @@ export class UserdataBacktermineComponent implements OnInit {
       .doCommand(LumaraServiceCommands.GetBacktermine())
       .subscribe(data => {
         if (data.ReturnCode === 200) {
-          // console.log('Ich bekam vom Server folgende Daten: ');
-          // console.log(data.ReturnValue);
+          console.log('Ich bekam vom Server folgende Daten: ');
+          console.log(data.ReturnValue);
           this.backtermine = JSON.parse(data.ReturnValue); // JSON.parse(data.ReturnValue);
           // notify(data.ReturnMessage);
         } else if (data.ReturnCode >= 400) {

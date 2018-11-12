@@ -5,6 +5,7 @@ export class BackterminItem {
   DateBegin: Date;
   Ort: string;
   AnzahlTeilnehmer: number;
+  AnzahlFrei: number;
   IsAusstellung: number;
 }
 
