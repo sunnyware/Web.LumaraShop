@@ -1,5 +1,149 @@
-<div class="row">
-  <div class="col-md-12">
-    coming soon....
-  </div>
-</div>
+<h1 xmlns="http://www.w3.org/1999/html">meine Angaben zur Umsatzsteuerpflicht</h1>
+<hr>
+
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+	<h5>Antwortbogen zum Steuerverkürzungsbekämpfungsgesetz für das Jahr <span class="text-danger"><strong>{{currentYear}}</strong></span></h5>
+	<!--div class="btn-group-lg" role="group">
+		<button type="button" class="btn" [ngClass]="{'btn-primary': currentYear == 2016}" (click)="onYearClick(2016)">
+			2016
+		</button>
+		<button type="button" class="btn" [ngClass]="{'btn-primary': currentYear == 2017}" (click)="onYearClick(2017)">
+			2017
+		</button>
+    <button type="button" class="btn" [ngClass]="{'btn-primary': currentYear == 2018}" (click)="onYearClick(2018)">
+      2018
+    </button>
+	</div -->
+	<div class="alert alert-primary" role="alert" style="margin-top: 30px;" [innerHtml]="persistentMessage" *ngIf="showPersistenMessage">
+
+	</div>
+	<div *ngIf="isLoaded">
+
+		<div class="form-group" style="margin-top: 15px">
+			<label for="address">Adresse</label><br>
+			<small>(Sollte diese Adresse falsch sein, so ändern Sie Ihre Adressdaten bitte <b>auch</b> in den
+				<a href="/userdata-allgemein">Benutzerdaten</a>)</small>
+			<div class="col-lg3" style="width:200px">
+				<textarea rows="5" class="form-control" id="address" placeholder="Anschrift"
+				       [ngModel]="ust.address" name="address" required></textarea>
+			</div>
+		</div>
+		<div class="form-group" style="margin-top: 15px">
+			<label for="steuernummer">Steuernummer beim Finanzamt</label><br>
+			<small>(Nr. des Einkommens- bzw. Umsatzsteuerbescheids. Sollte diese Steuernummer falsch sein, so ändern Sie diese <b>auch</b> in den
+				<a href="/userdata-allgemein">Benutzerdaten</a>)</small>
+			<div class="col-lg3" style="width:200px">
+				<input type="text" class="form-control" id="steuernummer" placeholder="Steuernummer"
+				       [ngModel]="ust.steuernummer" name="steuernummer">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="option_first">Bitte wählen Sie nachfolgend sorgfältig Ihre Umsatzsteuerpflicht:</label><br>
+			<div class="radio">
+				<label><input id="option_first" type="radio" value="1" [ngModel]="ust.usteuer_type" name="usteuer_type">&nbsp; Kleinunternehmer (Umsatz incl. Umsatzsteuer unter
+					<span *ngIf="isGermany">17.500 €</span>
+					<span *ngIf="!isGermany">30.000 €</span>
+					)</label>
+				<button type="button" class="btn btn-secondary" (click)="onClickHinweis1()" style="margin-left: 15px;">
+					Erläuterungen...
+				</button>
+				<div class="alert alert-primary" role="alert" style="margin-left: 20px;"
+				     *ngIf="showHinweis1 && isGermany">
+					<h3><b>Erläuterungen für Unternehmen in Deutschland</b></h3>
+					<p>Gesamter Umsatz zzgl. USt darf folgende Grenzen nicht übersteigen:<br/>
+						- im Vorjahr 17.500 €<br/>
+						- voraussichtlich im lfd. Jahr 50.000€<br/>
+						Beide Voraussetzungen müssen gemeinsam erfüllt sein.<br/>
+						Gesamter Umsatz heißt, dass sämtliche vereinnahmte Umsätze des Unternehmens heranzuziehen
+						sind
+						(d.h.
+						nicht nur Provisionen von
+						Lumara Haushaltsprodukte GmbH & Co. Vertriebs-KG, sondern ggf. weitere Umsätze, sofern
+						vorhanden).<br/>
+						Folge: Der Unternehmer<br/>
+						- darf auf seinen Rechnungen keine Umsatzsteuer ausweisen<br/>
+						- muss keine Umsatzsteuer an das Finanzamt abführen<br/>
+						- kann keine Vorsteuer abziehen</p>
+				</div>
+				<div class="alert alert-primary" role="alert" style="margin-left: 20px;"
+				     *ngIf="showHinweis1 && !isGermany">
+					<h3><b>Erläuterungen für Unternehmen in Österreich</b></h3>
+					<p>Der Gesamtumsatz eines Jahres darf die Grenze von 30.000€ nicht überschreiten. Für die
+						Berechnung der Grenze ist die USt herauszurechnen. Werden verschiedene unternehmerische
+						Tätigkeiten ausgeübt, sind die Umsätze zusammenzurechnen.<br/>
+						Einmal in fünf Jahren darf die Grenze um max. 15% überschritten werden.<br/>
+						Folge: Der Unternehmer<br/>
+						- darf auf seinen Rechnungen keine Umsatzsteuer ausweisen<br/>
+						- muss keine Umsatzsteuer an das Finanzamt abführen<br/>
+						- kann keine Vorsteuer abziehen</p>
+				</div>
+			</div>
+			<div class="radio">
+				<label><input type="radio" value="2" [ngModel]="ust.usteuer_type" name="usteuer_type">&nbsp; Optierender Betrieb
+					<span *ngIf="isGermany">19% MwSt</span>
+					<span *ngIf="!isGermany">20% MwSt</span>(d.h. Verzicht auf die
+					Kleinunternehmerregelung durch den Unternehmer)</label>
+				<button type="button" class="btn btn-secondary" (click)="onClickHinweis2()" style="margin-left: 15px;">
+					Erläuterungen...
+				</button>
+				<div class="alert alert-primary" role="alert" style="margin-left: 20px;"
+				     *ngIf="showHinweis2 && isGermany">
+					<h3><b>Erläuterungen für Unternehmer in Deutschland</b></h3>
+					<p>Der Unternehmer kann dem Finanzamt gegenüber (ohne bestimmte Form) erklären, dass er auf die
+						Anwendung der Kleinunternehmerregelung verzichtet. Er unterliegt damit der Besteuerung nach
+						dem
+						allgemeinen Vorschriften des UStG. Dies gilt vom Beginn des Kalenderjahres an, für das der
+						Unternehmer die Erklärung abgegeben hat.
+						Folge: Der Unternehmer<br/>
+						- kann auf seinen Rechnungen die Umsatzsteuer gesondert ausweisen<br/>
+						- muss die Umsatzsteuer an das Finanzamt abführen<br/>
+						- kann die ihm in Rechnung gestellte Steuer als Vorsteuer abziehen<br/>
+						- ist 5 Jahre daran gebunden (Bindungswirkung)
+					</p>
+				</div>
+				<div class="alert alert-primary" role="alert" style="margin-left: 20px;"
+				     *ngIf="showHinweis2 && !isGermany">
+					<h3><b>Erläuterungen für Unternehmer in Österreich</b></h3>
+					<p>Der Unternehmer kann dem Finanzamt gegenüber erklären, dass er auf die
+						Anwendung der Kleinunternehmerregelung verzichtet (Formular U12). Er unterliegt damit der
+						Besteuerung nach den allgemeinen Vorschriften des UStG. Dies gilt vom Beginn des
+						Kalenderjahres
+						an, für das der Unternehmer die Erklärung abgegeben hat.
+						Folge: Der Unternehmer<br/>
+						- kann auf seinen Rechnungen die Umsatzsteuer gesondert ausweisen<br/>
+						- muss die Umsatzsteuer an das Finanzamt abführen<br/>
+						- kann die ihm in Rechnung gestellte Steuer als Vorsteuer abziehen<br/>
+						- ist für das Jahr der Erklärung und für 4 weitere Jahre daran gebunden. Erst nach der
+						Bindungsfrist kann die Optionserklärung widerrufen werden.
+					</p>
+				</div>
+			</div>
+			<div class="radio">
+				<label><input type="radio" value="3" [ngModel]="ust.usteuer_type" name="usteuer_type">&nbsp; Unternehmen mit Regelbesteuerung
+					<span *ngIf="isGermany">19% MwSt</span>
+					<span *ngIf="!isGermany">20% MwSt</span>(Unternehmen unterliegt
+					der Regelbesteuerung nach dem UStG)</label>
+				<button type="button" class="btn btn-secondary" (click)="onClickHinweis3()" style="margin-left: 15px;">
+					Erläuterungen...
+				</button>
+				<div class="alert alert-primary" role="alert" style="margin-left: 20px;" *ngIf="showHinweis3">
+					<h3><b>Erläuterungen</b></h3>
+					<p>Alle Unternehmen, deren Umsätze die o.g. Grenzen für die Kleinunternehmer übersteigen.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="form-group" style="margin-top: 15px">
+			<div class="col-lg3">
+				<input type="checkbox" name="isAccept" [(ngModel)]="isAccept" required>&nbsp;<span class="text-danger">ich versichere, daß ich diese
+				Angabe nach bestem Wissen und Gewissen gemacht habe!</span>
+			</div>
+		</div>
+		<div #msgdiv class="alert alert-primary" role="alert" *ngIf="showReturnMessage" style="margin-top: 30px;">
+			{{returnMessage}}
+		</div>
+		<button type="submit" class="btn btn-success" [disabled]="!f.valid">speichern</button>
+	</div>
+
+</form>

@@ -1,7 +1,5 @@
-export class JsonHelper
-{
-    public static DeserializeJsonWithDate(data: string): any
-    {
+export class JsonHelper {
+    public static DeserializeJsonWithDate(data: string): any {
         return JSON.parse(data, JsonHelper.ReviveDateTime);
     }
 
