@@ -62,6 +62,8 @@ import { UserdataMessengerComponent } from './views/user/userdata-messenger.comp
 import { UserdataBackorteComponent } from './views/user/userdata-backorte.component';
 import { UserdataBackterminAnmeldungComponent } from './views/user/userdata-backtermin-anmeldung.component';
 import { MomentModule } from 'ngx-moment';
+import { UserdataAktivgastgeberComponent } from './views/user/userdata-aktivgastgeber.component';
+import { UserdataAktivgastgeberPassComponent } from './views/user/userdata-aktivgastgeber-pass.component';
 
 registerLocaleData(localeDe);
 loadMessages(messagesDe);
@@ -99,6 +101,9 @@ const APP_ROUTES: Routes = [
   {path: 'userdata-backtermine', component: UserdataBacktermineComponent, canActivate: [ProtectedGuard]},
   {path: 'userdata-backorte', component: UserdataBackorteComponent, canActivate: [ProtectedGuard]},
   {path: 'userdata-backtermin-anmeldungen', component: UserdataBackterminAnmeldungComponent, canActivate: [ProtectedGuard]},
+  {path: 'userdata-aktivgastgeber', component: UserdataAktivgastgeberComponent, canActivate: [ProtectedGuard]},
+  {path: 'userdata-aktivgastgeber/userdata-aktivgastgeber-pass/:id', component: UserdataAktivgastgeberPassComponent, canActivate: [ProtectedGuard]},
+
   /*{
     path: 'userdata', component: UserdataComponent, canActivate: [ProtectedGuard], children: [
       {path: 'allgemein', component: UserdataAllgemeinComponent, canActivate: [ProtectedGuard]},
@@ -144,7 +149,9 @@ const APP_ROUTES: Routes = [
     JahresumsatzComponent,
     NavigationComponent,
     UserdataBackorteComponent,
-    UserdataBackterminAnmeldungComponent
+    UserdataBackterminAnmeldungComponent,
+    UserdataAktivgastgeberComponent,
+    UserdataAktivgastgeberPassComponent
   ],
   imports: [
     NgbModule.forRoot(),

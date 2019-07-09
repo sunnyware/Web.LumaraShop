@@ -1,0 +1,69 @@
+<!-- Navigation -->
+<div class="row mt-4">
+  <div class="col-12">
+      <a [routerLink]="['/userdata-aktivgastgeber']">zurück zu den Aktivgastgeberpässen</a>
+  </div>
+</div>
+
+<!-- Aktivgastgeberpass -->
+<div class="row" *ngIf="pass">
+  <div class="col-12">
+      <h1>Aktiv-Gastgeberpass {{pass.Gastgebername}}</h1>
+      <p>{{zeitraumlabel}}
+        <span *ngIf="pass.IsInvalid"><span class="badge badge-warning">ungültige Daten</span></span>&nbsp;&nbsp;
+        <span class="badge" [style.background-color]="getStatusColor(pass.Status)" style="color: white">{{getStatusText(pass.Status)}}</span>
+      </p>
+      <p></p>
+      <table>
+        <tr><td style="padding-right: 10px;">Fachberater</td><td style="font-weight: bold">{{pass.PersonalakteName}}</td></tr>
+        <tr><td style="padding-right: 10px;">Bezirksleitung</td><td style="font-weight: bold">{{pass.BZLName}}</td></tr>
+        <tr><td style="padding-right: 10px;">Gruppenleitung</td><td style="font-weight: bold">{{pass.GPLName}}</td></tr>
+      </table>
+
+  </div>
+</div>
+
+<!-- Gastgeber-Informationen und Umsatz -->
+<!-->div class="row mt-4">
+  <div class="col-12">
+    <h3>Gastgeberinformationen</h3>
+  </div>
+</!-- -->
+<div class="row" *ngIf="pass">
+  <div class="col-12">
+      <!-->dx-form [colCount]="1" [formData]="pass" labelLocation="left">
+          <dxi-item dataField="Gastgebername" editorType="dxTextBox" [editorOptions]="{disabled: isreadonly}"><dxo-label text="Name des Gastgebers"></dxo-label></dxi-item>
+      </!-- -->
+
+      <h4 class="mt-3">Umsätze <span>
+        <button type="button" class="btn btn-success" (click)="createUmsatz()" *ngIf="!isreadonly">noch einen Umsatz hinzufügen</button>&nbsp;&nbsp;
+        <button type="button" class="btn"  (click)="deleteLastUmsatz()">letzte Zeile löschen</button>
+      </span></h4>
+      <dx-form [colCount]="3" [formData]="ud" labelLocation="left" *ngFor="let ud of pass.Umsaetze; index as i">
+          <dxi-item dataField="Datum" editorType="dxDateBox"
+          [editorOptions]="{type: 'date', showAnalogClock: false, pickerType: 'calendar', dateSerializationFormat: 'yyy-MM-ddTHH:mm:ssx',
+          acceptCustomValue: false, min: '2018-06-01', max: '2019-05-31', disabled: isreadonly}"><dxo-label text="Datum"></dxo-label></dxi-item>
+          <dxi-item dataField="Umsatz" editorType="dxNumberBox" [editorOptions]="{disabled: isreadonly}"><dxo-label text="Umsatz in €"></dxo-label></dxi-item>
+      </dx-form>
+
+  </div>
+  <div class="col-12 mt-2">
+      <input type="checkbox" name="isAccept" [readonly]="isreadonly" [(ngModel)]="pass.AddFremdUmsaetze" required>&nbsp;<span>eine andere Fachberaterin
+        hat bei dieser Gastgeberin Vorführungen gehalten. Deren Umsatz muss für diese Gastgeberin dazugerechnet werden.
+      </span>
+      <dx-form [colCount]="1" [formData]="pass" labelLocation="left">
+          <dxi-item dataField="FremdFachberatername" editorType="dxTextBox" [editorOptions]="{disabled: isreadonly}"><dxo-label text="Name der anderen Fachberaterin"></dxo-label></dxi-item>
+      </dx-form>
+  </div>
+</div>
+
+
+<div class="row mt-4" *ngIf="pass && !isreadonly">
+  <div class="col-sm">
+      <p class="text-danger" *ngIf="message">{{message}}</p>
+      <button type="button" class="btn btn-success" (click)="savePass()">Pass speichern</button>
+      &nbsp;&nbsp;
+      <button type="button" class="btn btn-danger" style="background-color: rgb(170, 12, 9)" (click)="deletePass()">Pass löschen</button>
+  </div>
+
+</div>

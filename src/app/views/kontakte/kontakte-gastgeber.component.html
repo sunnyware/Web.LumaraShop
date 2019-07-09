@@ -132,8 +132,8 @@
         <label for="_captionGG" class="col-12 row-form-label text-info">Gesamtumsatz Aktiv-Gastgeberwettbewerb 2017/2018</label>
         <input type="number" lang="de-DE" class="form-control ml-3 mr-3" id="_captionGG" aria-describedby="c77" placeholder="" [(ngModel)]="currentGastgeber.UmsatzAktivWettbewerb">
       </div> -->
-      <span class="mx-3">Gesamtumsatz Aktiv-GG-Wettbewerb 2017/18</span>
-      <dx-number-box format="###,###,##0.00" [(ngModel)] = "currentGastgeber.UmsatzAktivWettbewerb" [showSpinButtons]="false" [showClearButton]="false" style="width:100vw" class="mx-3"></dx-number-box>
+      <!-- span class="mx-3">Gesamtumsatz Aktiv-GG-Wettbewerb 2017/18</!-- -->
+      <!-- dx-number-box format="###,###,##0.00" [(ngModel)] = "currentGastgeber.UmsatzAktivWettbewerb" [showSpinButtons]="false" [showClearButton]="false" style="width:100vw" class="mx-3"></!-->
 
       <div class="col-sm-12" style="margin-bottom: 5px;">
         <div class="form-check">
@@ -173,6 +173,7 @@
 
   </div>
   <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="createAktivgastgeberpass()">Aktiv-GG-Pass für 2018/19 erstellen</button>
     <button type="button" class="btn btn-danger" (click)="deleteGastgeber()">löschen!</button>
     <button type="button" class="btn btn-success" (click)="saveGastgeber()">speichern</button>
   </div>

@@ -132,6 +132,21 @@ export class KontakteGastgeberComponent implements OnInit {
       });
   }
 
+  createAktivgastgeberpass() {
+    // this.popupGastgeberVisible = false;
+    this.ggModalDialog.close();
+    // Gastgeber speichern
+    this.lumaraService
+      .doCommand(LumaraServiceCommands.CreateAktivGastgeberpass(this.lumaraService.current_fachberater.ID, 2018, this.currentGastgeber.IDObj))
+      .subscribe(data => {
+        if (data.ReturnCode === 200) {
+          this.router.navigate(['/userdata-aktivgastgeber']);
+        } else if (data.ReturnCode >= 400) {
+          notify(data.ReturnMessage);
+        }
+      });
+  }
+
   showPopupDeleteGastgeber(idObjGastgeber: string) {
     for (const gg of this.gastgeberList) {
       if (gg.IDObj === idObjGastgeber) {

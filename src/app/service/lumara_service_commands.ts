@@ -1,3 +1,4 @@
+import { AktivGastgeberpass } from './../models/gastgeber';
 import { BackterminOrt } from './../models/backtermine';
 import {JsonCommand} from '../utils/json/json-command';
 import {Gastgeber} from '../models/gastgeber';
@@ -137,6 +138,45 @@ export class LumaraServiceCommands {
     return cmd;
   }
 
+  /** AktivGastgeberpässe */
+  public static GetAktivGastgeberpaesse(doidPersonalakte: number, jahr: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'GetAktivGastgeberpaesse';
+    cmd.addParameter('DOIDPersonalakte', doidPersonalakte);
+    cmd.addParameter('Jahr', jahr);
+    return cmd;
+  }
+  public static CreateAktivGastgeberpass(doidPersonalakte: number, jahr: number, idObjGastgeber: string): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'CreateAktivGastgeberpass';
+    cmd.addParameter('DOIDPersonalakte', doidPersonalakte);
+    cmd.addParameter('Jahr', jahr);
+    cmd.addParameter('IDObjGastgeber', idObjGastgeber);
+    return cmd;
+  }
+  public static GetAktivGastgeberpass(aktivGastgeberpassID: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'GetAktivGastgeberpass';
+    cmd.addParameter('AktivGastgeberpassID', aktivGastgeberpassID);
+    return cmd;
+  }
+  public static UpdateAktivGastgeberpass(aktivGastgeberpass: AktivGastgeberpass): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'UpdateAktivGastgeberpass';
+    cmd.addParameter('AktivGastgeberpass', aktivGastgeberpass);
+    return cmd;
+  }
+  public static DeleteAktivGastgeberpass(aktivGastgeberpassID: number): JsonCommand {
+    const cmd = new JsonCommand();
+    cmd.ModuleName = 'Modules.Lumara.Base.Service.BaseService';
+    cmd.CommandName = 'DeleteAktivGastgeberpass';
+    cmd.addParameter('AktivGastgeberpassID', aktivGastgeberpassID);
+    return cmd;
+  }
   /*** Backtermine ****/
   public static GetBacktermine(): JsonCommand {
     const cmd = new JsonCommand();

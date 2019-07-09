@@ -1,0 +1,31 @@
+<h2>Aktiv-Gastgeberpässe 2018/2019</h2>
+<p>Bitte erstellen Sie für jeden Aktivgastgeber einen Pass, falls er die Umsätze erreicht hat.
+  Der Einsendeschluss ist der 31.08.2019
+</p>
+<div *ngIf="paesse" class="row">
+
+  <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-xs-4" *ngFor="let pass of paesse">
+    <div class="card mb-4 text-center" style="background-color: rgb(170, 12, 9)">
+      <a routerLink="/userdata-aktivgastgeber/userdata-aktivgastgeber-pass/{{pass.Oid}}">
+        <img class="card-img-top my-3" src="/assets/navicons/mitarbeiterkarte.png" style="height: 50px; width:50px;" alt="{{pass.Gastgebername}}">
+        <div class="card-block text-center">
+          <h5 class="card-title text-light">{{pass.Gastgebername}}</h5>
+          <h6 class="text-light">{{pass.Zeitraum}}
+            <!-- img style="height:25px; width:25px" src="/assets/navicons/{{getStatusIconFile(pass.Status)}}"/ --></h6>
+
+            <p><span *ngIf="pass.IsInvalid" class="badge badge-warning">unvollständige/fehlerhafte Eingaben</span></p>
+            <p><span class="badge" [style.background-color]="getStatusColor(pass.Status)" style="color: white">{{getStatusText(pass.Status)}}</span></p>
+
+        </div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-->div class="row">
+  <div class="col-sm">
+      <button type="button" class="btn btn-success" style="background-color: rgb(170, 12, 9)" (click)="createGastgeberpass()">neuer Gastgeberpass</button>
+  </div>
+
+</!-- -->

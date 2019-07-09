@@ -29,10 +29,11 @@ export class NavigationComponent implements OnInit {
         this.navItems.push({caption: 'persönliche Daten', imagefilename: '/assets/navicons/kontaktdaten_white.png', routerlink: ['/userdata-allgemein']});
         this.navItems.push({caption: 'Telegram-Benachrichtigung', imagefilename: '/assets/navicons/telegram_white.png', routerlink: ['/userdata-messenger']});
         this.navItems.push({caption: 'Steuerdaten', imagefilename: '/assets/navicons/steuer_white.png', routerlink: ['/userdata-steuer']});
-        console.log(this.lumaraService.current_fachberater);
+        // console.log(this.lumaraService.current_fachberater);
         if (this.lumaraService.current_fachberater && this.lumaraService.current_fachberater.ShowAddressInHomepage) {
           this.navItems.push({caption: 'meine Backvorträge', imagefilename: '/assets/navicons/calendar_white.png', routerlink: ['/userdata-backtermine']});
         }
+        this.navItems.push({caption: 'Aktiv-Gastgeberpass', imagefilename: '/assets/navicons/batch_assign_white.png', routerlink: ['/userdata-aktivgastgeber']});
       }
     }
   }
