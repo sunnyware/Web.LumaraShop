@@ -52,15 +52,19 @@
   <div class="col col-sm-3">
     <div style="background: #BE392B; color: white; border-radius: 6px; margin-top: 10px; padding-left:10px;padding-right:10px;padding-bottom:10px;">
       <h4 class="text-white">Sonderangebote</h4>
-      <a href="https://portal.lumara.de/flyer/Flyer_KW19-26.pdf">
-        <img src="https://portal.lumara.de/flyer/Flyer_KW19-26_1.jpg" style="width: 100%; " />
+      <div *ngFor="let flyerinfo of flyerinfos" >
+        <a [href]="flyerinfo.Url">
+          <img [src]="getThumbnailUrl(flyerinfo.Url,1)" style="width: 100%; " /><br/>
+          <img [src]="getThumbnailUrl(flyerinfo.Url,2)" style="width: 100%; " />
+        </a>
+        <br/>
+      </div>
 
-      </a>
       <br/>
-      <a href="https://portal.lumara.de/flyer/Flyer_KW_27_35.pdf">
+      <!--a href="https://portal.lumara.de/flyer/Flyer_KW_27_35.pdf">
         <img src="https://portal.lumara.de/flyer/Flyer_KW_27_35_01.jpg" style="width: 100%; " />
         <img src="https://portal.lumara.de/flyer/Flyer_KW_27_35_02.jpg" style="width: 100%; " />
-      </a>
+      </!--a -->
     </div>
   </div>
 </div>

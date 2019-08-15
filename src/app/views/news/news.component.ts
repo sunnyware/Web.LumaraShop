@@ -5,6 +5,8 @@ import {LumaraServiceCommands} from '../../service/lumara_service_commands';
 import {Router} from '@angular/router';
 import {BlogPostListItem} from '../../models/blogpost';
 import {ArtikelNichtLieferbarItem} from '../../models/artikel';
+import { FlyerInfo } from 'src/app/models/flyer';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-news',
@@ -14,18 +16,20 @@ import {ArtikelNichtLieferbarItem} from '../../models/artikel';
 
 export class NewsComponent implements OnInit {
   blogPosts: BlogPostListItem[] = undefined;
+  flyerinfos: FlyerInfo[];
   artikelNichtLieferbarArray: ArtikelNichtLieferbarItem[] = undefined;
   neuheiten = TestData.neuheiten;
   pageNr = 0;
   itemsPerPage = 10;
 
-  constructor(private lumaraService: LumaraService, private router: Router) {
+  constructor(private lumaraService: LumaraService, private router: Router, private http: HttpClient) {
     lumaraService.setHeadline('Lumara-News');
   }
 
   ngOnInit() {
     this.reloadPosts();
     this.reloadArtikelNichtLieferbar();
+    this.reloadFlyerInfos();
   }
 
   reloadArtikelNichtLieferbar() {
@@ -61,5 +65,20 @@ export class NewsComponent implements OnInit {
   }
   GetIconUrl(extension: string) {
     return this.lumaraService.url_zentrale_min + '/icon?imagekey=fileimage:' + extension + '&imagesize=24';
+  }
+
+  reloadFlyerInfos() {
+    const url = 'https://portal.lumara.de/flyer/flyer.json';
+    this.http.get<FlyerInfo[]>(url).subscribe(data => {
+      this.flyerinfos = data;
+    });
+  }
+
+  getThumbnailUrl(myurl: string, pageno: number) {
+    if (pageno === 1) {
+      return myurl.replace('.pdf', '_01.jpg');
+    } else if (pageno === 2) {
+      return myurl.replace('.pdf', '_02.jpg');
+    }
   }
 }

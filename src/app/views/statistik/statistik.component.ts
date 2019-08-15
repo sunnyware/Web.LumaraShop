@@ -21,47 +21,47 @@ export class StatistikComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.reloadGastgeberStatistik();
+    //this.reloadGastgeberStatistik();
     this.reloadJahresspiegel();
     this.reloadJahresstatistik();
   }
 
-  reloadGastgeberStatistik() {
-    // Ewertowski IDPersonalakte = 7951858
-    this.lumaraService
-      .doCommand(
-        LumaraServiceCommands.GetGastgeberStatistik(
-          0,
-          0,
-          0,
-          new Date('2017-06-01'),
-          new Date('2018-05-31'),
-          3,
-          1200,
-          1,
-          false
-        )
-      )
-      .subscribe(data => {
-        if (data.ReturnCode === 200) {
-          // console.log('Ich bekam vom Server folgende Daten: ');
-          // console.log(data.ReturnMessage + '\r\n' + data.ReturnValue);
-          // console.log(data.ReturnValue);
-          this.gastgeberStatistikItems = JSON.parse(data.ReturnValue); // JSON.parse(data.ReturnValue);
-          if (this.gastgeberStatistikItems && this.gastgeberStatistikItems.length > 0) {
-            this.showEmptyGastgeberList = false;
-          } else {
-            this.showEmptyGastgeberList = true;
-          }
-          // this.gastgeberStatistik.GastgeberList = JSON.parse(this.gastgeberStatistik.GastgeberList.toString());
-          // console.log(this.gastgeberStatistik);
-        } else {
-          console.log(data.ReturnMessage + '\r\n' + data.ReturnValue);
-          // this.router.navigate(['/login']);
-          notify(data.ReturnMessage);
-        }
-      });
-  }
+  // reloadGastgeberStatistik() {
+  //   // Ewertowski IDPersonalakte = 7951858
+  //   this.lumaraService
+  //     .doCommand(
+  //       LumaraServiceCommands.GetGastgeberStatistik(
+  //         0,
+  //         0,
+  //         0,
+  //         new Date('2017-06-01'),
+  //         new Date('2018-05-31'),
+  //         3,
+  //         1200,
+  //         1,
+  //         false
+  //       )
+  //     )
+  //     .subscribe(data => {
+  //       if (data.ReturnCode === 200) {
+  //         // console.log('Ich bekam vom Server folgende Daten: ');
+  //         // console.log(data.ReturnMessage + '\r\n' + data.ReturnValue);
+  //         // console.log(data.ReturnValue);
+  //         this.gastgeberStatistikItems = JSON.parse(data.ReturnValue); // JSON.parse(data.ReturnValue);
+  //         if (this.gastgeberStatistikItems && this.gastgeberStatistikItems.length > 0) {
+  //           this.showEmptyGastgeberList = false;
+  //         } else {
+  //           this.showEmptyGastgeberList = true;
+  //         }
+  //         // this.gastgeberStatistik.GastgeberList = JSON.parse(this.gastgeberStatistik.GastgeberList.toString());
+  //         // console.log(this.gastgeberStatistik);
+  //       } else {
+  //         console.log(data.ReturnMessage + '\r\n' + data.ReturnValue);
+  //         // this.router.navigate(['/login']);
+  //         notify(data.ReturnMessage);
+  //       }
+  //     });
+  // }
   reloadJahresspiegel() {
     this.lumaraService.doCommand(LumaraServiceCommands.GetJahresspiegel(0, false)).subscribe(
       data => {
@@ -80,7 +80,7 @@ export class StatistikComponent implements OnInit {
   }
 
   reloadJahresstatistik() {
-    this.lumaraService.doCommand(LumaraServiceCommands.GetJahresstatistik(0, 2018, false)).subscribe(
+    this.lumaraService.doCommand(LumaraServiceCommands.GetJahresstatistik(0, 2019, false)).subscribe(
       data => {
         if (data.ReturnCode === 200) {
           // console.log('Ich bekam vom Server folgende Daten: ');

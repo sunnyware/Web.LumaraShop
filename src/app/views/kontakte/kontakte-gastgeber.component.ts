@@ -139,6 +139,7 @@ export class KontakteGastgeberComponent implements OnInit {
     this.lumaraService
       .doCommand(LumaraServiceCommands.CreateAktivGastgeberpass(this.lumaraService.current_fachberater.ID, 2018, this.currentGastgeber.IDObj))
       .subscribe(data => {
+        console.log(data);
         if (data.ReturnCode === 200) {
           this.router.navigate(['/userdata-aktivgastgeber']);
         } else if (data.ReturnCode >= 400) {
