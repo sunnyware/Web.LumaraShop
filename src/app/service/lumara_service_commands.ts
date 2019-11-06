@@ -291,22 +291,24 @@ export class LumaraServiceCommands {
   }
 
    /***** Statistik *****/
-  public static GetJahresspiegel(idPersonalakte: number, returnChefstatistik: boolean): JsonCommand {
+  public static GetJahresspiegel(idPersonalakte: number, returnChefstatistik: boolean, anstellung: string): JsonCommand {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.StatistikService';
     cmd.CommandName = 'GetJahresspiegel';
     cmd.addParameter('IDPersonalakte', idPersonalakte);
     cmd.addParameter('ReturnChefstatistik', returnChefstatistik);
+    cmd.addParameter('Anstellung', anstellung);
     return cmd;
   }
 
-  public static GetJahresstatistik(idPersonalakte: number, jahr: number, returnChefstatistik: boolean): JsonCommand {
+  public static GetJahresstatistik(idPersonalakte: number, jahr: number, returnChefstatistik: boolean, anstellung: string): JsonCommand {
     const cmd = new JsonCommand();
     cmd.ModuleName = 'Modules.Lumara.Base.Service.StatistikService';
     cmd.CommandName = 'GetJahresstatistik';
     cmd.addParameter('IDPersonalakte', idPersonalakte);
     cmd.addParameter('Jahr', jahr);
     cmd.addParameter('ReturnChefstatistik', returnChefstatistik);
+    cmd.addParameter('Anstellung', anstellung);
     return cmd;
   }
 

@@ -63,7 +63,7 @@ export class StatistikComponent implements OnInit {
   //     });
   // }
   reloadJahresspiegel() {
-    this.lumaraService.doCommand(LumaraServiceCommands.GetJahresspiegel(0, false)).subscribe(
+    this.lumaraService.doCommand(LumaraServiceCommands.GetJahresspiegel(0, false, 'LFB')).subscribe(
       data => {
         if (data.ReturnCode === 200) {
           // console.log('Ich bekam vom Server folgende Daten: ');
@@ -80,7 +80,7 @@ export class StatistikComponent implements OnInit {
   }
 
   reloadJahresstatistik() {
-    this.lumaraService.doCommand(LumaraServiceCommands.GetJahresstatistik(0, 2019, false)).subscribe(
+    this.lumaraService.doCommand(LumaraServiceCommands.GetJahresstatistik(0, 2019, false, 'LFB')).subscribe(
       data => {
         if (data.ReturnCode === 200) {
           // console.log('Ich bekam vom Server folgende Daten: ');

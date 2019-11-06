@@ -20,7 +20,7 @@ export class JahresspiegelComponent implements OnInit {
   }
 
   reloadJahresspiegel() {
-    this.lumaraService.doCommand(LumaraServiceCommands.GetJahresspiegel(0, true)).subscribe(
+    this.lumaraService.doCommand(LumaraServiceCommands.GetJahresspiegel(0, false, 'LFB')).subscribe(
       data => {
         if (data.ReturnCode === 200) {
           // console.log('Ich bekam vom Server folgende Daten: ');
