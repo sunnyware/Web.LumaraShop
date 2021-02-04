@@ -22,7 +22,7 @@ export class UserdataAktivgastgeberComponent implements OnInit {
     //console.log("Aktueller BenutzerID: ");
     //console.log(this.lumaraService.current_fachberater.ID);
     this.lumaraService
-    .doCommand(LumaraServiceCommands.GetAktivGastgeberpaesse(this.lumaraService.current_fachberater.ID, 2018))
+    .doCommand(LumaraServiceCommands.GetAktivGastgeberpaesse(this.lumaraService.current_fachberater.ID, 2019))
     .subscribe(data => {
       if (data.ReturnCode === 200) {
         console.log('GetAktivGastgeberpaesse: ');
@@ -38,7 +38,7 @@ export class UserdataAktivgastgeberComponent implements OnInit {
   /*
   createGastgeberpass() {
     this.lumaraService
-    .doCommand(LumaraServiceCommands.CreateAktivGastgeberpass(this.lumaraService.current_fachberater.ID, 2018))
+    .doCommand(LumaraServiceCommands.CreateAktivGastgeberpass(this.lumaraService.current_fachberater.ID, 2019))
     .subscribe(data => {
       if (data.ReturnCode === 200) {
         console.log('CreateAktivGastgeberpass: ');
@@ -50,8 +50,8 @@ export class UserdataAktivgastgeberComponent implements OnInit {
         //this.router.navigate(['/login']);
       }
     });
-  }
-*/
+  }*/
+
 
   getStatusIconFile(status: number) {
     if (status == 0) {

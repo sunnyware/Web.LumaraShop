@@ -14,7 +14,7 @@ import { JsonHelper } from 'src/app/utils/json/jsonhelper';
 export class UserdataSteuerComponent implements OnInit {
 
   ust: Ust = null;
-  currentYear = 2019;
+  currentYear = 2021;
   isLoaded = false;
   isGermany = false;
   showHinweis1 = false;

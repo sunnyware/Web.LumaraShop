@@ -133,7 +133,7 @@ export class UserdataAktivgastgeberPassComponent implements OnInit {
   createUmsatz() {
     if (this.pass) {
       const us = new AktivGastgeberUmsatz();
-      us.Datum = new Date(2018,6,1);
+      us.Datum = new Date(2019,6,1);
       //us.Datum = moment(us.Datum).utc(true).toDate();
       us.Umsatz = 0;
       this.pass.Umsaetze.push(us);
