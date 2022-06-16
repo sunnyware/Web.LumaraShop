@@ -137,7 +137,7 @@ export class KontakteGastgeberComponent implements OnInit {
     this.ggModalDialog.close();
     // Gastgeber speichern
     this.lumaraService
-      .doCommand(LumaraServiceCommands.CreateAktivGastgeberpass(this.lumaraService.current_fachberater.ID, 2019, this.currentGastgeber.IDObj))
+      .doCommand(LumaraServiceCommands.CreateAktivGastgeberpass(this.lumaraService.current_fachberater.ID, 2021, this.currentGastgeber.IDObj))
       .subscribe(data => {
         console.log(data);
         if (data.ReturnCode === 200) {

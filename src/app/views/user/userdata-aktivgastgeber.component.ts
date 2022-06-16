@@ -22,7 +22,7 @@ export class UserdataAktivgastgeberComponent implements OnInit {
     //console.log("Aktueller BenutzerID: ");
     //console.log(this.lumaraService.current_fachberater.ID);
     this.lumaraService
-    .doCommand(LumaraServiceCommands.GetAktivGastgeberpaesse(this.lumaraService.current_fachberater.ID, 2019))
+    .doCommand(LumaraServiceCommands.GetAktivGastgeberpaesse(this.lumaraService.current_fachberater.ID, 2021))
     .subscribe(data => {
       if (data.ReturnCode === 200) {
         console.log('GetAktivGastgeberpaesse: ');

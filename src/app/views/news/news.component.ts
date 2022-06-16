@@ -20,7 +20,7 @@ export class NewsComponent implements OnInit {
   artikelNichtLieferbarArray: ArtikelNichtLieferbarItem[] = undefined;
   neuheiten = TestData.neuheiten;
   pageNr = 0;
-  itemsPerPage = 10;
+  itemsPerPage = 80;
 
   constructor(private lumaraService: LumaraService, private router: Router, private http: HttpClient) {
     lumaraService.setHeadline('Lumara-News');

@@ -44,3 +44,25 @@
     </dx-chart>
   </div>
 </div>
+
+<div class="row mt-4"  *ngIf="chartDataJahresstatistik2">
+  <div class="col">
+      <h2>{{chartDataJahresstatistik2.Caption}}</h2>
+  </div>
+
+</div>
+<div class="row" *ngIf="chartDataJahresstatistik2">
+  <div  class="col-12">
+    <dx-chart id="chart" [dataSource]="chartDataJahresstatistik2.Statistik" resolveLabelOverlapping="hide">
+      <dxo-legend [visible]="false"></dxo-legend>
+      <dxi-value-axis>
+        <dxo-label [visible]="true"><dxo-format type="###,###" [precision]="0"></dxo-format></dxo-label>
+      </dxi-value-axis>
+      <dxi-series argumentField="Label" valueField="Value" type="bar" color="#ffaa66" >
+        <dxo-label [visible]="true" rotationAngle="-90" [showForZeroValues]="false" backgroundColor="#BE392B">
+          <dxo-format type="###,###" [precision]="0"></dxo-format>
+        </dxo-label>
+      </dxi-series>
+    </dx-chart>
+  </div>
+</div>

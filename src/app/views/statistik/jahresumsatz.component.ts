@@ -12,6 +12,7 @@ import { LumaraServiceCommands } from '../../service/lumara_service_commands';
 })
 export class JahresumsatzComponent implements OnInit {
   chartDataJahresstatistik: StatistikJahresstatistik = undefined;
+  chartDataJahresstatistik2: StatistikJahresstatistik = undefined;
 
   constructor(private lumaraService: LumaraService, private router: Router) { }
 
@@ -20,13 +21,28 @@ export class JahresumsatzComponent implements OnInit {
   }
 
   reloadJahresstatistik() {
-    this.lumaraService.doCommand(LumaraServiceCommands.GetJahresstatistik(0, 201, false, 'LFB')).subscribe(
+    this.lumaraService.doCommand(LumaraServiceCommands.GetJahresstatistik(0, 2021, false, 'LFB')).subscribe(
       data => {
         if (data.ReturnCode === 200) {
           // console.log('Ich bekam vom Server folgende Daten: ');
           // console.log(data.ReturnValue);
           this.chartDataJahresstatistik = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
           this.chartDataJahresstatistik.Statistik = JSON.parse(this.chartDataJahresstatistik.Statistik.toString());
+          // console.log(this.chartDataJahresspiegel);
+        } else if (data.ReturnCode >= 400) {
+          // this.router.navigate(['/login']);
+          notify(data.ReturnMessage);
+        }
+      }
+    );
+
+     this.lumaraService.doCommand(LumaraServiceCommands.GetJahresstatistik(0, 2020, false, 'LFB')).subscribe(
+      data => {
+        if (data.ReturnCode === 200) {
+          // console.log('Ich bekam vom Server folgende Daten: ');
+          // console.log(data.ReturnValue);
+          this.chartDataJahresstatistik2 = JSON.parse(data.ReturnValue);  // JSON.parse(data.ReturnValue);
+          this.chartDataJahresstatistik2.Statistik = JSON.parse(this.chartDataJahresstatistik2.Statistik.toString());
           // console.log(this.chartDataJahresspiegel);
         } else if (data.ReturnCode >= 400) {
           // this.router.navigate(['/login']);
